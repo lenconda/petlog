@@ -1,0 +1,127 @@
+.slide-enter-active,
+.slideIn,
+.slide-leave-active,
+.slideOut {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slide-enter-active,
+.slideIn {
+  animation-name: slideIn;
+}
+.slide-leave-active,
+.slideOut {
+  animation-name: slideOut;
+}
+.slideUpBig-enter-active,
+.slideInUpBig,
+.slideUpBig-leave-active,
+.slideOutUpBig {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slideUpBig-enter-active,
+.slideInUpBig {
+  animation-name: slideInUpBig;
+}
+.slideUpBig-leave-active,
+.slideOutUpBig {
+  animation-name: slideOutUpBig;
+}
+.slideUp-enter-active,
+.slideInUp,
+.slideUp-leave-active,
+.slideOutUp {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slideUp-enter-active,
+.slideInUp {
+  animation-name: slideInUp;
+}
+.slideUp-leave-active,
+.slideOutUp {
+  animation-name: slideOutUp;
+}
+.slideRightBig-enter-active,
+.slideInRightBig,
+.slideRightBig-leave-active,
+.slideOutRightBig {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slideRightBig-enter-active,
+.slideInRightBig {
+  animation-name: slideInRightBig;
+}
+.slideRightBig-leave-active,
+.slideOutRightBig {
+  animation-name: slideOutRightBig;
+}
+.slideRight-enter-active,
+.slideInRight,
+.slideRight-leave-active,
+.slideOutRight {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slideRight-enter-active,
+.slideInRight {
+  animation-name: slideInRight;
+}
+.slideRight-leave-active,
+.slideOutRight {
+  animation-name: slideOutRight;
+}
+.slideLeftBig-enter-active,
+.slideInLeftBig,
+.slideLeftBig-leave-active,
+.slideOutLeftBig {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slideLeftBig-enter-active,
+.slideInLeftBig {
+  animation-name: slideInLeftBig;
+}
+.slideLeftBig-leave-active,
+.slideOutLeftBig {
+  animation-name: slideOutLeftBig;
+}
+.slideLeft-enter-active,
+.slideInLeft,
+.slideLeft-leave-active,
+.slideOutLeft {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slideLeft-enter-active,
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+.slideLeft-leave-active,
+.slideOutLeft {
+  animation-name: slideOutLeft;
+}
+.slideDownBig-enter-active,
+.slideInDownBig,
+.slideDownBig-leave-active,
+.slideOutDownBig {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
+.slideDownBig-enter-active,
+.slideInDownBig {
+  animation-name: slideInDownBig;
+}
+.slideDownBig-leave-active,
+.slideOutDownBig {
+  animation-name: slideOutDownBig;
+}
+.slideDown-enter-active,
+.slideInDown,
+.slideDown-leave-active,
+.slideOutDown {
+  animation-duration: .3s;
+  animation-fill-mode: both;
+}
