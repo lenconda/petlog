@@ -9,6 +9,7 @@ import 'vant/lib/vant-css/index.css'
 import 'vue2-animate/dist/vue2-animate.css'
 import './common.css'
 import 'lib-flexible'
+import './assets/font-awesome/css/font-awesome.min.css'
 
 Vue.config.productionTip = false
 Vue.use(Vant)
