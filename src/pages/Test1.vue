@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import Utils from '../utils'
 export default {
   name: 'upload',
   mounted () {
@@ -38,9 +39,29 @@ export default {
   },
   methods: {
     testOnly () {
-      // this.acSheet = true
-      var test = this.imgList
-      console.log(test)
+      var _this = this
+      var getImgURL = function (i) {
+        var originalUrl = _this.imgList[i].src
+        console.log(`Original URL is ${originalUrl}`)
+        var xhr = new XMLHttpRequest
+        var blobAsDataUrl
+        xhr.responseType = 'blob'
+        xhr.onload = () => {
+          var recoveredBlob = xhr.response
+          var reader = new FileReader()
+          reader.onload = () => {
+            blobAsDataUrl = reader.result
+            _this.uploadList.push(blobAsDataUrl)
+          }
+          reader.readAsDataURL(recoveredBlob)
+        }
+        xhr.open('GET', originalUrl)
+        xhr.send()
+      }
+      for (var i = 0; i < this.imgList.length; i++) {
+        getImgURL(i)
+      }
+      console.log(this.uploadList)
     },
     getIndex (index) {
       this.swipeIndex = index
@@ -72,7 +93,7 @@ export default {
         var newBlob = new Blob([this.imgList[i].src], { type: this.imgList[i].type })
         ajaxFrom.append('image', newBlob)
       }
-      this.$http.post('/test', ajaxFrom)
+      this.$http.post('/api/upload', ajaxFrom)
     },
     showImgView () {
       this.show = true
@@ -113,7 +134,9 @@ export default {
       actions: [{
         name: '删除',
         callback: this.fileDel
-      }]
+      }],
+      file: '',
+      uploadList: []
     }
   }
 }

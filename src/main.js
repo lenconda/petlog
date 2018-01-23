@@ -10,9 +10,11 @@ import 'vue2-animate/dist/vue2-animate.css'
 import './common.css'
 import 'lib-flexible'
 import './assets/font-awesome/css/font-awesome.min.css'
+import VueResource from 'vue-resource'
 
 Vue.config.productionTip = false
 Vue.use(Vant)
+Vue.use(VueResource)
 
 /* eslint-disable no-new */
 new Vue({
