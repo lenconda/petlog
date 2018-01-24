@@ -39,27 +39,8 @@ export default {
   },
   methods: {
     testOnly () {
-      var _this = this
-      var getImgURL = function (i) {
-        var originalUrl = _this.imgList[i].src
-        console.log(`Original URL is ${originalUrl}`)
-        var xhr = new XMLHttpRequest
-        var blobAsDataUrl
-        xhr.responseType = 'blob'
-        xhr.onload = () => {
-          var recoveredBlob = xhr.response
-          var reader = new FileReader()
-          reader.onload = () => {
-            blobAsDataUrl = reader.result
-            _this.uploadList.push(blobAsDataUrl)
-          }
-          reader.readAsDataURL(recoveredBlob)
-        }
-        xhr.open('GET', originalUrl)
-        xhr.send()
-      }
       for (var i = 0; i < this.imgList.length; i++) {
-        getImgURL(i)
+        Utils.getImgURL(i, this.imgList, this.uploadList)
       }
       console.log(this.uploadList)
     },
@@ -86,6 +67,7 @@ export default {
         }
         this.imgList.push(imgObj)
       }
+      this.imgList = this.imgList.slice(0, 6)
     },
     uploadImg () {
       var ajaxFrom = new FormData()
