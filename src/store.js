@@ -6,7 +6,8 @@ Vue.use(Vuex)
 const state = {
   inClass: 'slideInLeft',
   leaveClass: 'slideOutRight',
-  isHome: true
+  isHome: true,
+  processed: ''
 }
 
 const mutations = {
@@ -16,6 +17,12 @@ const mutations = {
   },
   modNavbar (state, button) {
     state.isHome = button
+  },
+  processImg (state, imgSrc) {
+    state.processed = imgSrc
+  },
+  delProcessed (state) {
+    state.processed = ''
   }
 }
 

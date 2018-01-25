@@ -11,7 +11,7 @@
         <i class="fa fa-trash-o remove-btn" aria-hidden="true" @click="delAlert($event, swipeIndex)"></i>
         <van-swipe :auto="0" :show-indicators="false" :initial-swipe="this.imageIndex" @change="getIndex" :class="['img-view']">
           <van-swipe-item v-for="(item, index) in imgList">
-            <img :src="item.src" alt="" width="100%" @click="hideImageView" class="display-item">
+            <img :src="item" alt="" width="100%" @click="hideImageView" class="display-item">
             <van-actionsheet :actions="actions" cancel-text="取消" v-model="acSheet"></van-actionsheet>
           </van-swipe-item>
         </van-swipe>
@@ -20,7 +20,7 @@
     </transition>
     <div class="images-lists">
       <ul>
-        <li v-for="(item, index) in imgList"><img :src="item.src" alt="" @click="selectImg(index)"></li>
+        <li v-for="(item, index) in imgList"><img :src="item" alt="" @click="selectImg(index)"></li>
         <li @click="handleClick" v-show="imgList.length < 6">
           <i class="fa fa-camera cust-camera" aria-hidden="true"></i>
         </li>
@@ -31,6 +31,7 @@
 
 <script>
 import Utils from '../utils'
+import EXIF from 'exif-js'
 export default {
   name: 'upload',
   mounted () {
@@ -51,23 +52,24 @@ export default {
       document.getElementById('upfile').click()
     },
     fileChange (el) {
+      var _this = this
       function getObjectURL (object) {
         return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object)
       }
       for (var i = 0; i < el.target.files.length; i++) {
-        var imgObj = {}
-        var imgBlob = getObjectURL(el.target.files[i])
-        imgObj.src = imgBlob
-        var reader = new FileReader()
-        reader.readAsDataURL(el.target.files[i])
-        reader.onload = (event) => {
-          var base64Obj = event.target.result
-          var imgType = base64Obj.split(':')[1].split(';')[0]
-          imgObj.type = imgType
-        }
-        this.imgList.push(imgObj)
+        var imgSrc = getObjectURL(el.target.files[i])
+        var currentFile = el.target.files[i]
+        EXIF.getData(currentFile, () => {
+          var temp1 = EXIF.getAllTags(currentFile)
+          if (temp1.Orientation == 6) {
+            Utils.rotateImg(imgSrc, _this)
+          } else {
+            _this.imgList.push(imgSrc)
+          }
+        })
       }
       this.imgList = this.imgList.slice(0, 6)
+      console.log(_this.imgList)
     },
     uploadImg () {
       var ajaxFrom = new FormData()
@@ -118,7 +120,8 @@ export default {
         callback: this.fileDel
       }],
       file: '',
-      uploadList: []
+      uploadList: [],
+      payload: []
     }
   }
 }
