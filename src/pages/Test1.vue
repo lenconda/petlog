@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <h2>{{ test }}</h2> -->
     <div class="upload-img-wrapper">
       <van-button type="primary" @click="handleClick">Select an image</van-button>
       <input id="upfile" type="file" accept="image/*" multiple @change="fileChange($event)" style="display: none;">
@@ -72,12 +73,12 @@ export default {
       console.log(_this.imgList)
     },
     uploadImg () {
-      var ajaxFrom = new FormData()
       for (var i = 0; i < this.imgList.length; i++) {
-        var newBlob = new Blob([this.imgList[i].src], { type: this.imgList[i].type })
-        ajaxFrom.append('image', newBlob)
+        Utils.getImgURL(i, this.imgList, this.uploadList)
       }
-      this.$http.post('/api/upload', ajaxFrom)
+      this.$http.post('/api/postimage', this.uploadList).then(res => {
+        console.log(res.body.status)
+      })
     },
     showImgView () {
       this.show = true
@@ -121,7 +122,8 @@ export default {
       }],
       file: '',
       uploadList: [],
-      payload: []
+      payload: [],
+      test: '你真是无药可救<a href="#">test</a>☺'
     }
   }
 }

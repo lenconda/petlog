@@ -5,6 +5,7 @@ import Router from 'vue-router'
 import Index from '@/pages/Index'
 import Test1 from '@/pages/Test1'
 import Test2 from '@/pages/Test2'
+import Emotions from '@/pages/Emotions'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/test2',
       name: 'test2',
       component: Test2
+    },
+    {
+      path: '/emotions',
+      name: 'text',
+      component: Emotions
     }
   ]
 })
