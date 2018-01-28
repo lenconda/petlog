@@ -12,8 +12,8 @@ const utils = {
     }
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`
   },
-  getImgURL: (i, imgArr, uplArr) => {
-    var originalUrl = imgArr[i]
+  getImgURL: (i, vue) => {
+    var originalUrl = vue.imgList[i]
     console.log(`Original URL is ${originalUrl}`)
     var xhr = new XMLHttpRequest
     var blobAsDataUrl
@@ -23,7 +23,9 @@ const utils = {
       var reader = new FileReader()
       reader.onload = () => {
         blobAsDataUrl = reader.result
-        uplArr.push(blobAsDataUrl)
+        vue.$store.commit('processImg', blobAsDataUrl)
+        vue.uploadList.push(vue.$store.state.processed)
+        vue.$store.commit('delProcessed')
       }
       reader.readAsDataURL(recoveredBlob)
     }
@@ -59,9 +61,7 @@ const utils = {
       var file = new File([blobObj], `${Date.now()}.png`, {type: 'image/png'})
       var pushSrc = getObjectURL(file)
       testSrc = getObjectURL(file)
-      vue.$store.commit('processImg', pushSrc)
       vue.imgList.push(pushSrc)
-      vue.$store.commit('delProcessed')
     }
   }
 }

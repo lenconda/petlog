@@ -7,7 +7,8 @@ const state = {
   inClass: 'slideInLeft',
   leaveClass: 'slideOutRight',
   isHome: true,
-  processed: ''
+  processed: '',
+  images: []
 }
 
 const mutations = {

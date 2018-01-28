@@ -3,7 +3,7 @@
     <!-- <h2>{{ test }}</h2> -->
     <div class="upload-img-wrapper">
       <van-button type="primary" @click="handleClick">Select an image</van-button>
-      <input id="upfile" type="file" accept="image/*" multiple @change="fileChange($event)" style="display: none;">
+      <input id="upfile" type="file" accept="image/*" @change="fileChange($event)" style="display: none;">
       <van-button type="danger" @click="uploadImg">Upload</van-button>
       <van-button type="primary" @click="testOnly">Debug</van-button>
     </div>
@@ -39,12 +39,28 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
   },
+  watch: {
+    'payload.length': {
+      handler () {
+        if (this.payload.length == this.imgList.length) {
+          this.postCard()
+        }
+      }
+    }
+  },
   methods: {
     testOnly () {
+      var _this = this
       for (var i = 0; i < this.imgList.length; i++) {
-        Utils.getImgURL(i, this.imgList, this.uploadList)
+        this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
+          console.log(res)
+          var ajaxFrom = new FormData()
+          ajaxFrom.append('image', res.body)
+          this.$http.post('/api/upload', ajaxFrom).then(res => {
+            _this.payload.push(res.body)
+          })
+        })
       }
-      console.log(this.uploadList)
     },
     getIndex (index) {
       this.swipeIndex = index
@@ -59,25 +75,40 @@ export default {
       }
       for (var i = 0; i < el.target.files.length; i++) {
         var imgSrc = getObjectURL(el.target.files[i])
-        var currentFile = el.target.files[i]
-        EXIF.getData(currentFile, () => {
-          var temp1 = EXIF.getAllTags(currentFile)
+        console.log(`imgSrc1 ${imgSrc}`)
+        var current = el.target.files[i]
+        console.log(el.target.files[i])
+        console.log(`i = ${i}`)
+        EXIF.getData(current, () => {
+          var temp1 = EXIF.getAllTags(current)
           if (temp1.Orientation == 6) {
+            console.log(`if src ${imgSrc}`)
             Utils.rotateImg(imgSrc, _this)
           } else {
+            console.log(`else src ${imgSrc}`)
+            console.log(`current ${current.name}`)
             _this.imgList.push(imgSrc)
           }
         })
       }
       this.imgList = this.imgList.slice(0, 6)
-      console.log(_this.imgList)
     },
     uploadImg () {
+      var _this = this      
       for (var i = 0; i < this.imgList.length; i++) {
-        Utils.getImgURL(i, this.imgList, this.uploadList)
+        this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
+          var ajaxFrom = new FormData()
+          ajaxFrom.append('image', res.body)
+          this.$http.post('/api/upload', ajaxFrom).then(res => {
+            _this.payload.push(res.body)
+          })
+        })
       }
-      this.$http.post('/api/postimage', this.uploadList).then(res => {
-        console.log(res.body.status)
+    },
+    postCard () {
+      this.$http.post('/api/test', {content: 'hahaha', images: this.payload}).then(res => {
+        this.payload.splice(0, this.payload.length)
+        //这里也要搞一个imgList的删除
       })
     },
     showImgView () {
@@ -122,8 +153,7 @@ export default {
       }],
       file: '',
       uploadList: [],
-      payload: [],
-      test: '你真是无药可救<a href="#">test</a>☺'
+      payload: []
     }
   }
 }
