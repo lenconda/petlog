@@ -2,12 +2,14 @@
   <div class="wrapper">
     <div class="publish-wrapper">
       <div class="text-area">
-        <textarea rows="4" placeholder="来吧，记录这一刻..." class="text-field"></textarea>
+        <textarea rows="4" placeholder="来吧，记录这一刻..." class="text-field" v-model="content"></textarea>
       </div>
       <div class="images-lists">
         <ul>
           <input id="upfile" type="file" accept="image/*" @change="fileChange($event)" style="display: none;">
-          <li v-for="(item, index) in imgList"><img :src="item"></li>
+          <li v-for="(item, index) in imgList"><img :src="item">
+            <span class="delete-image" @click="delImg(index)"><i class="fa fa-times close-btn"></i></span>
+          </li>
           <li @click="selectImg" v-show="imgList.length < 6">
             <i class="iconfont ptsh-add cust-camera" aria-hidden="true"></i>
           </li>
@@ -49,7 +51,10 @@ export default {
     return {
       imgList: [],
       uploadList: [],
-      payload: []
+      payload: [],
+      content: '',
+      tags: [],
+      selectedTags: []
     }
   },
   methods: {
@@ -62,10 +67,24 @@ export default {
     postCard () {
       this.$http.post('/api/test', {content: 'hahaha', images: this.payload}).then(res => {
         this.payload.splice(0, this.payload.length)
-        //这里也要搞一个imgList的删除
+        this.imgList.splice(0, this.imgList.length)
       })
     },
     uploadImg () {
+      if (this.imgList.length == 0 || this.content == 0) {
+        this.$toast.fail('写一些东西吧')
+      } else {
+        var _this = this      
+        for (var i = 0; i < this.imgList.length; i++) {
+          this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
+            var ajaxFrom = new FormData()
+            ajaxFrom.append('image', res.body)
+            this.$http.post('/api/upload', ajaxFrom).then(res => {
+              _this.payload.push(res.body)
+            })
+          })
+        }
+      }
       var _this = this      
       for (var i = 0; i < this.imgList.length; i++) {
         this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
@@ -102,6 +121,9 @@ export default {
       }
       this.imgList = this.imgList.slice(0, 6)
     },
+    delImg (index) {
+      this.imgList.splice(index, 1)
+    }
   }
 }
 </script>
@@ -213,6 +235,7 @@ export default {
   width: 109px;
   height: 109px;
   margin: 1.5px;
+  position: relative;
 }
 .images-lists > ul > li:last-child {
   background: #fff;
@@ -222,5 +245,19 @@ export default {
   width: 100%;
   height: 100%;
 }
-
+.delete-image {
+  width: 27px;
+  height: 27px;
+  line-height: 27px;
+  text-align: center;
+  background: rgba(0, 0, 0, .5);
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  border-radius: 50%;
+}
+.close-btn {
+  font-size: 11.5px;
+  color: #fff;
+}
 </style>
