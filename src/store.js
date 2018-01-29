@@ -9,7 +9,7 @@ const state = {
   isHome: true,
   processed: '',
   images: [],
-  referer: '',
+  referer: '/index',
   title: '宠物秀'
 }
 

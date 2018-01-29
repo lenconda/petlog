@@ -19,12 +19,16 @@
     <div class="tags-picker"></div>
     <div class="control-bar">
       <div class="left-buttons">
-        <i></i>
-        <i></i>
-        <i></i>
+        <i @click="selectImg"></i>
+        <i @click="actions(0)" :class="[showTags ? 'actived' : '']"></i>
+        <i @click="actions(1)" :class="[showStatus ? 'actived' : '']"></i>
       </div>
       <div class="right-buttons"><button class="form-control-btn" @click="uploadImg">发布</button></div>
     </div>
+    <van-popup position="bottom" v-model="showStatus" class="select-status">
+      <div class="confirms"></div>
+      <van-picker :columns="status" @change="onStatusChange" />
+    </van-popup>
   </div>
 </template>
 
@@ -54,12 +58,29 @@ export default {
       payload: [],
       content: '',
       tags: [],
-      selectedTags: []
+      selectedTags: [],
+      showTags: false,
+      showStatus: false,
+      status: ["开心", "难过", "怀孕", "生病"]
     }
   },
   methods: {
     test () {
       alert('active')
+    },
+    actions(option) {
+      switch (option) {
+        case 0:
+          this.showTags = !this.showTags
+          break;
+        case 1:
+          this.showStatus = !this.showStatus
+        default:
+          break;
+      }
+    },
+    onStatusChange (picker, value, index) {
+
     },
     selectImg () {
       document.getElementById('upfile').click()
@@ -67,7 +88,6 @@ export default {
     postCard () {
       this.$http.post('/api/test', {content: 'hahaha', images: this.payload}).then(res => {
         this.payload.splice(0, this.payload.length)
-        this.imgList.splice(0, this.imgList.length)
       })
     },
     uploadImg () {
@@ -132,11 +152,13 @@ export default {
 .control-bar {
   width: 100%;
   height: 55px;
+  background: #fff;
   border-top: 1px solid #ebebeb;
   position: fixed;
   bottom: 0;
   display: flex;
   flex-wrap: nowrap;
+  z-index: 9999999;
 }
 .left-buttons {
   flex-shrink: 1;
@@ -194,6 +216,18 @@ export default {
   background-size: 100%;
 }
 .left-buttons > i:last-child:active {
+  background: url('../../static/images/status_active.gif') no-repeat;
+  background-size: 100%;
+}
+.left-buttons > i:first-child.actived {
+  background: url('../../static/images/picture_active.gif') no-repeat;
+  background-size: 100%;
+}
+.left-buttons > i:nth-child(2).actived {
+  background: url('../../static/images/tags_active.gif') no-repeat;
+  background-size: 100%;
+}
+.left-buttons > i:last-child.actived {
   background: url('../../static/images/status_active.gif') no-repeat;
   background-size: 100%;
 }
@@ -259,5 +293,17 @@ export default {
 .close-btn {
   font-size: 11.5px;
   color: #fff;
+}
+.select-status {
+  width: 100%;
+  background: #fff;
+  position: fixed;
+  bottom: 55px;
+  z-index: 9;
+}
+.confirms {
+  width: 100%;
+  height: 44px;
+  background: #fff;
 }
 </style>

@@ -31,6 +31,39 @@
 .left-arrow {
   font-size: 28.5px !important;
 }
+/* Pickers */
+div.select-status div.van-picker {
+  background: #d1d4db;
+}
+div.select-status div.van-picker::after {
+  content: '';
+  position: absolute;
+  border-top: 4px solid #7f8386;
+  width: 44px;
+  top: 148px;
+  left: 100px;
+}
+div.select-status div.van-picker::before {
+  content: '';
+  position: absolute;
+  border-top: 4px solid #7f8386;
+  width: 44px;
+  top: 148px;
+  right: 100px;
+}
+div.select-status li {
+  font-size: 23px;
+  width: 98.5px;
+  margin: 0 auto;
+  color: #acb5be;
+}
+div.select-status ul li.van-picker-column--selected {
+  font-size: 29px;
+  color: #7f8386;
+}
+div.select-status div.van-picker__frame.van-hairline--top-bottom {
+  display: none;
+}
 
 .slide-enter-active,
 .slideIn,
