@@ -1,3 +1,42 @@
+.navbar {
+  width: 100%;
+  height: 55px;
+  background-color: #ffa721;
+  color: #fff;
+  font-size: 17.5px;
+  position: fixed;
+  top: 0;
+}
+.navbar .navbar-left {
+  position: absolute;
+  bottom: 16.5px;
+  left: 26.5px;
+}
+.navbar .navbar-middle {
+  position: absolute;
+  bottom: 16.5px;
+  left: 50%;
+  transform: translateX(-50%)
+}
+.form-control-btn {
+  display: inline-block;
+  background: #ffa721;
+  border-radius: 5px;
+  padding: 10px 18.5px;
+  font-size: 15.5px;
+  color: #fff;
+  border: none;
+  margin: 7px auto;
+  transition: all .4s;
+}
+.form-control-btn:disabled {
+  background: rgba(255, 167, 33, 0.6);
+}
+.form-control-btn:active {
+  background: #c27f1a;
+  transition: all .4s;
+}
+
 .slide-enter-active,
 .slideIn,
 .slide-leave-active,

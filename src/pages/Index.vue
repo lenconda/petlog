@@ -14,6 +14,7 @@ export default {
   mounted () {
     this.$store.commit('modNavbar', true)
     this.$store.commit('modClass', {inclass: 'slideInRight', leaveclass: 'slideOutLeft'})
+    this.$store.commit('setTitle', '宠物秀')
   },
   data () {
     return {

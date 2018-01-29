@@ -8,7 +8,9 @@ const state = {
   leaveClass: 'slideOutRight',
   isHome: true,
   processed: '',
-  images: []
+  images: [],
+  referer: '',
+  title: '宠物秀'
 }
 
 const mutations = {
@@ -24,6 +26,12 @@ const mutations = {
   },
   delProcessed (state) {
     state.processed = ''
+  },
+  setRef (state, newRef) {
+    state.referer = newRef
+  },
+  setTitle (state, newTitle) {
+    state.title = newTitle
   }
 }
 

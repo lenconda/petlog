@@ -206,10 +206,10 @@ export default {
   padding: 10px;
 }
 .images-lists {
-  width: 355px;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .18);
-  margin: 18px auto;
-  padding: 5px 0;
+  width: 100%;
+  /* box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .18); */
+  /* margin: 18px auto; */
+  /* padding: 5px 0; */
 }
 .images-lists > ul {
   padding-left: 10px;

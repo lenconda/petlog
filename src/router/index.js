@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 //import pages
 import Index from '@/pages/Index'
+import Publish from '@/pages/Publish'
+
 import Test1 from '@/pages/Test1'
 import Test2 from '@/pages/Test2'
 import Emotions from '@/pages/Emotions'
@@ -24,6 +26,11 @@ export default new Router({
       path: '/index',
       name: 'index',
       component: Index
+    },
+    {
+      path: '/publish',
+      name: 'publish',
+      component: Publish
     },
     {
       path: '/test1',
