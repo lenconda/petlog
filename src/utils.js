@@ -1,8 +1,9 @@
 const utils = {
-  getDate: () => {
+  getDate: (option, row) => {
     var date = new Date()
     var year = date.getFullYear()
     var month = date.getMonth() + 1
+    var row_month = date.getMonth() + 1
     var day = date.getDate()
     var hour = date.getHours()
     var minute = date.getMinutes()
@@ -10,7 +11,30 @@ const utils = {
     if (month < 10) {
       month = '0' + month
     }
-    return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+    switch (option) {
+      case 0:
+        return `${year}-${row ? row_month : month}-${day} ${hour}:${minute}:${second}`
+        break
+      case 1:
+        return `${year}-${row ? row_month : month}-${day} ${hour}:${minute}`
+        break
+      case 2:
+        return `${year}-${row ? row_month : month}-${day}`
+        break
+      case 3:
+        return `${year}年${row ? row_month : month}月${day}日 ${hour}:${minute}:${second}`
+        break
+      case 4:
+        return `${year}年${row ? row_month : month}月${day}日 ${hour}:${minute}`
+        break
+      case 5:
+        return `${year}年${row ? row_month : month}月${day}日`
+        break
+      default:
+        return false
+        break
+    }
+    
   },
   getImgURL: (i, vue) => {
     var originalUrl = vue.imgList[i]

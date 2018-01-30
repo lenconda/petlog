@@ -131,7 +131,7 @@ export default {
       document.getElementById('upfile').click()
     },
     postCard () {
-      this.$http.post('/api/test', {content: thi.content, images: this.payload, tags: this.selectedTags, time: Utils.getDate()}).then(res => {
+      this.$http.post('/api/test', {content: thi.content, images: this.payload, tags: this.selectedTags, time: Utils.getDate(4, true)}).then(res => {
         this.payload.splice(0, this.payload.length)
       })
     },
