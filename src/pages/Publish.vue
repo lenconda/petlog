@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="publish-wrapper">
       <div class="text-area">
-        <textarea rows="4" placeholder="来吧，记录这一刻..." class="text-field" v-model="content"></textarea>
+        <textarea @focus="textFocus" @blur="textBlur" rows="4" placeholder="来吧，记录这一刻..." class="text-field" v-model="content"></textarea>
       </div>
       <div class="images-lists">
         <ul>
@@ -14,6 +14,14 @@
             <i class="iconfont ptsh-add cust-camera" aria-hidden="true"></i>
           </li>
         </ul>
+      </div>
+      <div id="panel" class="staus-panel-wrapper" v-show="showPanel">
+        <div class="status-panel">
+          <div class="current-status">您的宠物当前状态：{{ currentStatus }}</div>
+          <div class="current-tags-wrapper">
+            <span class="current-tags" v-for="tag in selectedTags">{{ tag }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="tags-picker"></div>
@@ -88,13 +96,20 @@ export default {
       selectedTags: [],
       showTags: false,
       showStatus: false,
+      showPanel: true,
       status: ['开心', '难过', '怀孕', '生病'],
       currentStatus: ''
     }
   },
   methods: {
     test () {
-      alert('active')
+      this.showPanel = false
+    },
+    textFocus () {
+      this.showPanel = false
+    },
+    textBlur () {
+      this.showPanel = true
     },
     random() {
       this.randomShow = []
@@ -132,7 +147,7 @@ export default {
       })
     },
     uploadImg () {
-      if (this.imgList.length == 0 || this.content == 0) {
+      if (this.imgList.length == 0 && this.content == 0) {
         this.$toast.fail('写一些东西吧')
       } else {
         var _this = this      
@@ -211,11 +226,12 @@ export default {
   width: 100px;
 }
 .publish-wrapper {
-  height: calc(100% - 32px);
+  height: calc(100% - 16px);
   width: calc(100% - 42px);
-  padding: 16px 21px;
+  padding: 16px 21px 0;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 .wrapper {
   height: calc(100% - 55px);
@@ -294,6 +310,8 @@ export default {
 .images-lists {
   width: 355px;
   margin: 0 auto;
+  max-height: 221px;
+  overflow-y: auto;
 }
 .images-lists > ul {
   display: flex;
@@ -422,11 +440,64 @@ span.tag-content {
   border-radius: 4px;
   background-color: #fff;
   border: 1px solid #949494;
+  color: #555555;
   transition: all .4s;
 }
 input:checked + span {
   color: #2cbce7;
   border-color: #2cbce7;
   transition: all .4s;
+}
+/* Tag、状态显示栏 */
+.status-panel-wrapper {
+  width: 100%;
+  background-color: #fff;
+  height: auto;
+  position: relative;
+}
+.status-panel {
+  width: 318.5px;
+  height: auto;
+  max-height: 166px;
+  min-height: 55px;
+  position: absolute;
+  left: 41.5px;
+  bottom: 6px;
+  background-color: #fff;
+  user-select: none;
+  color: #9f9f9f;
+  font-size: 15.5px;
+  text-align: left;
+  font-style: normal;
+}
+.current-tags-wrapper {
+  margin-top: 10px;
+}
+.current-tags {
+  display: inline-block;
+  color: #2cbce7;
+  padding: 6px 9px;
+  border: 1px solid #2cbce7;
+  border-radius: 4px;
+  margin-right: 7px;
+  margin-bottom: 6px;
+}
+.status-panel::before {
+  content: '';
+  width: 17px;
+  height: 15.5px;
+  position: absolute;
+  top: 3px;
+  left: -26.5px;
+  background: url('../../static/images/status_small@3x.png') 100% / 100% no-repeat;
+}
+.status-panel::after {
+  content: '';
+  width: 15.5px;
+  height: 15.5px;
+  position: absolute;
+  top: 43px;
+  left: -26.5px;
+  background: url('../../static/images/tag_small@3x.png') 100% / 100% no-repeat;
 }
 </style>
