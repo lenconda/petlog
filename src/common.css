@@ -10,14 +10,15 @@
 }
 .navbar .navbar-left {
   position: absolute;
-  bottom: 14px;
+  transform: translateY(50%);
+  bottom: 50%;
   left: 26.5px;
 }
 .navbar .navbar-middle {
   position: absolute;
-  bottom: 16.5px;
+  bottom: 15.5px;
   left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
 }
 .form-control-btn {
   display: inline-block;

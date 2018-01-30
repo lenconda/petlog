@@ -8,7 +8,7 @@
         <ul>
           <input id="upfile" type="file" accept="image/*" @change="fileChange($event)" style="display: none;">
           <li v-for="(item, index) in imgList"><img :src="item">
-            <span class="delete-image" @click="delImg(index)"><i class="fa fa-times close-btn"></i></span>
+            <span class="delete-image" @click="delImg(index)"><i class="iconfont ptsh-close close-btn"></i></span>
           </li>
           <li @click="selectImg" v-show="imgList.length < 6">
             <i class="iconfont ptsh-add cust-camera" aria-hidden="true"></i>
@@ -332,7 +332,9 @@ export default {
 }
 .images-lists > ul > li:last-child {
   background: #fff;
-  border: 1px dashed #ccc; 
+  border: 1px dashed #ccc;
+  width: 107.5px;
+  height: 107.5px; 
 }
 .images-lists img {
   width: 100%;
@@ -350,7 +352,14 @@ export default {
   border-radius: 50%;
 }
 .close-btn {
+  display: inline-block;
   font-size: 11.5px;
+  line-height: 27px;
+  width: 27px;
+  text-align: center;
+  padding-left: 1.1px;
+  padding-bottom: 0.5px;
+  font-weight: bolder;
   color: #fff;
 }
 .select-status {
