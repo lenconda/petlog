@@ -37,7 +37,7 @@
     <van-popup position="bottom" v-model="showTags" class="select-tags">
       <div class="confirms">
         <ul>
-          <li class="cancel-btn" @click="actions(0)">取消</li>
+          <li class="cancel-btn" @click="actions(2)">取消</li>
           <li class="confirm-title">选择标签</li>
           <li class="confirm-btn" @click="actions(0)">确定</li>
         </ul>
@@ -116,6 +116,10 @@ export default {
           this.showStatus = !this.showStatus
           this.showTags = false
           break
+        case 2:
+          this.showTags = !this.showTags
+          this.showStatus = false
+          this.selectedTags = []
         default:
           break
       }
@@ -127,7 +131,7 @@ export default {
       document.getElementById('upfile').click()
     },
     postCard () {
-      this.$http.post('/api/test', {content: 'hahaha', images: this.payload}).then(res => {
+      this.$http.post('/api/test', {content: thi.content, images: this.payload, tags: this.selectedTags, time: Utils.getDate()}).then(res => {
         this.payload.splice(0, this.payload.length)
       })
     },
@@ -350,24 +354,27 @@ export default {
   border-bottom: 1px solid #ccc;
 }
 .confirms > ul > li {
-  font-size: 16px;
+  font-size: 19.5px;
   width: auto;
   display: inline-block;
 }
 .confirms > ul > li.confirm-btn {
   color: #1d5faa;
   float: right;
-  padding: 11px 13px;
+  padding: 8px 13px;
 }
 .confirms > ul > li.cancel-btn {
   float: left;
   color: #000;
-  padding: 11px 13px;
+  padding: 8px 13px;
 }
 .confirms > ul > li.confirm-title {
-  font-size: 18px;
+  display: inline-block;
+  font-size: 21.5px;
+  font-weight: bold;
+  text-align: center;
   color: #000;
-  padding: 9px 0;
+  padding: 7px 0;
   width: calc(100% - 58 * 2);
 }
 .select-tags {
@@ -381,10 +388,9 @@ export default {
   background-color: #f5f5f5;
 }
 div.tags-wrapper div.tag-list {
-  width: 346px;
+  width: 100%;
   height: 143px;
   overflow-y: auto;
-  margin: 0 auto;
   padding-top: 17px;
   text-align: left;
 }
@@ -396,6 +402,7 @@ div.tags-wrapper div.refresh-wrapper {
   font-size: 26.5px;
   line-height: 60px;
   display: inline-block;
+  color: #aaaaaa;
 }
 .refresh-btn:active {
   color: #686868;
@@ -407,7 +414,7 @@ input[type=checkbox] {
 label.tag-wrapper {
   display: inline-block;
   font-size: 16px;
-  margin: 10px 10px 0 10px;
+  margin: 0 10px 0 10px;
 }
 span.tag-content {
   text-align: center;
