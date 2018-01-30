@@ -6,10 +6,11 @@
   font-size: 17.5px;
   position: fixed;
   top: 0;
+  user-select: none;
 }
 .navbar .navbar-left {
   position: absolute;
-  bottom: 12.5px;
+  bottom: 14px;
   left: 26.5px;
 }
 .navbar .navbar-middle {
@@ -27,6 +28,7 @@
   color: #fff;
   border: none;
   margin: 7px auto;
+  user-select: none;
 }
 .left-arrow {
   font-size: 28.5px !important;
