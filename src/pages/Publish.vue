@@ -98,7 +98,7 @@ export default {
       showStatus: false,
       showPanel: true,
       status: ['开心', '难过', '怀孕', '生病'],
-      currentStatus: ''
+      currentStatus: '开心'
     }
   },
   methods: {
@@ -496,7 +496,7 @@ input:checked + span {
   width: 15.5px;
   height: 15.5px;
   position: absolute;
-  top: 43px;
+  top: 39px;
   left: -26.5px;
   background: url('../../static/images/tag_small@3x.png') 100% / 100% no-repeat;
 }
