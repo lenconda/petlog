@@ -44,25 +44,13 @@
       </div>
       <div class="tags-wrapper">
         <div class="tag-list">
-          <label class="tag-wrapper">
-            <input type="checkbox" v-model="selectedTags" value="萌宠">
-            <span class="tag-content">萌宠</span>
-          </label>
-          <label class="tag-wrapper">
-            <input type="checkbox" v-model="selectedTags" value="狗年大吉">
-            <span class="tag-content">狗年大吉</span>
-          </label>
-          <label class="tag-wrapper">
-            <input type="checkbox" v-model="selectedTags" value="喵星人">
-            <span class="tag-content">喵星人</span>
-          </label>
-          <label class="tag-wrapper">
-            <input type="checkbox" v-model="selectedTags" value="铲屎官">
-            <span class="tag-content">铲屎官</span>
+          <label class="tag-wrapper" v-for="(tag, index) in tags" v-show="randomShow.indexOf(index) > -1">
+            <input type="checkbox" v-model="selectedTags" :value="tag">
+            <span class="tag-content">{{ tag }}</span>
           </label>
         </div>
         <div class="refresh-wrapper">
-          <i class="iconfont ptsh-refresh refresh-btn"></i>
+          <i class="iconfont ptsh-refresh refresh-btn" @click="random"></i>
         </div>
       </div>
     </van-popup>
@@ -78,6 +66,7 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '发布动态')
+    this.random()
   },
   watch: {
     'payload.length': {
@@ -94,17 +83,24 @@ export default {
       uploadList: [],
       payload: [],
       content: '',
-      tags: [],
+      tags: ['狗年大吉', '喵星人', '铲屎官', '萌宠', 'lorem', 'ipsum', 'sim', 'dolor', 'asda', 'asdasdasd', 'uhdwiud', 'a78euqn', 'asjdh72y788', '123ad', 'weaas12', 'qweas', '123', 'asd', 'foo', 'bar'],
+      randomShow: [],
       selectedTags: [],
       showTags: false,
       showStatus: false,
-      status: ["开心", "难过", "怀孕", "生病"],
+      status: ['开心', '难过', '怀孕', '生病'],
       currentStatus: ''
     }
   },
   methods: {
     test () {
       alert('active')
+    },
+    random() {
+      this.randomShow = []
+      for (var i = 0; i < 10; i++) {
+        this.randomShow.push(parseInt(Math.random() * (this.tags.length + 1), 10))
+      }
     },
     actions(option) {
       switch (option) {
@@ -414,7 +410,7 @@ input[type=checkbox] {
 label.tag-wrapper {
   display: inline-block;
   font-size: 16px;
-  margin: 0 10px 0 10px;
+  margin: 0 10px 10px 10px;
 }
 span.tag-content {
   text-align: center;
