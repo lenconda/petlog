@@ -8,7 +8,7 @@
       <router-view/>
     </transition>
     <van-popup v-model="$store.state.showLogin" position="right" class="popup" id="popup">
-      <h2>Login</h2>
+      <h2><i class="iconfont ptsh-close" @click="closeLogin"></i>Login</h2>
     </van-popup>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     '$route' (to, from) {
       if (to.query.login) {
         this.$store.commit('toggleLogin', true)
+        this.$store.commit('setRef', from.fullPath)
       } else {
         this.$store.commit('toggleLogin', false)
       }
@@ -33,6 +34,9 @@ export default {
   methods: {
     back () {
       this.$router.go(-1)
+    },
+    closeLogin () {
+      this.$router.push(this.$store.state.referer)
     }
   }
 }
@@ -56,7 +60,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #fff;
-  z-index: 999999999;
+  z-index: 9999999 !important;
 }
 </style>
 

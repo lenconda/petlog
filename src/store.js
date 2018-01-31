@@ -32,6 +32,9 @@ const mutations = {
   setTitle (state, newTitle) {
     state.title = newTitle
   },
+  setRef (state, newRef) {
+    state.referer = newRef
+  },
   toggleLogin (state, option) {
     state.showLogin = option
   },
