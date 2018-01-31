@@ -10,7 +10,9 @@ const state = {
   processed: '',
   images: [],
   referer: '/index',
-  title: '宠物秀'
+  title: '宠物秀',
+  showLogin: false,
+  showRegister: false
 }
 
 const mutations = {
@@ -27,11 +29,14 @@ const mutations = {
   delProcessed (state) {
     state.processed = ''
   },
-  setRef (state, newRef) {
-    state.referer = newRef
-  },
   setTitle (state, newTitle) {
     state.title = newTitle
+  },
+  toggleLogin (state, option) {
+    state.showLogin = option
+  },
+  togglleRegister (state, option) {
+    state.showRegister = option
   }
 }
 
