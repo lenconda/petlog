@@ -4,6 +4,7 @@ import Router from 'vue-router'
 //import pages
 import Index from '@/pages/Index'
 import Publish from '@/pages/Publish'
+import Details from '@/pages/Details'
 
 import Test1 from '@/pages/Test1'
 import Test2 from '@/pages/Test2'
@@ -31,6 +32,12 @@ export default new Router({
       path: '/publish',
       name: 'publish',
       component: Publish
+    },
+    {
+      // 这个地方要改成命名路由
+      path: '/cards',
+      name: 'cards',
+      component: Details
     },
     {
       path: '/test1',

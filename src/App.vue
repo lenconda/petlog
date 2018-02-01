@@ -7,7 +7,7 @@
     <transition :enter-active-class="$store.state.inClass" :leave-active-class="$store.state.leaveClass" mode="out-in">
       <router-view/>
     </transition>
-    <van-popup v-model="$store.state.showLogin" position="right" class="popup" id="popup">
+    <van-popup v-model="$store.state.showLogin" class="popup">
       <h2><i class="iconfont ptsh-close" @click="closeLogin"></i>Login</h2>
     </van-popup>
   </div>
@@ -23,7 +23,8 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      if (to.query.login) {
+      console.log(to)
+      if (to.hash == '#login') {
         this.$store.commit('toggleLogin', true)
         this.$store.commit('setRef', from.fullPath)
       } else {
@@ -36,7 +37,7 @@ export default {
       this.$router.go(-1)
     },
     closeLogin () {
-      this.$router.push(this.$store.state.referer)
+      this.$store.commit('toggleLogin', false)
     }
   }
 }
@@ -57,8 +58,8 @@ export default {
   width: 100%;
 }
 .popup {
-  width: 100%;
-  height: 100%;
+  width: 248px;
+  height: 128px;
   background-color: #fff;
   z-index: 9999999 !important;
 }

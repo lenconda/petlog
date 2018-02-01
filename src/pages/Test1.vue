@@ -27,6 +27,14 @@
         </li>
       </ul>
     </div>
+    <van-swipe :auto="0" :show-indicators="false" :initial-swipe="this.imageIndex" @change="getIndex" class="card-img">
+      <van-swipe-item v-for="(item, index) in imgList">
+        <img :src="item" alt="" width="100%" @click="hideImageView" class="display-item">
+      </van-swipe-item>
+    </van-swipe>
+    <div class="write-comment-wrapper">
+      <van-field type="textarea" class="write-comment-field" v-model="message" placeholder="请输入留言" rows="1" autosize/>
+    </div>
   </div>
 </template>
 
@@ -153,7 +161,8 @@ export default {
       }],
       file: '',
       uploadList: [],
-      payload: []
+      payload: [],
+      message: ''
     }
   }
 }
@@ -281,5 +290,22 @@ img.display-item {
 }
 .van-swipe.img-view {
   height: 100%;
+}
+.card-img {
+  width: 355px;
+  height: 256px;
+  margin: 10px auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .18);
+  border-radius: 4px;
+  background-color: #000;
+}
+.write-comment-wrapper {
+  margin: 10px;
+  width: 280px;
+  height: auto;
+  padding: 12px 8px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0
 }
 </style>
