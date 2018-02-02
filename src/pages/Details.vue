@@ -25,18 +25,46 @@
       </div>
     </div>
     <div class="comment-wrapper">
-      <div class="comment-head"></div>
+      <div class="comment-head">
+        <div class="comment-count">评论 2</div>
+        <div class="comment-likes">
+          <span class="like-icon">10</span>
+          <span class="like-count">10</span>
+        </div>
+      </div>
       <div class="comment-contents">
-        <ul>
-          <li></li>
+        <div class="none-comment" v-if="card.comments.length == 0">
+          <span>快来发表评论吧</span>
+        </div>
+        <ul v-else>
+          <li>
+            <div class="comment-avatar">
+              <img src="../../static/images/testonly.jpg">
+            </div>
+            <div class="comment-texts">
+              <div class="comment-text-author">美丽喵喵</div>
+              <div class="comment-text-raw">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 汉字汉字汉字</div>
+              <div class="comment-text-date"><span>1-1</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="comment-avatar">
+              <img src="../../static/images/testonly.jpg">
+            </div>
+            <div class="comment-texts">
+              <div class="comment-text-author">美丽喵喵</div>
+              <div class="comment-text-raw">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 汉字汉字汉字</div>
+              <div class="comment-text-date"><span>1-1</span></div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
     <div class="write-comment">
-      <div class="write-comment-field">
-        
+      <div class="write-comment-wrapper">
+        <van-field type="textarea" class="write-comment-field" v-model="comment" maxlength="100" placeholder="请输入留言" rows="1" autosize/>
       </div>
-      <div class="write-comment-submit">
+      <div class="write-comment-submit" :class="[comment.length > 0 ? 'active' : '']">
         <span>发送</span>
       </div>
     </div>
@@ -48,7 +76,10 @@ export default {
   name: 'details',
   data () {
     return {
-
+      card: {
+        comments: ['asdasd']
+      },
+      comment: ''
     }
   },
   mounted () {
@@ -115,7 +146,7 @@ export default {
   padding: 3px 0 10px 5px;
 }
 .card-wrapper .card-head .card-head-follow button {
-  width: 69px;
+  width: 63px;
   height: 34px;
   background-color: #fff;
   border: 1px solid #ffa721;
@@ -178,5 +209,135 @@ export default {
   border-radius: 4px;
   margin-right: 7px;
   margin-bottom: 6px;
+}
+.write-comment {
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 60px;
+  padding: 11px 14px 10px 14px;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+}
+.write-comment-wrapper {
+  box-sizing: border-box;
+  width: 280px;
+  height: auto;
+  padding: 8px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0
+}
+.write-comment-submit {
+  width: 66.5px;
+  text-align: right;
+  font-size: 18.5px;
+  line-height: 39px;
+  padding: 0 8.5px 0 21px;
+  color: #888;
+  box-sizing: border-box;
+}
+.write-comment-submit.active {
+  color: #ffa721;
+}
+.comment-wrapper {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 11px;
+}
+.comment-wrapper .comment-head {
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 12.5px 14px;
+  color: #9b9b9b;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 18.5px;
+}
+.comment-wrapper .comment-head .comment-count {
+  float: left;
+}
+.comment-wrapper .comment-head .comment-likes {
+  float: right;
+}
+span.like-icon {
+  display: inline-block;
+  color: transparent;
+  width: 25px;
+  height: 25px;
+  background: url('../../static/images/like@3x.png') 100% / 100% no-repeat;
+}
+span.like-icon.active {
+  background: url('../../static/images/liked@3x.png') 100% / 100% no-repeat;
+}
+span.like-count {
+  display: inline-block;
+  line-height: 25px;
+}
+.none-comment {
+  background: #f4f4f4;
+  height: 267px;
+  position: relative;
+  margin-bottom: 60px;
+}
+.none-comment span {
+  display: block;
+  width: 100%;
+  line-height: 267px;
+  color: #9b9b9b;
+  font-size: 12.5px;
+}
+.comment-contents > ul {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 69px;
+  background-color: #f4f4f4;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+.comment-contents > ul > li {
+  display: flex;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+}
+.comment-contents > ul > li > .comment-avatar {
+  text-align: left;
+  width: 73.5px;
+  box-sizing: border-box;
+}
+.comment-contents > ul > li > .comment-avatar img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin: 25px 14.5px 0 15px;
+}
+.comment-contents > ul > li > .comment-texts {
+  width: 302px;
+  height: auto;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 27px 14px 10px 0;
+  box-sizing: border-box;
+}
+.comment-contents > ul > li > .comment-texts > .comment-text-author {
+  font-size: 16.5px;
+  color: #888;
+}
+.comment-contents > ul > li > .comment-texts > .comment-text-raw {
+  font-size: 18px;
+  color: #333;
+  margin: 10.5px 0 8.5px 0;
+}
+.comment-contents > ul > li > .comment-texts > .comment-text-date {
+  font-size: 14px;
+  color: #9b9b9b;
+  margin: 7px 0;
+}
+.comment-contents > ul > li:last-child >.comment-texts {
+  border: none;
 }
 </style>
