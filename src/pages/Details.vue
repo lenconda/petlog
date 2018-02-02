@@ -83,7 +83,9 @@ export default {
     }
   },
   mounted () {
-
+    this.$store.commit('modNavbar', false)
+    this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
+    this.$store.commit('setTitle', '')
   },
   methods: {
 
@@ -217,6 +219,7 @@ export default {
   min-height: 60px;
   padding: 11px 14px 10px 14px;
   background-color: #fff;
+  border-top: 1px solid #e6e6e6;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -293,7 +296,7 @@ span.like-count {
 .comment-contents > ul {
   padding: 0;
   margin: 0;
-  margin-bottom: 69px;
+  margin-bottom: 63px;
   background-color: #f4f4f4;
   padding-bottom: 10px;
   box-sizing: border-box;
