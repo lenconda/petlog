@@ -5,6 +5,7 @@
   color: #fff;
   font-size: 17.5px;
   position: fixed;
+  z-index: 99;
   top: 0;
   user-select: none;
 }
@@ -73,6 +74,7 @@ div.write-comment-field textarea.van-field__control {
   max-height: 48px !important;
   font-size: 16px;
   box-sizing: content-box;
+  caret-color: #ffa721;
 }
 div.write-comment-field {
   padding: 0 !important;

@@ -3,7 +3,7 @@
     <div class="card-wrapper">
       <div class="card-head">
         <div class="card-head-avatar">
-          <img src="../../static/images/testonly.jpg" width="100%" height="100%">
+          <img src="../../static/images/testonly.jpg" width="100%">
         </div>
         <div class="card-head-poster">
           <div class="poster-name">金屋藏猫</div>
@@ -37,6 +37,16 @@
           <span>快来发表评论吧</span>
         </div>
         <ul v-else>
+          <li>
+            <div class="comment-avatar">
+              <img src="../../static/images/testonly.jpg">
+            </div>
+            <div class="comment-texts">
+              <div class="comment-text-author">美丽喵喵</div>
+              <div class="comment-text-raw">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 汉字汉字汉字</div>
+              <div class="comment-text-date"><span>1-1</span></div>
+            </div>
+          </li>
           <li>
             <div class="comment-avatar">
               <img src="../../static/images/testonly.jpg">
@@ -123,6 +133,8 @@ export default {
   height: 47px;
 }
 .card-wrapper .card-head .card-head-avatar img {
+  width: 47px;
+  height: 47px;
   border-radius: 50%;
 }
 .card-wrapper .card-head .card-head-poster {
@@ -171,6 +183,8 @@ export default {
   box-sizing: border-box;
   width: 100%;
   height: auto;
+  position: relative;
+  z-index: 1;
   padding: 12.5px 14px 13px 40.5px;
   background-color: #fff;
 }
