@@ -241,7 +241,7 @@ export default {
   position: absolute;
 }
 .left-buttons > i:first-child {
-  background: url('../../static/images/picture.gif') no-repeat;
+  background: url('../../static/images/picture.png') no-repeat;
   background-size: 100%;
   width: 26px;
   height: 23.5px;
@@ -249,7 +249,7 @@ export default {
   top: 16.5px;
 }
 .left-buttons > i:nth-child(2) {
-  background: url('../../static/images/tags.gif') no-repeat;
+  background: url('../../static/images/tags.png') no-repeat;
   background-size: 100%;
   width: 25px;
   height: 25.5px;
@@ -257,7 +257,7 @@ export default {
   top: 15.5px;
 }
 .left-buttons > i:last-child {
-  background: url('../../static/images/status.gif') no-repeat;
+  background: url('../../static/images/status.png') no-repeat;
   background-size: 100%;
   width: 29.5px;
   height: 26.5px;
@@ -265,27 +265,27 @@ export default {
   top: 15px;
 }
 .left-buttons > i:first-child:active {
-  background: url('../../static/images/picture_active.gif') no-repeat;
+  background: url('../../static/images/picture_active.png') no-repeat;
   background-size: 100%;
 }
 .left-buttons > i:nth-child(2):active {
-  background: url('../../static/images/tags_active.gif') no-repeat;
+  background: url('../../static/images/tags_active.png') no-repeat;
   background-size: 100%;
 }
 .left-buttons > i:last-child:active {
-  background: url('../../static/images/status_active.gif') no-repeat;
+  background: url('../../static/images/status_active.png') no-repeat;
   background-size: 100%;
 }
 .left-buttons > i:first-child.actived {
-  background: url('../../static/images/picture_active.gif') no-repeat;
+  background: url('../../static/images/picture_active.png') no-repeat;
   background-size: 100%;
 }
 .left-buttons > i:nth-child(2).actived {
-  background: url('../../static/images/tags_active.gif') no-repeat;
+  background: url('../../static/images/tags_active.png') no-repeat;
   background-size: 100%;
 }
 .left-buttons > i:last-child.actived {
-  background: url('../../static/images/status_active.gif') no-repeat;
+  background: url('../../static/images/status_active.png') no-repeat;
   background-size: 100%;
 }
 .text-field {

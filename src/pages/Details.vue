@@ -72,7 +72,7 @@
     </div>
     <div class="write-comment">
       <div class="write-comment-wrapper">
-        <van-field type="textarea" class="write-comment-field" v-model="comment" maxlength="100" placeholder="请输入留言" rows="1" autosize/>
+        <van-field type="textarea" class="write-comment-field" v-model="comment" maxlength="100" placeholder="说点什么吧..." rows="1" autosize/>
       </div>
       <div class="write-comment-submit" :class="[comment.length > 0 ? 'active' : '']">
         <span>发送</span>
@@ -236,6 +236,7 @@ export default {
   border-top: 1px solid #e6e6e6;
   position: fixed;
   bottom: 0;
+  z-index: 999999999;
   display: flex;
   align-items: flex-end;
 }
