@@ -64,7 +64,6 @@
     </van-popup>
   </div>
 </template>
-
 <script>
 import Utils from '../utils'
 import EXIF from 'exif-js'
@@ -203,7 +202,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .control-bar {
   width: 100%;
