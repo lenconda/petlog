@@ -15,8 +15,8 @@
           </li>
         </ul>
       </div>
-      <div id="panel" class="staus-panel-wrapper" v-show="showPanel">
-        <div class="status-panel">
+      <div id="panel" class="staus-panel-wrapper">
+        <div class="status-panel" :class="[showPanel ? '' : 'static']">
           <div class="current-status">您的宠物当前状态：{{ currentStatus }}</div>
           <div class="current-tags-wrapper">
             <span class="current-tags" v-for="tag in selectedTags">{{ tag }}</span>
@@ -478,6 +478,9 @@ input:checked + span {
   font-size: 15.5px;
   text-align: left;
   font-style: normal;
+}
+.static {
+  position: static;
 }
 .current-tags-wrapper {
   margin-top: 10px;
