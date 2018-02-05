@@ -2,7 +2,15 @@
   <div class="wrapper">
     <div class="publish-wrapper">
       <div class="text-area">
-        <textarea @focus="textFocus" @blur="textBlur" rows="4" placeholder="来吧，记录这一刻..." class="text-field" v-model="content"></textarea>
+        <textarea rows="4" placeholder="来吧，记录这一刻..." class="text-field" v-model="content"></textarea>
+      </div>
+      <div id="panel" class="staus-panel-wrapper">
+        <div class="status-panel">
+          <div class="current-status">您的宠物当前状态：{{ currentStatus }}</div>
+          <div class="current-tags-wrapper">
+            <span class="current-tags" v-for="tag in selectedTags">{{ tag }}</span>
+          </div>
+        </div>
       </div>
       <div class="images-lists">
         <ul>
@@ -14,14 +22,6 @@
             <i class="iconfont ptsh-add cust-camera" aria-hidden="true"></i>
           </li>
         </ul>
-      </div>
-      <div id="panel" class="staus-panel-wrapper">
-        <div class="status-panel" :class="[showPanel ? '' : 'static']">
-          <div class="current-status">您的宠物当前状态：{{ currentStatus }}</div>
-          <div class="current-tags-wrapper">
-            <span class="current-tags" v-for="tag in selectedTags">{{ tag }}</span>
-          </div>
-        </div>
       </div>
     </div>
     <div class="tags-picker"></div>
@@ -41,6 +41,27 @@
         </ul>
       </div>
       <van-picker :columns="status" @change="onStatusChange" />
+    </van-popup>
+    <van-popup position="bottom" v-model="showSelect" class="select-pets">
+      <div class="confirms">
+        <ul>
+          <li class="cancel-btn" @click="actions(3)">取消</li>
+          <li class="confirm-title">为哪只宠物发布</li>
+          <li class="confirm-btn" @click="actions(3)">确定</li>
+        </ul>
+      </div>
+      <div class="pets-wrapper">
+        <ul>
+          <li><label><input type="radio" name="pet" value="pet1" v-model="selectedPet"><span>Pet1</span></label></li>
+          <li><label><input type="radio" name="pet" value="pet2" v-model="selectedPet"><span>Pet2</span></label></li>
+          <li><label><input type="radio" name="pet" value="pet3" v-model="selectedPet"><span>Pet3</span></label></li>
+          <li><label><input type="radio" name="pet" value="pet4" v-model="selectedPet"><span>Pet4</span></label></li>
+          <li><label><input type="radio" name="pet" value="pet5" v-model="selectedPet"><span>Pet5</span></label></li>
+          <li><label><input type="radio" name="pet" value="pet6" v-model="selectedPet"><span>Pet6</span></label></li>
+          <li><label><input type="radio" name="pet" value="pet7" v-model="selectedPet"><span>Pet7</span></label></li>
+          <li><label><input type="radio" name="pet" value="pet8" v-model="selectedPet"><span>Pet8</span></label></li>
+        </ul>
+      </div>
     </van-popup>
     <van-popup position="bottom" v-model="showTags" class="select-tags">
       <div class="confirms">
@@ -64,6 +85,7 @@
     </van-popup>
   </div>
 </template>
+
 <script>
 import Utils from '../utils'
 import EXIF from 'exif-js'
@@ -93,23 +115,15 @@ export default {
       tags: ['狗年大吉', '喵星人', '铲屎官', '萌宠', 'lorem', 'ipsum', 'sim', 'dolor', 'asda', 'asdasdasd', 'uhdwiud', 'a78euqn', 'asjdh72y788', '123ad', 'weaas12', 'qweas', '123', 'asd', 'foo', 'bar'],
       randomShow: [],
       selectedTags: [],
+      selectedPet: '',
       showTags: false,
       showStatus: false,
-      showPanel: true,
+      showSelect: false,
       status: ['开心', '难过', '怀孕', '生病'],
       currentStatus: '开心'
     }
   },
   methods: {
-    test () {
-      this.showPanel = false
-    },
-    textFocus () {
-      this.showPanel = false
-    },
-    textBlur () {
-      this.showPanel = true
-    },
     random() {
       this.randomShow = []
       for (var i = 0; i < 10; i++) {
@@ -130,6 +144,8 @@ export default {
           this.showTags = !this.showTags
           this.showStatus = false
           this.selectedTags = []
+        case 3:
+          this.showSelect = !this.showSelect
         default:
           break
       }
@@ -202,6 +218,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .control-bar {
   width: 100%;
@@ -367,6 +384,13 @@ export default {
   bottom: 55px;
   z-index: 9;
 }
+.select-pets {
+  width: 100%;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  z-index: 99999999 !important;
+}
 .confirms {
   width: 100%;
   height: 44px;
@@ -375,7 +399,7 @@ export default {
   border-bottom: 1px solid #ccc;
 }
 .confirms > ul > li {
-  font-size: 19.5px;
+  font-size: 17.5px;
   width: auto;
   display: inline-block;
 }
@@ -402,6 +426,61 @@ export default {
   width: 100%;
   height: 319px;
   background-color: #fff;
+}
+.pets-wrapper {
+  width: 100%;
+  height: 170px;
+  background-color: #f5f5f5;
+  text-align: left;
+  display: flex;
+  box-sizing: border-box;
+  padding: 9px 0;
+}
+.pets-wrapper > ul {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  overflow-y: auto;
+}
+.pets-wrapper > ul > li {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 122px;
+  white-space: nowrap;
+  /* padding: 9px 0; */
+  padding-left: 32px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  color: #949494;
+  font-size: 21px;
+}
+input[type='radio'] {
+  display: none;
+}
+input[type='radio'] + span {
+  position: relative;
+  width: 122px;
+  text-overflow: ellipsis;
+}
+input[type='radio'] + span::before {
+  content: '';
+  position: absolute;
+  left: -18px;
+  top: 8px;
+  background: #fff;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px #aaa;
+}
+input[type='radio']:checked + span {
+  color: #686868;
+}
+input[type='radio']:checked + span::before {
+  background: #2cbce7;
 }
 .tags-wrapper {
   width: 100%;
@@ -460,16 +539,13 @@ input:checked + span {
   width: 100%;
   background-color: #fff;
   height: auto;
-  position: relative;
 }
 .status-panel {
   width: 318.5px;
   height: auto;
-  max-height: 166px;
-  min-height: 55px;
-  position: absolute;
-  left: 41.5px;
-  bottom: 6px;
+  margin-left: 21.5px;
+  position: relative;
+  min-height: 63px;
   background-color: #fff;
   user-select: none;
   color: #9f9f9f;
