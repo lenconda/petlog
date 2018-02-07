@@ -3,7 +3,7 @@
     <router-view></router-view>
     <div class="tabbar">
       <div>
-        <router-link :to="{path: '/index/cards/hot'}">
+        <router-link :to="{path: '/index/cards'}">
           <span class="nav_icon"></span>
           <span class="text">首页</span>
         </router-link>
@@ -69,6 +69,8 @@ export default {
   position: fixed;
   bottom: 0;
   display: flex;
+  background-color: #fff;
+  user-select: none;
 }
 .tabbar > div {
   width: 33.33%;

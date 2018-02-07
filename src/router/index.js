@@ -32,10 +32,12 @@ export default new Router({
       path: '/index',
       name: 'index',
       component: Index,
+      redirect: '/index/cards',
       children: [
         {
           path: 'cards',
           name: 'index_cards',
+          redirect: '/index/cards/hot',
           component: Index_Cards,
           children: [
             {

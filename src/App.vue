@@ -3,7 +3,11 @@
     <div class="navbar">
       <div class="navbar-left" @click="back" v-show="!$store.state.isHome"><i class="fa fa-angle-left left-arrow"></i></div>
       <div class="navbar-middle" v-show="!$store.state.isHome">{{ $store.state.title }}</div>
-      <div class="navbar-middle" v-show="$store.state.isHome"></div>
+      <div class="icon_personal" v-show="$store.state.isHome"></div>
+      <div class="navbar-middle-tabs" v-show="$store.state.isHome">
+        <div class="tab_ele"><router-link :to="{path: '/index/cards/interested'}">关注</router-link></div>
+        <div class="tab_ele"><router-link :to="{path: '/index/cards/hot'}">热门</router-link></div>
+      </div>
     </div>
     <transition :enter-active-class="$store.state.inClass" :leave-active-class="$store.state.leaveClass" mode="out-in">
       <router-view/>
@@ -63,6 +67,49 @@ export default {
   height: 128px;
   background-color: #fff;
   z-index: 9999999 !important;
+}
+.navbar-middle-tabs {
+  display: flex;
+  position: absolute;
+  bottom: 8px;
+  font-size: 19px;
+  text-align: center;
+  width: 125px;
+  height: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tab_ele {
+  width: 50%;
+}
+.tab_ele > a {
+  color: rgba(255, 255, 255, .7);
+  display: inline-block;
+  height: 100%;
+  position: relative;
+  transition: all .4s;
+}
+.tab_ele > a.router-link-active {
+  color: #fff;
+  transition: all .4s;
+}
+.tab_ele > a.router-link-active::after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  bottom: -4px;
+  left: 0;
+}
+.icon_personal {
+  width: 19px;
+  height: 20px;
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: url('../static/images/personal@3x.png') 100% / 100% no-repeat;
 }
 </style>
 

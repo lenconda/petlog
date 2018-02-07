@@ -20,6 +20,7 @@
   bottom: 15.5px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
 }
 .form-control-btn {
   display: inline-block;
