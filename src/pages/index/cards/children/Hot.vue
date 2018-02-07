@@ -25,8 +25,8 @@
       </div>
       <div class="card-control-wrapper">
         <div class="card-control">
-          <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;评论</span></button>
-          <button class="control-btn"><span class="icon_like">icon_like</span><span>&nbsp;点赞</span></button>
+          <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;23</span></button>
+          <button class="control-btn"><span class="icon_like">icon_like</span><span>&nbsp;233</span></button>
         </div>
       </div>
     </div>
@@ -154,7 +154,7 @@ export default {
   height: auto;
   position: relative;
   z-index: 1;
-  padding: 12.5px 14px 13px 40.5px;
+  padding: 11px 14px 13px 40.5px;
   background-color: #fff;
 }
 .card-wrapper .card-misc .misc-status {
@@ -225,15 +225,15 @@ export default {
 .icon_comment {
   display: inline-block;
   color: transparent;
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   background: url('../../../../../static/images/comment@3x.png') 100% / 100% no-repeat;
 }
 .icon_like {
   display: inline-block;
   color: transparent;
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   background: url('../../../../../static/images/like@3x.png') 100% / 100% no-repeat;
 }
 .icon_like.actived {
