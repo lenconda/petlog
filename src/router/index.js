@@ -3,8 +3,13 @@ import Router from 'vue-router'
 
 //import pages
 import Index from '@/pages/Index'
+import Index_Cards from '@/pages/index/cards/Cards'
+import Index_Cards_Hot from '@/pages/index/cards/children/Hot'
+import Index_Cards_Interested from '@/pages/index/cards/children/Interested'
+
 import Publish from '@/pages/Publish'
 import Details from '@/pages/Details'
+
 
 import Test1 from '@/pages/Test1'
 import Test2 from '@/pages/Test2'
@@ -26,7 +31,26 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
-      component: Index
+      component: Index,
+      children: [
+        {
+          path: 'cards',
+          name: 'index_cards',
+          component: Index_Cards,
+          children: [
+            {
+              path: 'hot',
+              name: 'index_cards_hot',
+              component: Index_Cards_Hot
+            },
+            {
+              path: 'interested',
+              name: 'index_cards_interested',
+              component: Index_Cards_Interested
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/publish',
@@ -35,8 +59,8 @@ export default new Router({
     },
     {
       // 这个地方要改成命名路由
-      path: '/cards',
-      name: 'cards',
+      path: '/details',
+      name: 'details',
       component: Details
     },
     {

@@ -2,7 +2,8 @@
   <div id="app">
     <div class="navbar">
       <div class="navbar-left" @click="back" v-show="!$store.state.isHome"><i class="fa fa-angle-left left-arrow"></i></div>
-      <div class="navbar-middle">{{ $store.state.title }}</div>
+      <div class="navbar-middle" v-show="!$store.state.isHome">{{ $store.state.title }}</div>
+      <div class="navbar-middle" v-show="$store.state.isHome"></div>
     </div>
     <transition :enter-active-class="$store.state.inClass" :leave-active-class="$store.state.leaveClass" mode="out-in">
       <router-view/>
