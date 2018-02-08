@@ -8,6 +8,7 @@
         <div class="tab_ele"><router-link :to="{path: '/index/cards/interested'}">关注</router-link></div>
         <div class="tab_ele"><router-link :to="{path: '/index/cards/hot'}">热门</router-link></div>
       </div>
+      <div class="navbar-right" v-show="$store.state.isTimeline"><router-link :to="{path: '/publish'}"><span class="write-btn"></span></router-link></div>
     </div>
     <transition :enter-active-class="$store.state.inClass" :leave-active-class="$store.state.leaveClass" mode="out-in">
       <router-view/>
@@ -110,6 +111,25 @@ export default {
   bottom: 16px;
   left: 16px;
   background: url('../static/images/personal@3x.png') 100% / 100% no-repeat;
+}
+.navbar .navbar-right {
+  position: absolute;
+  transform: translateY(50%);
+  bottom: 50%;
+  right: 17px;
+  width: 17px;
+  height: 17px;
+}
+.navbar-right > a {
+  display: inline-block;
+  height: 17px;
+  width: 17px;
+}
+.navbar-right > a > span.write-btn {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  background: url('../static/images/edit@3x.png') 100% / 100% no-repeat; 
 }
 </style>
 
