@@ -7,6 +7,7 @@ const state = {
   inClass: 'slideInLeft',
   leaveClass: 'slideOutRight',
   isHome: true,
+  isTimeline: false,
   processed: '',
   images: [],
   referer: '/index',
@@ -40,6 +41,9 @@ const mutations = {
   },
   togglleRegister (state, option) {
     state.showRegister = option
+  },
+  isTimeline (state, option) {
+    state.isTimeline = option
   }
 }
 

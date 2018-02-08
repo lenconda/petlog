@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class="navbar">
-      <div class="navbar-left" @click="back" v-show="!$store.state.isHome"><i class="fa fa-angle-left left-arrow"></i></div>
+      <div class="navbar-left" @click="back" v-show="!$store.state.isHome && !$store.state.isTimeline"><i class="fa fa-angle-left left-arrow"></i></div>
       <div class="navbar-middle" v-show="!$store.state.isHome">{{ $store.state.title }}</div>
-      <div class="icon_personal" v-show="$store.state.isHome"></div>
+      <div class="icon_personal" v-show="$store.state.isHome || $store.state.isTimeline"></div>
       <div class="navbar-middle-tabs" v-show="$store.state.isHome">
         <div class="tab_ele"><router-link :to="{path: '/index/cards/interested'}">关注</router-link></div>
         <div class="tab_ele"><router-link :to="{path: '/index/cards/hot'}">热门</router-link></div>

@@ -6,6 +6,7 @@ import Index from '@/pages/Index'
 import Index_Cards from '@/pages/index/cards/Cards'
 import Index_Cards_Hot from '@/pages/index/cards/children/Hot'
 import Index_Cards_Interested from '@/pages/index/cards/children/Interested'
+import Index_Timeline from '@/pages/index/Timeline'
 
 import Publish from '@/pages/Publish'
 import Details from '@/pages/Details'
@@ -51,6 +52,11 @@ export default new Router({
               component: Index_Cards_Interested
             }
           ]
+        },
+        {
+          path: '/index/timeline',
+          name: 'index_timeline',
+          component: Index_Timeline
         }
       ]
     },

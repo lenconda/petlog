@@ -15,7 +15,7 @@
         </router-link>
       </div>
       <div>
-        <router-link :to="{path: '/index/cards/interested'}">
+        <router-link :to="{path: '/index/timeline'}">
           <span class="nav_icon"></span>
           <span class="text">时间轴</span>
         </router-link>
@@ -27,10 +27,12 @@
 <script>
 export default {
   name: 'index',
-  mounted () {
+  beforeMount () {
     this.$store.commit('modNavbar', true)
+    this.$store.commit('setTitle', '宠爱时刻')
+  },
+  mounted () {
     this.$store.commit('modClass', {inclass: 'slideInRight', leaveclass: 'slideOutLeft'})
-    this.$store.commit('setTitle', '宠物秀')
   },
   data () {
     return {

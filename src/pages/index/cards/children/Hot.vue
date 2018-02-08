@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-  </van-pull-refresh> 
+  </van-pull-refresh>
 </template>
 
 <script>

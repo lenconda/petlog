@@ -7,7 +7,10 @@
 <script>
 export default {
   name: 'index_cards',
-
+  mounted () {
+    this.$store.commit('modNavbar', true)
+    this.$store.commit('setTitle', '宠爱时刻')
+  }
 }
 </script>
 
