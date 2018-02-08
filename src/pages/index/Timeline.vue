@@ -69,6 +69,9 @@
               <img src="../../../static/images/testonly2.png" alt="" width="100%" height="100%">
               <span>9</span>
             </div>
+            <div class="status-panel">
+              <span class="icon_status">status</span><span>开心</span>
+            </div>
           </div>
         </div>
       </div>
@@ -164,7 +167,6 @@ export default {
 .timeline-items-wrapper {
   width: 100%;
   box-sizing: border-box;
-  padding-top: 7.75px;
 }
 .timeline-items {
   width: 100%;
@@ -227,6 +229,9 @@ export default {
   box-sizing: border-box;
   padding: 8.75px 17.5px 8.75px 21px;
 }
+.timeline-items:first-child > .content {
+  padding-top: 16.5px;
+}
 .timeline-items > .content > .card {
   background-color: #fff;
   border-radius: 5px;
@@ -235,6 +240,7 @@ export default {
   box-sizing: border-box;
   padding: 12px;
   padding-right: 2px;
+  padding-bottom: 8px;
   text-align: left;
   font-size: 16.5px;
   color: #000;
@@ -251,7 +257,7 @@ export default {
 .timeline-items > .content > .card > .image-wrapper > img {
   width: 239px;
   height: 139px;
-  margin: 10px 0;
+  margin: 8px 0 3px 0;
 }
 .timeline-items > .content > .card > .image-wrapper > span {
   display: inline-block;
@@ -263,5 +269,21 @@ export default {
   position: absolute;
   right: 7px;
   bottom: 24px;
+}
+.timeline-items > .content > .card > .status-panel > span {
+  display: inline-block;
+}
+.timeline-items > .content > .card > .status-panel > .icon_status {
+  color: transparent;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  background: url('../../../static/images/status.png') 100% / 100% no-repeat;
+}
+.timeline-items > .content > .card > .status-panel > span:last-child {
+  color: #888;
+  font-size: 12.5px;
+  line-height: 12.5px;
+  margin-left: 4.5px;
 }
 </style>
