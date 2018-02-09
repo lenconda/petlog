@@ -12,9 +12,9 @@ import Publish from '@/pages/Publish'
 import Details from '@/pages/Details'
 
 
-import Test1 from '@/pages/Test1'
-import Test2 from '@/pages/Test2'
-import Emotions from '@/pages/Emotions'
+import Test1 from '@/tests/Test1'
+import Test2 from '@/tests/Test2'
+import Emotions from '@/tests/Emotions'
 
 Vue.use(Router)
 

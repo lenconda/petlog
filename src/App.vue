@@ -49,87 +49,90 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
 #app {
   font-family: 'Pingfang SC';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: calc(100% - 55px);
+  box-sizing: border-box;
+  height: 100%;
   padding-top: 55px;
-}
-.content {
-  height: 100%;
-  width: 100%;
-}
-.popup {
-  width: 248px;
-  height: 128px;
-  background-color: #fff;
-  z-index: 9999999 !important;
-}
-.navbar-middle-tabs {
-  display: flex;
-  position: absolute;
-  bottom: 8px;
-  font-size: 19px;
-  text-align: center;
-  width: 125px;
-  height: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.tab_ele {
-  width: 50%;
-}
-.tab_ele > a {
-  color: rgba(255, 255, 255, .7);
-  display: inline-block;
-  height: 100%;
-  position: relative;
-  transition: all .4s;
-}
-.tab_ele > a.router-link-active {
-  color: #fff;
-  transition: all .4s;
-}
-.tab_ele > a.router-link-active::after {
-  content: '';
-  position: absolute;
-  width: 36px;
-  height: 4px;
-  border-radius: 2px;
-  background-color: #fff;
-  bottom: -4px;
-  left: 0;
-}
-.icon_personal {
-  width: 19px;
-  height: 20px;
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  background: url('../static/images/personal@3x.png') 100% / 100% no-repeat;
-}
-.navbar .navbar-right {
-  position: absolute;
-  transform: translateY(50%);
-  bottom: 50%;
-  right: 17px;
-  width: 17px;
-  height: 17px;
-}
-.navbar-right > a {
-  display: inline-block;
-  height: 17px;
-  width: 17px;
-}
-.navbar-right > a > span.write-btn {
-  display: inline-block;
-  width: 17px;
-  height: 17px;
-  background: url('../static/images/edit@3x.png') 100% / 100% no-repeat; 
+  padding-bottom: 57px;
+  // .content {
+  //   height: 100%;
+  //   width: 100%;
+  // }
+  .popup {
+    width: 248px;
+    height: 128px;
+    background-color: #fff;
+    z-index: 9999999 !important;
+  }
+  .navbar {
+    .navbar-middle-tabs {
+      display: flex;
+      position: absolute;
+      bottom: 8px;
+      font-size: 19px;
+      text-align: center;
+      width: 125px;
+      height: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      .tab_ele {
+        width: 50%;
+        & > a {
+          color: rgba(255, 255, 255, .7);
+          display: inline-block;
+          height: 100%;
+          position: relative;
+          transition: all .4s;
+          &.router-link-active {
+            color: #fff;
+            transition: all .4s;
+            &::after {
+              content: '';
+              position: absolute;
+              width: 36px;
+              height: 4px;
+              border-radius: 2px;
+              background-color: #fff;
+              bottom: -4px;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+    .icon_personal {
+      width: 19px;
+      height: 20px;
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: url('../static/images/personal@3x.png') 100% e('/') 100% no-repeat;
+    }
+    .navbar-right {
+      position: absolute;
+      transform: translateY(50%);
+      bottom: 50%;
+      right: 17px;
+      width: 17px;
+      height: 17px;
+      & > a {
+        display: inline-block;
+        height: 17px;
+        width: 17px;
+        & > span.write-btn {
+          display: inline-block;
+          width: 17px;
+          height: 17px;
+          background: url('../static/images/edit@3x.png') 100% e('/') 100% no-repeat; 
+        }
+      }
+    }
+  }
 }
 </style>
-

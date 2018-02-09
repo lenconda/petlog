@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "exif-js": "^2.3.0",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
     "lib-flexible": "^0.3.2",
     "px2rem-loader": "^0.1.7",
     "vant": "^0.12.4",

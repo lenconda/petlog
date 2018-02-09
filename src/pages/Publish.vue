@@ -4,9 +4,9 @@
       <div class="text-area">
         <textarea rows="4" placeholder="来吧，记录这一刻..." class="text-field" v-model="content"></textarea>
       </div>
-      <div id="panel" class="staus-panel-wrapper">
+      <div id="panel" class="status-panel-wrapper">
         <div class="status-panel">
-          <div class="current-status">您的宠物当前状态：{{ currentStatus }}</div>
+          <div>您的宠物当前状态：{{ currentStatus }}</div>
           <div class="current-tags-wrapper">
             <span class="current-tags" v-for="tag in selectedTags">{{ tag }}</span>
           </div>
@@ -24,7 +24,6 @@
         </ul>
       </div>
     </div>
-    <div class="tags-picker"></div>
     <div class="control-bar">
       <div class="left-buttons">
         <i @click="selectImg"></i>
@@ -219,371 +218,421 @@ export default {
 }
 </script>
 
-<style scoped>
-.control-bar {
-  width: 100%;
-  height: 55px;
-  background: #fff;
-  border-top: 1px solid #ebebeb;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  flex-wrap: nowrap;
-  z-index: 9999999;
-}
-.left-buttons {
-  flex-shrink: 1;
-  width: 275px;
-  position: relative;
-}
-.right-buttons {
-  flex-shrink: 0;
-  width: 100px;
-}
-.publish-wrapper {
-  height: calc(100% - 16px);
-  width: calc(100% - 42px);
-  padding: 16px 21px 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
-}
+<style lang="less" scoped>
 .wrapper {
-  height: calc(100% - 55px);
-}
-.left-buttons > i {
-  display: inline-block;
-  position: absolute;
-}
-.left-buttons > i:first-child {
-  background: url('../../static/images/picture.png') no-repeat;
-  background-size: 100%;
-  width: 26px;
-  height: 23.5px;
-  left: 26px;
-  top: 16.5px;
-}
-.left-buttons > i:nth-child(2) {
-  background: url('../../static/images/tags.png') no-repeat;
-  background-size: 100%;
-  width: 25px;
-  height: 25.5px;
-  left: 88px;
-  top: 15.5px;
-}
-.left-buttons > i:last-child {
-  background: url('../../static/images/status.png') no-repeat;
-  background-size: 100%;
-  width: 29.5px;
-  height: 26.5px;
-  left: 149px;
-  top: 15px;
-}
-.left-buttons > i:first-child:active {
-  background: url('../../static/images/picture_active.png') no-repeat;
-  background-size: 100%;
-}
-.left-buttons > i:nth-child(2):active {
-  background: url('../../static/images/tags_active.png') no-repeat;
-  background-size: 100%;
-}
-.left-buttons > i:last-child:active {
-  background: url('../../static/images/status_active.png') no-repeat;
-  background-size: 100%;
-}
-.left-buttons > i:first-child.actived {
-  background: url('../../static/images/picture_active.png') no-repeat;
-  background-size: 100%;
-}
-.left-buttons > i:nth-child(2).actived {
-  background: url('../../static/images/tags_active.png') no-repeat;
-  background-size: 100%;
-}
-.left-buttons > i:last-child.actived {
-  background: url('../../static/images/status_active.png') no-repeat;
-  background-size: 100%;
-}
-.text-field {
-  width: 100%;
-  padding: 0;
-  caret-color: #ffa721;
-  border: none;
-  resize: none;
-  font-size: 14px;
-}
-.text-area {
-  height: 85.5px;
-  margin-bottom: 26.5px;
-}
-.cust-camera {
-  display: block;
-  line-height: 109px;
   height: 100%;
-  font-size: 37px;
-  color: #ccc
-}
-.images-lists {
-  width: 355px;
-  margin: 0 auto;
-  max-height: 221px;
-  overflow-y: auto;
-}
-.images-lists > ul {
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: flex-start;
-}
-.images-lists > ul > li {
-  display: block;
-  flex-shrink: 1;
-  width: 109px;
-  height: 109px;
-  margin: 1.5px;
-  position: relative;
-}
-.images-lists > ul > li:last-child {
-  background: #fff;
-  border: 1px dashed #ccc;
-  width: 107.5px;
-  height: 107.5px; 
-}
-.images-lists img {
-  width: 100%;
-  height: 100%;
-}
-.delete-image {
-  width: 27px;
-  height: 27px;
-  line-height: 27px;
-  text-align: center;
-  background: rgba(0, 0, 0, .5);
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  border-radius: 50%;
-}
-.close-btn {
-  display: inline-block;
-  font-size: 11.5px;
-  line-height: 27px;
-  width: 27px;
-  text-align: center;
-  padding-left: 1.1px;
-  padding-bottom: 0.5px;
-  font-weight: bolder;
-  color: #fff;
-}
-.select-status {
-  width: 100%;
-  background: #fff;
-  position: fixed;
-  bottom: 55px;
-  z-index: 9;
-}
-.select-pets {
-  width: 100%;
-  background: #fff;
-  position: fixed;
-  bottom: 0;
-  z-index: 99999999 !important;
-}
-.confirms {
-  width: 100%;
-  height: 44px;
-  background: #fff;
-  position: relative;
-  border-bottom: 1px solid #ccc;
-}
-.confirms > ul > li {
-  font-size: 17.5px;
-  width: auto;
-  display: inline-block;
-}
-.confirms > ul > li.confirm-btn {
-  color: #1d5faa;
-  float: right;
-  padding: 8px 13px;
-}
-.confirms > ul > li.cancel-btn {
-  float: left;
-  color: #000;
-  padding: 8px 13px;
-}
-.confirms > ul > li.confirm-title {
-  display: inline-block;
-  font-size: 21.5px;
-  font-weight: bold;
-  text-align: center;
-  color: #000;
-  padding: 7px 0;
-  width: calc(100% - 58 * 2);
-}
-.select-tags {
-  width: 100%;
-  height: 319px;
-  background-color: #fff;
-}
-.pets-wrapper {
-  width: 100%;
-  height: 170px;
-  background-color: #f5f5f5;
-  text-align: left;
-  display: flex;
-  box-sizing: border-box;
-  padding: 9px 0;
-}
-.pets-wrapper > ul {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  width: 100%;
-  overflow-y: auto;
-}
-.pets-wrapper > ul > li {
-  display: inline-block;
-  box-sizing: border-box;
-  width: 122px;
-  white-space: nowrap;
-  /* padding: 9px 0; */
-  padding-left: 32px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-  color: #949494;
-  font-size: 21px;
-}
-input[type='radio'] {
-  display: none;
-}
-input[type='radio'] + span {
-  position: relative;
-  width: 122px;
-  text-overflow: ellipsis;
-}
-input[type='radio'] + span::before {
-  content: '';
-  position: absolute;
-  left: -18px;
-  top: 8px;
-  background: #fff;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid #fff;
-  box-shadow: 0 0 0 1px #aaa;
-}
-input[type='radio']:checked + span {
-  color: #686868;
-}
-input[type='radio']:checked + span::before {
-  background: #2cbce7;
-}
-.tags-wrapper {
-  width: 100%;
-  height: 220px;
-  background-color: #f5f5f5;
-}
-div.tags-wrapper div.tag-list {
-  width: 100%;
-  height: 143px;
-  overflow-y: auto;
-  padding-top: 17px;
-  text-align: left;
-}
-div.tags-wrapper div.refresh-wrapper {
-  width: 100%;
-  height: 60px;
-}
-.refresh-btn {
-  font-size: 26.5px;
-  line-height: 60px;
-  display: inline-block;
-  color: #aaaaaa;
-}
-.refresh-btn:active {
-  color: #686868;
-}
-/* Tags */
-input[type=checkbox] {
-  display: none;
-}
-label.tag-wrapper {
-  display: inline-block;
-  font-size: 16px;
-  margin: 0 10px 10px 10px;
-}
-span.tag-content {
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
-  padding: 6px;
-  margin: 0 2.5px;
-  border-radius: 4px;
-  background-color: #fff;
-  border: 1px solid #949494;
-  color: #555555;
-  transition: all .4s;
-}
-input:checked + span {
-  color: #2cbce7;
-  border-color: #2cbce7;
-  transition: all .4s;
-}
-/* Tag、状态显示栏 */
-.status-panel-wrapper {
-  width: 100%;
-  background-color: #fff;
-  height: auto;
-}
-.status-panel {
-  width: 318.5px;
-  height: auto;
-  margin-left: 21.5px;
-  position: relative;
-  min-height: 63px;
-  background-color: #fff;
-  user-select: none;
-  color: #9f9f9f;
-  font-size: 15.5px;
-  text-align: left;
-  font-style: normal;
-}
-.static {
-  position: static;
-}
-.current-tags-wrapper {
-  margin-top: 10px;
-}
-.current-tags {
-  display: inline-block;
-  color: #2cbce7;
-  padding: 6px 9px;
-  border: 1px solid #2cbce7;
-  border-radius: 4px;
-  margin-right: 7px;
-  margin-bottom: 6px;
-}
-.status-panel::before {
-  content: '';
-  width: 17px;
-  height: 15.5px;
-  position: absolute;
-  top: 3px;
-  left: -26.5px;
-  background: url('../../static/images/status_small@3x.png') 100% / 100% no-repeat;
-}
-.status-panel::after {
-  content: '';
-  width: 15.5px;
-  height: 15.5px;
-  position: absolute;
-  top: 39px;
-  left: -26.5px;
-  background: url('../../static/images/tag_small@3x.png') 100% / 100% no-repeat;
+  & > .publish-wrapper {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px 21px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    & > .text-area {
+      height: 85.5px;
+      margin-bottom: 26.5px;
+      & > .text-field {
+        width: 100%;
+        padding: 0;
+        caret-color: #ffa721;
+        border: none;
+        resize: none;
+        font-size: 14px;
+      }
+    }
+    & > .status-panel-wrapper {
+      width: 100%;
+      background-color: #fff;
+      height: auto;
+      & > .status-panel {
+        width: 318.5px;
+        height: auto;
+        margin-left: 21.5px;
+        position: relative;
+        min-height: 63px;
+        background-color: #fff;
+        user-select: none;
+        color: #9f9f9f;
+        font-size: 15.5px;
+        text-align: left;
+        font-style: normal;
+        &::before {
+          content: '';
+          width: 17px;
+          height: 15.5px;
+          position: absolute;
+          top: 3px;
+          left: -26.5px;
+          background: url('../../static/images/status_small@3x.png') 100% e('/') 100% no-repeat;
+        }
+        &::after {
+          content: '';
+          width: 15.5px;
+          height: 15.5px;
+          position: absolute;
+          top: 39px;
+          left: -26.5px;
+          background: url('../../static/images/tag_small@3x.png') 100% e('/') 100% no-repeat;
+        }
+        & > .current-tags-wrapper {
+          margin-top: 10px;
+          & > .current-tags {
+            display: inline-block;
+            color: #2cbce7;
+            padding: 6px 9px;
+            border: 1px solid #2cbce7;
+            border-radius: 4px;
+            margin-right: 7px;
+            margin-bottom: 6px;
+          }
+        }
+      }
+    }
+    & > .images-lists {
+      width: 355px;
+      margin: 0 auto;
+      max-height: 221px;
+      overflow-y: auto;
+      .delete-image {
+        width: 27px;
+        height: 27px;
+        line-height: 27px;
+        text-align: center;
+        background: rgba(0, 0, 0, .5);
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        border-radius: 50%;
+      }
+      .close-btn {
+        display: inline-block;
+        font-size: 11.5px;
+        line-height: 27px;
+        width: 27px;
+        text-align: center;
+        padding-left: 1.1px;
+        padding-bottom: 0.5px;
+        font-weight: bolder;
+        color: #fff;
+      }
+      .cust-camera {
+        display: block;
+        line-height: 109px;
+        height: 100%;
+        font-size: 37px;
+        color: #ccc
+      }
+      & > ul {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+        & > li {
+          display: block;
+          flex-shrink: 1;
+          width: 109px;
+          height: 109px;
+          margin: 1.5px;
+          position: relative;
+          &:last-child {
+            background: #fff;
+            border: 1px dashed #ccc;
+            width: 107.5px;
+            height: 107.5px; 
+          }
+        }
+      }
+      & > img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  & > .control-bar {
+    width: 100%;
+    height: 55px;
+    background: #fff;
+    border-top: 1px solid #ebebeb;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    z-index: 9999999;
+    & > .left-buttons {
+      flex-shrink: 1;
+      width: 275px;
+      position: relative;
+      & > i {
+        display: inline-block;
+        position: absolute;
+        &:first-child {
+          background: url('../../static/images/picture.png') no-repeat;
+          background-size: 100%;
+          width: 26px;
+          height: 23.5px;
+          left: 26px;
+          top: 16.5px;
+          &:active {
+            background: url('../../static/images/picture_active.png') no-repeat;
+            background-size: 100%;
+          }
+          &.actived {
+            background: url('../../static/images/picture_active.png') no-repeat;
+            background-size: 100%;
+          }
+        }
+        &:nth-child(2) {
+          background: url('../../static/images/tags.png') no-repeat;
+          background-size: 100%;
+          width: 25px;
+          height: 25.5px;
+          left: 88px;
+          top: 15.5px;
+          &:active {
+            background: url('../../static/images/tags_active.png') no-repeat;
+            background-size: 100%;
+          }
+          &.actived {
+            background: url('../../static/images/tags_active.png') no-repeat;
+            background-size: 100%;
+          }
+        }
+        &:last-child {
+          background: url('../../static/images/status.png') no-repeat;
+          background-size: 100%;
+          width: 29.5px;
+          height: 26.5px;
+          left: 149px;
+          top: 15px;
+          &:active {
+            background: url('../../static/images/status_active.png') no-repeat;
+            background-size: 100%;
+          }
+          &.actived {
+            background: url('../../static/images/status_active.png') no-repeat;
+            background-size: 100%;
+          }
+        }
+      }
+    }
+    & > .right-buttons {
+      flex-shrink: 0;
+      width: 100px;
+    }
+  }
+  & > .select-status {
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 55px;
+    z-index: 9;
+    & > .confirms {
+      width: 100%;
+      height: 44px;
+      background: #fff;
+      position: relative;
+      border-bottom: 1px solid #ccc;
+      & > ul > li {
+        font-size: 17.5px;
+        width: auto;
+        display: inline-block;
+        &.confirm-btn {
+          color: #1d5faa;
+          float: right;
+          padding: 8px 13px;
+        }
+        &.cancel-btn {
+          float: left;
+          color: #000;
+          padding: 8px 13px;
+        }
+        &.confirm-title {
+          display: inline-block;
+          font-size: 21.5px;
+          font-weight: bold;
+          text-align: center;
+          color: #000;
+          padding: 7px 0;
+        }
+      }
+    }
+  }
+  & > .select-pets {
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    z-index: 99999999 !important;
+    & > .confirms {
+      width: 100%;
+      height: 44px;
+      background: #fff;
+      position: relative;
+      border-bottom: 1px solid #ccc;
+      & > ul > li {
+        font-size: 17.5px;
+        width: auto;
+        display: inline-block;
+        &.confirm-btn {
+          color: #1d5faa;
+          float: right;
+          padding: 8px 13px;
+        }
+        &.cancel-btn {
+          float: left;
+          color: #000;
+          padding: 8px 13px;
+        }
+        &.confirm-title {
+          display: inline-block;
+          font-size: 21.5px;
+          font-weight: bold;
+          text-align: center;
+          color: #000;
+          padding: 7px 0;
+        }
+        & input[type='radio'] {
+          display: none;
+          & + span {
+            position: relative;
+            width: 122px;
+            text-overflow: ellipsis;
+            &::before {
+              content: '';
+              position: absolute;
+              left: -18px;
+              top: 8px;
+              background: #fff;
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              border: 1.5px solid #fff;
+              box-shadow: 0 0 0 1px #aaa;
+            }
+          }
+          &:checked + span {
+            color: #686868;
+            &::before {
+              background: #2cbce7;
+            }
+          }
+        }
+      }
+    }
+    & > .pets-wrapper {
+      width: 100%;
+      height: 170px;
+      background-color: #f5f5f5;
+      text-align: left;
+      display: flex;
+      box-sizing: border-box;
+      padding: 9px 0;
+      & > ul {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        width: 100%;
+        overflow-y: auto;
+        & > li {
+          display: inline-block;
+          box-sizing: border-box;
+          width: 122px;
+          white-space: nowrap;
+          /* padding: 9px 0; */
+          padding-left: 32px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+          color: #949494;
+          font-size: 21px;
+        }
+      }
+    }
+  }
+  & > .select-tags {
+    width: 100%;
+    height: 319px;
+    background-color: #fff;
+    & > .confirms {
+      width: 100%;
+      height: 44px;
+      background: #fff;
+      position: relative;
+      border-bottom: 1px solid #ccc;
+      & > ul > li {
+        font-size: 17.5px;
+        width: auto;
+        display: inline-block;
+        &.confirm-btn {
+          color: #1d5faa;
+          float: right;
+          padding: 8px 13px;
+        }
+        &.cancel-btn {
+          float: left;
+          color: #000;
+          padding: 8px 13px;
+        }
+        &.confirm-title {
+          display: inline-block;
+          font-size: 21.5px;
+          font-weight: bold;
+          text-align: center;
+          color: #000;
+          padding: 7px 0;
+        }
+      }
+    }
+    & > .tags-wrapper {
+      width: 100%;
+      height: 220px;
+      background-color: #f5f5f5;
+      & > .tag-list {
+        width: 100%;
+        height: 143px;
+        overflow-y: auto;
+        padding-top: 17px;
+        text-align: left;
+        & > .tag-wrapper {
+          display: inline-block;
+          font-size: 16px;
+          margin: 0 10px 10px 10px;
+          & > input {
+            display: none;
+          }
+          & > .tag-content {
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            padding: 6px;
+            margin: 0 2.5px;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 1px solid #949494;
+            color: #555555;
+            transition: all .4s;
+          }
+        }
+      }
+      & > .refresh-wrapper {
+        width: 100%;
+        height: 60px;
+        & > .refresh-btn {
+          font-size: 26.5px;
+          line-height: 60px;
+          display: inline-block;
+          color: #aaaaaa;
+          &:active {
+            color: #686868;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

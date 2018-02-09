@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<!--<style scoped>
 .content {
   box-sizing: border-box;
   padding-bottom: 55px;
@@ -130,5 +130,82 @@ export default {
 }
 .tabbar > div:last-child > a.router-link-active > span.nav_icon {
   background: url('../../static/images/timeline_active@3x.png') 100% / 100% no-repeat;
+}
+</style>-->
+
+<style lang="less" scoped>
+.content {
+  box-sizing: border-box;
+  padding-bottom: 55px;
+  overflow-y: auto;
+  .tabbar {
+    width: 100%;
+    border-top: 1px solid #e6e6e6;
+    height: 55px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    background-color: #fff;
+    user-select: none;
+    & > div {
+      width: 33.33%;
+      & > a {
+        box-sizing: border-box;
+        color: #949494;
+        font-size: 11.5px;
+        padding: 8px 0 6px 0;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        & > span.nav_icon {
+          display: block;
+          width: 27px;
+          height: 27px;
+          margin: 0 auto;
+        }
+        &.router-link-active {
+          color: #ffa721;
+        }
+      }
+      &:first-child > a {
+        /* text-align: left; */
+        box-sizing: border-box;
+        /* padding-left: 25px; */
+        & > span.nav_icon {
+          background: url('../../static/images/home@3x.png') 100% e('/') 100% no-repeat;
+        }
+        &.router-link-active > span.nav_icon {
+          background: url('../../static/images/home_active@3x.png') 100% e('/') 100% no-repeat;
+        }
+      }
+      &:nth-child(2) > a { 
+        & > span.nav_icon {
+          margin: 0 auto;
+          background: url('../../static/images/camera@3x.png') 100% e('/') 100% no-repeat;
+        }
+        &.router-link-active > span.nav_icon {
+          background: url('../../static/images/camera_active@3x.png') 100% e('/') 100% no-repeat;
+        }
+      }
+      &:last-child > a {
+        box-sizing: border-box;
+        /* padding-right: 25px; */
+        & > span {
+          &.text {
+            width: 100%;
+            display: inline-block;
+            /* text-align: right; */
+          }
+          &.nav_icon {
+            /* margin-right: 4px; */
+            background: url('../../static/images/timeline@3x.png') 100% e('/') 100% no-repeat;
+          }
+        }
+        &.router-link-active > span.nav_icon {
+          background: url('../../static/images/timeline_active@3x.png') 100% e('/') 100% no-repeat;
+        }
+      }
+    }
+  }
 }
 </style>
