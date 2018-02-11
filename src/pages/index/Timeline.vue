@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <div class="head-wrapper">
+    <div class="head-wrapper" :style="{background: 'url(../../../static/images/testonly.jpg)'}">
       <div class="avatar-wrapper">
         <div>
           <img :src="['../../../static/images/testonly.jpg']" width="100%" height="100%">
@@ -102,8 +102,24 @@ export default {
     min-height: 161px;
     height: auto;
     width: 100%;
-    background: #2f3139;
+    position: relative;
+    background-repeat: no-repeat !important;
+    background-size: 100% !important;
+    background-position: center !important;
+    overflow: hidden;
     user-select: none;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: inherit;
+      filter: blur(28px);
+      margin: -100%;
+      z-index: 0;
+    }
     & > .avatar-wrapper {
       box-sizing: border-box;
       width: 100%;
@@ -139,6 +155,7 @@ export default {
       color: #fff;
       box-sizing: border-box;
       padding: 9.5px 0 5.5px 0;
+      position: relative;
       & > .name-age {
         display: block;
         margin-bottom: 2px;
