@@ -1,10 +1,10 @@
 <template>
   <div class="timeline">
-    <div class="head-wrapper" :style="{background: 'url(../../../static/images/testonly.jpg)'}">
+    <div class="head-wrapper" :style="{background: `url(../../../static/images/${this.avatar})`}">
       <div class="avatar-wrapper">
         <div>
-          <img :src="['../../../static/images/testonly.jpg']" width="100%" height="100%">
-          <i class="switch-btn"></i>
+          <img :src="[`../../../static/images/${this.avatar}`]" width="100%" height="100%">
+          <i class="switch-btn" @click="toggleAvt"></i>
         </div>
       </div>
       <div class="info-wrapper">
@@ -87,6 +87,21 @@ export default {
     this.$store.commit('setTitle', '时间轴')
     this.$store.commit('isTimeline', true)
   },
+  data () {
+    return {
+      avatar: 'testonly.jpg',
+      test: 'aahahaha'
+    }
+  },
+  methods: {
+    toggleAvt () {
+      if (this.avatar == 'testonly.jpg') {
+        this.avatar = 'testonly2.png'
+      } else {
+        this.avatar = 'testonly.jpg'
+      }
+    }
+  },
   destroyed () {
     this.$store.commit('isTimeline', false)
   }
@@ -104,8 +119,9 @@ export default {
     width: 100%;
     position: relative;
     background-repeat: no-repeat !important;
-    background-size: 100% !important;
+    background-size: 80% !important;
     background-position: center !important;
+    transition: all .5s;
     overflow: hidden;
     user-select: none;
     &::before {
@@ -116,8 +132,8 @@ export default {
       bottom: 0;
       left: 0;
       background: inherit;
-      filter: blur(28px);
-      margin: -100%;
+      filter: blur(18px);
+      margin: -20%;
       z-index: 0;
     }
     & > .avatar-wrapper {
