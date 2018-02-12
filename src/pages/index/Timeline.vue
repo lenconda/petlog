@@ -113,7 +113,7 @@ export default {
   height: 100%;
   background-color: #f4f4f4;
   overflow-y: auto;
-  & > .head-wrapper {
+  .head-wrapper {
     min-height: 161px;
     height: auto;
     width: 100%;
@@ -136,7 +136,7 @@ export default {
       margin: -20%;
       z-index: 0;
     }
-    & > .avatar-wrapper {
+    .avatar-wrapper {
       box-sizing: border-box;
       width: 100%;
       height: 105px;
@@ -144,16 +144,16 @@ export default {
       align-items: flex-end;
       justify-content: center;
       position: relative;
-      & > div {
+      div {
         position: relative;
-        & > img {
+        img {
           width: 82px;
           height: 82px;
           box-sizing: border-box;
           border-radius: 50%;
           border: 1.5px solid rgba(224, 224, 224, .5);
         }
-        & > .switch-btn {
+        .switch-btn {
           width: 10.5px;
           height: 13px;
           background-color: transparent;
@@ -165,25 +165,25 @@ export default {
         }
       }
     }
-    & > .info-wrapper {
+    .info-wrapper {
       width: 100%;
       height: auto;
       color: #fff;
       box-sizing: border-box;
       padding: 9.5px 0 5.5px 0;
       position: relative;
-      & > .name-age {
+      .name-age {
         display: block;
         margin-bottom: 2px;
         font-size: 17px;
-        & > span:first-child {
+        span:first-child {
           padding-right: 24px;
         }
-        & > span:last-child {
+        span:last-child {
           padding-left: 24px;
         }
       }
-      & > .motto {
+      .motto {
         box-sizing: border-box;
         width: 100%;
         padding: 0 26.5px 0 26.5px;
@@ -192,14 +192,14 @@ export default {
       }
     }
   }
-  & > .timeline-items-wrapper {
+  .timeline-items-wrapper {
     width: 100%;
     box-sizing: border-box;
-    & > .timeline-items {
+    .timeline-items {
       width: 100%;
       height: auto;
       display: flex;
-      & > .date {
+      .date {
         width: 70px;
         border-right: 1px solid #fff;
         position: relative;
@@ -219,7 +219,7 @@ export default {
           top: 25px;
           z-index: 9;
         }
-        & > .year {
+        .year {
           display: block;
           padding: 3px 6px;
           box-sizing: border-box;
@@ -238,7 +238,7 @@ export default {
             display: none;
           }
         }
-        & > div > span {
+        div > span {
           &:first-child {
             color: #000;
             font-size: 19px;
@@ -252,11 +252,11 @@ export default {
           }
         }
       }
-      & > .content {
+      .content {
         width: 305px;
         box-sizing: border-box;
         padding: 8.75px 17.5px 8.75px 21px;
-        & > .card {
+        .card {
           background-color: #fff;
           border-radius: 5px;
           box-shadow: 0px 4px 6.5px 0px rgba(0, 0, 0, 0.1);
@@ -268,20 +268,20 @@ export default {
           text-align: left;
           font-size: 16.5px;
           color: #000;
-          & > p {
+          p {
             margin: 0;
           }
-          & > .image-wrapper {
+          .image-wrapper {
             position: relative;
             width: 239px;
             height: auto;
             display: block;
-            & > img {
+            img {
               width: 239px;
               height: 139px;
               margin: 8px 0 3px 0;
             }
-            & > span {
+            span {
               display: inline-block;
               color: #fff;
               background-color: rgba(0, 0, 0, .5);
@@ -293,7 +293,7 @@ export default {
               bottom: 24px;
             }
           }
-          & > .status-panel > span {
+          .status-panel > span {
             display: inline-block;
             &:last-child {
               color: #888;

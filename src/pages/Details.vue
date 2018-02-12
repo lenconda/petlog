@@ -109,49 +109,49 @@ export default {
   width: 100%;
   display: relative;
   background-color: #f4f4f4;
-  & > .card-wrapper {
+  .card-wrapper {
     text-align: left;
     width: 100%;
     height: auto;
     background-color: #fff;
-    & > .card-head {
+    .card-head {
       display: flex;
       height: 69.5px;
       width: 100%;
       padding: 12.5px 14.5px 10px 14px;
       box-sizing: border-box;
-      & > .card-head-avatar {
+      .card-head-avatar {
         display: inline-block;
         width: 47px;
         height: 47px;
-        & > img {
+        img {
           width: 47px;
           height: 47px;
           border-radius: 50%;
         }
       }
-      & > .card-head-poster {
+      .card-head-poster {
         display: inline-block;
         width: 225.5px;
         padding: 6px 5px 5px 12px;
         box-sizing: content-box;
-        & > .poster-name {
+        .poster-name {
           font-size: 18px;
           line-height: 18px;
           color: #000;
         }
-        & > .poster-date {
+        .poster-date {
           font-size: 12.5px;
           line-height: 12.5px;
           margin-top: 7px;
           color: #9b9b9b;
         }
       }
-      & > .card-head-follow {
+      .card-head-follow {
         width: 74px;
         height: 47px;
         padding: 3px 0 10px 5px;
-        & > button {
+        button {
           width: 63px;
           height: 34px;
           background-color: #fff;
@@ -162,13 +162,13 @@ export default {
           box-sizing: border-box;
           outline: none;
         }
-        & > .plus {
+        .plus {
           font-weight: bold;
           font-size: 13px;
         }
       }
     }
-    & > .card-content {
+    .card-content {
       box-sizing: border-box;
       width: 100%;
       height: auto;
@@ -177,7 +177,7 @@ export default {
       color: #000;
       font-size: 18px;
     }
-    & > .card-misc {
+    .card-misc {
       box-sizing: border-box;
       width: 100%;
       height: auto;
@@ -185,7 +185,7 @@ export default {
       z-index: 1;
       padding: 12.5px 14px 13px 40.5px;
       background-color: #fff;
-      & > .misc-status {
+      .misc-status {
         position: relative;
         font-size: 16.5px;
         color: #9f9f9f;
@@ -200,7 +200,7 @@ export default {
           background: url('../../static/images/status_small@3x.png') 100% e('/') 100% no-repeat;
         }
       }
-      & > .misc-tags {
+      .misc-tags {
         position: relative;
         margin-top: 10px;
         &::before {
@@ -212,7 +212,7 @@ export default {
           left: -26.5px;
           background: url('../../static/images/tag_small@3x.png') 100% e('/') 100% no-repeat;
         }
-        & > .tag {
+        .tag {
           display: inline-block;
           font-size: 16.5px;
           color: #2cbce7;
@@ -225,11 +225,11 @@ export default {
       }
     }
   }
-  & > .comment-wrapper {
+  .comment-wrapper {
     width: 100%;
     background-color: #fff;
     margin-top: 11px;
-    & > .comment-head {
+    .comment-head {
       width: 100%;
       height: 50px;
       box-sizing: border-box;
@@ -237,12 +237,12 @@ export default {
       color: #9b9b9b;
       border-bottom: 1px solid #e6e6e6;
       font-size: 18.5px;
-      & > .comment-count {
+      .comment-count {
         float: left;
       }
-      & > .comment-likes {
+      .comment-likes {
         float: right;
-        & > .like-icon {
+        .like-icon {
           display: inline-block;
           color: transparent;
           width: 25px;
@@ -252,58 +252,58 @@ export default {
             background: url('../../static/images/liked@3x.png') 100% e('/') 100% no-repeat;
           }
         }
-        & > .like-count {
+        .like-count {
           display: inline-block;
           line-height: 25px;
         }
       }
     }
-    & > .comment-contents > .none-comment {
+    .comment-contents > .none-comment {
       background: #f4f4f4;
       height: 267px;
       position: relative;
       margin-bottom: 60px;
     }
-    & > .comment-contents > ul {
+    .comment-contents > ul {
       padding: 0;
       margin: 0;
       margin-bottom: 63px;
       background-color: #f4f4f4;
       padding-bottom: 10px;
       box-sizing: border-box;
-      & > li {
+      li {
         display: flex;
         width: 100%;
         height: auto;
         background-color: #fff;
-        & > .comment-avatar {
+        .comment-avatar {
           text-align: left;
           width: 73.5px;
           box-sizing: border-box;
-          & > img {
+          img {
             width: 44px;
             height: 44px;
             border-radius: 50%;
             margin: 25px 14.5px 0 15px;
           }
         }
-        & > .comment-texts {
+        .comment-texts {
           width: 302px;
           height: auto;
           text-align: left;
           border-bottom: 1px solid #e0e0e0;
           padding: 27px 14px 10px 0;
           box-sizing: border-box;
-          & > .comment-text-author {
+          .comment-text-author {
             font-size: 16.5px;
             color: #888;
           }
-          & > .comment-text-raw {
+          .comment-text-raw {
             font-size: 18px;
             color: #333;
             margin: 10.5px 0 8.5px 0;
           }
-          & > .comment-text-date {
+          .comment-text-date {
             font-size: 14px;
             color: #9b9b9b;
             margin: 7px 0;
@@ -315,7 +315,7 @@ export default {
       }
     }
   }
-  & > .write-comment {
+  .write-comment {
     width: 100%;
     box-sizing: border-box;
     height: auto;
@@ -328,7 +328,7 @@ export default {
     z-index: 999999999;
     display: flex;
     align-items: flex-end;
-    & > .write-comment-wrapper {
+    .write-comment-wrapper {
       box-sizing: border-box;
       width: 280px;
       height: auto;
@@ -337,7 +337,7 @@ export default {
       border-radius: 5px;
       border: 1px solid #e0e0e0
     }
-    & > .write-comment-submit {
+    .write-comment-submit {
       width: 66.5px;
       text-align: right;
       font-size: 18.5px;

@@ -221,7 +221,7 @@ export default {
 <style lang="less" scoped>
 .wrapper {
   height: 100%;
-  & > .publish-wrapper {
+  .publish-wrapper {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
@@ -229,10 +229,10 @@ export default {
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
-    & > .text-area {
+    .text-area {
       height: 85.5px;
       margin-bottom: 26.5px;
-      & > .text-field {
+      .text-field {
         width: 100%;
         padding: 0;
         caret-color: #ffa721;
@@ -241,11 +241,11 @@ export default {
         font-size: 14px;
       }
     }
-    & > .status-panel-wrapper {
+    .status-panel-wrapper {
       width: 100%;
       background-color: #fff;
       height: auto;
-      & > .status-panel {
+      .status-panel {
         width: 318.5px;
         height: auto;
         margin-left: 21.5px;
@@ -275,9 +275,9 @@ export default {
           left: -26.5px;
           background: url('../../static/images/tag_small@3x.png') 100% e('/') 100% no-repeat;
         }
-        & > .current-tags-wrapper {
+        .current-tags-wrapper {
           margin-top: 10px;
-          & > .current-tags {
+          .current-tags {
             display: inline-block;
             color: #2cbce7;
             padding: 6px 9px;
@@ -289,7 +289,7 @@ export default {
         }
       }
     }
-    & > .images-lists {
+    .images-lists {
       width: 355px;
       margin: 0 auto;
       max-height: 221px;
@@ -323,7 +323,7 @@ export default {
         font-size: 37px;
         color: #ccc
       }
-      & > ul {
+      ul {
         display: flex;
         display: -webkit-flex;
         flex-direction: row;
@@ -331,7 +331,7 @@ export default {
         justify-content: flex-start;
         align-items: flex-start;
         align-content: flex-start;
-        & > li {
+        li {
           display: block;
           flex-shrink: 1;
           width: 109px;
@@ -346,13 +346,13 @@ export default {
           }
         }
       }
-      & > img {
+      img {
         width: 100%;
         height: 100%;
       }
     }
   }
-  & > .control-bar {
+  .control-bar {
     width: 100%;
     height: 55px;
     background: #fff;
@@ -362,11 +362,11 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     z-index: 9999999;
-    & > .left-buttons {
+    .left-buttons {
       flex-shrink: 1;
       width: 275px;
       position: relative;
-      & > i {
+      i {
         display: inline-block;
         position: absolute;
         &:first-child {
@@ -419,24 +419,24 @@ export default {
         }
       }
     }
-    & > .right-buttons {
+    .right-buttons {
       flex-shrink: 0;
       width: 100px;
     }
   }
-  & > .select-status {
+  .select-status {
     width: 100%;
     background: #fff;
     position: fixed;
     bottom: 55px;
     z-index: 9;
-    & > .confirms {
+    .confirms {
       width: 100%;
       height: 44px;
       background: #fff;
       position: relative;
       border-bottom: 1px solid #ccc;
-      & > ul > li {
+      ul > li {
         font-size: 17.5px;
         width: auto;
         display: inline-block;
@@ -461,19 +461,19 @@ export default {
       }
     }
   }
-  & > .select-pets {
+  .select-pets {
     width: 100%;
     background: #fff;
     position: fixed;
     bottom: 0;
     z-index: 99999999 !important;
-    & > .confirms {
+    .confirms {
       width: 100%;
       height: 44px;
       background: #fff;
       position: relative;
       border-bottom: 1px solid #ccc;
-      & > ul > li {
+      ul > li {
         font-size: 17.5px;
         width: auto;
         display: inline-block;
@@ -523,7 +523,7 @@ export default {
         }
       }
     }
-    & > .pets-wrapper {
+    .pets-wrapper {
       width: 100%;
       height: 170px;
       background-color: #f5f5f5;
@@ -531,13 +531,13 @@ export default {
       display: flex;
       box-sizing: border-box;
       padding: 9px 0;
-      & > ul {
+      ul {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         width: 100%;
         overflow-y: auto;
-        & > li {
+        li {
           display: inline-block;
           box-sizing: border-box;
           width: 122px;
@@ -553,17 +553,17 @@ export default {
       }
     }
   }
-  & > .select-tags {
+  .select-tags {
     width: 100%;
     height: 319px;
     background-color: #fff;
-    & > .confirms {
+    .confirms {
       width: 100%;
       height: 44px;
       background: #fff;
       position: relative;
       border-bottom: 1px solid #ccc;
-      & > ul > li {
+      ul > li {
         font-size: 17.5px;
         width: auto;
         display: inline-block;
@@ -587,24 +587,24 @@ export default {
         }
       }
     }
-    & > .tags-wrapper {
+    .tags-wrapper {
       width: 100%;
       height: 220px;
       background-color: #f5f5f5;
-      & > .tag-list {
+      .tag-list {
         width: 100%;
         height: 143px;
         overflow-y: auto;
         padding-top: 17px;
         text-align: left;
-        & > .tag-wrapper {
+        .tag-wrapper {
           display: inline-block;
           font-size: 16px;
           margin: 0 10px 10px 10px;
-          & > input {
+          input {
             display: none;
           }
-          & > .tag-content {
+          .tag-content {
             text-align: center;
             display: inline-block;
             width: 100%;
@@ -619,10 +619,10 @@ export default {
           }
         }
       }
-      & > .refresh-wrapper {
+      .refresh-wrapper {
         width: 100%;
         height: 60px;
-        & > .refresh-btn {
+        .refresh-btn {
           font-size: 26.5px;
           line-height: 60px;
           display: inline-block;

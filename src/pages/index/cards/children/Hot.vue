@@ -93,44 +93,44 @@ export default {
     height: auto;
     background-color: #fff;
     margin-bottom: 11px;
-    & > .card-head {
+    .card-head {
       display: flex;
       height: 69.5px;
       width: 100%;
       padding: 12.5px 14.5px 10px 14px;
       box-sizing: border-box;
-      & > .card-head-avatar {
+      .card-head-avatar {
         display: inline-block;
         width: 47px;
         height: 47px;
-        & > img {
+        img {
           width: 47px;
           height: 47px;
           border-radius: 50%;
         }
       }
-      & > .card-head-poster {
+      .card-head-poster {
         display: inline-block;
         width: 225.5px;
         padding: 6px 5px 5px 12px;
         box-sizing: content-box;
-        & > .poster-name {
+        .poster-name {
           font-size: 18px;
           line-height: 18px;
           color: #000;
         }
-        & > .poster-date {
+        .poster-date {
           font-size: 12.5px;
           line-height: 12.5px;
           margin-top: 7px;
           color: #9b9b9b;
         }
       }
-      & > .card-head-follow {
+      .card-head-follow {
         width: 74px;
         height: 47px;
         padding: 3px 0 10px 5px;
-        & > button {
+        button {
           width: 63px;
           height: 34px;
           background-color: #fff;
@@ -141,13 +141,13 @@ export default {
           box-sizing: border-box;
           outline: none;
         }
-        & > .plus {
+        .plus {
           font-weight: bold;
           font-size: 13px;
         }
       }
     }
-    & > .card-content {
+    .card-content {
       box-sizing: border-box;
       width: 100%;
       height: auto;
@@ -156,7 +156,7 @@ export default {
       color: #000;
       font-size: 18px;
     }
-    & > .card-misc {
+    .card-misc {
       box-sizing: border-box;
       width: 100%;
       height: auto;
@@ -164,7 +164,7 @@ export default {
       z-index: 1;
       padding: 12.5px 14px 13px 40.5px;
       background-color: #fff;
-      & > .misc-status {
+      .misc-status {
         position: relative;
         font-size: 16.5px;
         color: #9f9f9f;
@@ -179,7 +179,7 @@ export default {
           background: url('../../../../../static/images/status_small@3x.png') 100% e('/') 100% no-repeat;
         }
       }
-      & > .misc-tags {
+      .misc-tags {
         position: relative;
         margin-top: 10px;
         &::before {
@@ -191,7 +191,7 @@ export default {
           left: -26.5px;
           background: url('../../../../../static/images/tag_small@3x.png') 100% e('/') 100% no-repeat;
         }
-        & > .tag {
+        .tag {
           display: inline-block;
           font-size: 16.5px;
           color: #2cbce7;
@@ -203,16 +203,16 @@ export default {
         }
       }
     }
-    & > .card-control-wrapper {
+    .card-control-wrapper {
       width: 100%;
       background-color: #fff;
       box-sizing: border-box;
       padding: 0 14px 0 14px;
-      & > .card-control {
+      .card-control {
         width: 100%;
         border-top: 1px solid #e6e6e6;
         display: flex;
-        & > button {
+        button {
           width: 50%;
           height: 40px;
           color: #686868;
@@ -223,14 +223,14 @@ export default {
           &:active {
             background-color: #f4f4f4;
           }
-          & > .icon_comment {
+          .icon_comment {
             display: inline-block;
             color: transparent;
             width: 21px;
             height: 21px;
             background: url('../../../../../static/images/comment@3x.png') 100% e('/') 100% no-repeat;
           }
-          & > .icon_like {
+          .icon_like {
             display: inline-block;
             color: transparent;
             width: 21px;
