@@ -40,7 +40,7 @@
           <div class="poster-date">1970年1月1日 00:00</div>
         </div>
         <div class="card-head-follow">
-          <button class="follow"><i class="iconfont ptsh-tianjia plus"></i> 关注</button>
+          <button class="follow followed"><i class="checked"></i> 关注</button>
         </div>
       </div>
       <div class="card-content">
@@ -131,20 +131,36 @@ export default {
         height: 47px;
         padding: 3px 0 10px 5px;
         button {
-          width: 63px;
-          height: 34px;
-          background-color: #fff;
-          border: 1px solid #ffa721;
-          border-radius: 4px;
-          color: #ffa721;
-          font-size: 13px;
-          box-sizing: border-box;
-          outline: none;
-        }
-        .plus {
-          font-weight: bold;
-          font-size: 13px;
-        }
+          &.follow {
+            width: 63px;
+            height: 34px;
+            background-color: #fff;
+            border: 1px solid #ffa721;
+            border-radius: 4px;
+            color: #ffa721;
+            font-size: 13px;
+            box-sizing: border-box;
+            outline: none;
+            &.followed {
+              background-color: #f4f4f4;
+              color: #686868;
+              border: 1px solid #e7e7e7;
+            }
+          }
+          i {
+            &.plus {
+              font-weight: bold;
+              font-size: 13px;
+            }
+            &.checked {
+              width: 13px;
+              height: 9.9px;
+              display: inline-block;
+              background: url('../../../../../static/images/checked@3x.png') 100% e('/') 100% no-repeat;
+              transform: translateY(.6px);
+            }
+          }
+        }    
       }
     }
     .card-content {
