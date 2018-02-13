@@ -291,9 +291,7 @@ export default {
     }
     .images-lists {
       width: 355px;
-      margin: 0 auto;
       max-height: 221px;
-      overflow-y: auto;
       .delete-image {
         width: 27px;
         height: 27px;
