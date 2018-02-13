@@ -106,9 +106,10 @@ export default {
 <style lang="less" scoped>
 .gray {
   height: 100%;
-  width: 100%;
   display: relative;
   background-color: #f4f4f4;
+  padding-top: 55px;
+  padding-bottom: 57px;
   .card-wrapper {
     text-align: left;
     width: 100%;

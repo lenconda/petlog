@@ -221,6 +221,9 @@ export default {
 <style lang="less" scoped>
 .wrapper {
   height: 100%;
+  box-sizing: border-box;
+  padding-top: 55px;
+  padding-bottom: 57px;
   .publish-wrapper {
     height: 100%;
     width: 100%;

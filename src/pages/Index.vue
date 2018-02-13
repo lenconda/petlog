@@ -63,6 +63,8 @@ export default {
   box-sizing: border-box;
   height: 100%;
   // padding-bottom: 55px;
+  padding-top: 55px;
+  padding-bottom: 57px;
   overflow-y: auto;
   .tabbar {
     width: 100%;
