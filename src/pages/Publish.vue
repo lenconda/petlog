@@ -364,6 +364,7 @@ export default {
     z-index: 9999999;
     .left-buttons {
       flex-shrink: 1;
+      flex-grow: 1;
       width: 275px;
       position: relative;
       i {

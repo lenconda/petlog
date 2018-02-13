@@ -97,9 +97,10 @@ export default {
       display: flex;
       height: 69.5px;
       width: 100%;
-      padding: 12.5px 14.5px 10px 14px;
+      padding: 12.5px 19px 10px 14px;
       box-sizing: border-box;
       .card-head-avatar {
+        flex-grow: 0;
         display: inline-block;
         width: 47px;
         height: 47px;
@@ -110,6 +111,7 @@ export default {
         }
       }
       .card-head-poster {
+        flex-grow: 1;
         display: inline-block;
         width: 225.5px;
         padding: 6px 5px 5px 12px;
@@ -127,9 +129,13 @@ export default {
         }
       }
       .card-head-follow {
+        flex-grow: 1;
         width: 74px;
         height: 47px;
         padding: 3px 0 10px 5px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
         button {
           &.follow {
             width: 63px;

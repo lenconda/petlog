@@ -61,7 +61,8 @@ export default {
 <style lang="less" scoped>
 .content {
   box-sizing: border-box;
-  padding-bottom: 55px;
+  height: 100%;
+  // padding-bottom: 55px;
   overflow-y: auto;
   .tabbar {
     width: 100%;
