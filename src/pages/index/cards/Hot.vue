@@ -3,7 +3,7 @@
     <div class="card-wrapper">
       <div class="card-head">
         <div class="card-head-avatar">
-          <img src="../../../../../static/images/testonly.jpg" width="100%">
+          <img src="../../../../static/images/testonly.jpg" width="100%">
         </div>
         <div class="card-head-poster">
           <div class="poster-name">金屋藏猫</div>
@@ -33,7 +33,7 @@
     <div class="card-wrapper">
       <div class="card-head">
         <div class="card-head-avatar">
-          <img src="../../../../../static/images/testonly.jpg" width="100%">
+          <img src="../../../../static/images/testonly.jpg" width="100%">
         </div>
         <div class="card-head-poster">
           <div class="poster-name">金屋藏猫</div>
@@ -162,7 +162,7 @@ export default {
               width: 13px;
               height: 9.9px;
               display: inline-block;
-              background: url('../../../../../static/images/checked@3x.png') 100% e('/') 100% no-repeat;
+              background: url('../../../../static/images/checked@3x.png') 100% e('/') 100% no-repeat;
               transform: translateY(.6px);
             }
           }
@@ -198,7 +198,7 @@ export default {
           position: absolute;
           top: 3px;
           left: -26.5px;
-          background: url('../../../../../static/images/status_small@3x.png') 100% e('/') 100% no-repeat;
+          background: url('../../../../static/images/status_small@3x.png') 100% e('/') 100% no-repeat;
         }
       }
       .misc-tags {
@@ -211,7 +211,7 @@ export default {
           position: absolute;
           top: 7px;
           left: -26.5px;
-          background: url('../../../../../static/images/tag_small@3x.png') 100% e('/') 100% no-repeat;
+          background: url('../../../../static/images/tag_small@3x.png') 100% e('/') 100% no-repeat;
         }
         .tag {
           display: inline-block;
@@ -250,20 +250,20 @@ export default {
             color: transparent;
             width: 21px;
             height: 21px;
-            background: url('../../../../../static/images/comment@3x.png') 100% e('/') 100% no-repeat;
+            background: url('../../../../static/images/comment@3x.png') 100% e('/') 100% no-repeat;
           }
           .icon_like {
             display: inline-block;
             color: transparent;
             width: 21px;
             height: 21px;
-            background: url('../../../../../static/images/like@3x.png') 100% e('/') 100% no-repeat;
+            background: url('../../../../static/images/like@3x.png') 100% e('/') 100% no-repeat;
             &.actived {
               display: inline-block;
               color: transparent;
               width: 20px;
               height: 20px;
-              background: url('../../../../../static/images/liked@3x.png') 100% e('/') 100% no-repeat;
+              background: url('../../../../static/images/liked@3x.png') 100% e('/') 100% no-repeat;
             }
           }
         }

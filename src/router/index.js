@@ -3,9 +3,9 @@ import Router from 'vue-router'
 
 //import pages
 import Index from '@/pages/Index'
-import Index_Cards from '@/pages/index/cards/Cards'
-import Index_Cards_Hot from '@/pages/index/cards/children/Hot'
-import Index_Cards_Interested from '@/pages/index/cards/children/Interested'
+import Index_Cards from '@/pages/index/Cards'
+import Index_Cards_Hot from '@/pages/index/cards/Hot'
+import Index_Cards_Interested from '@/pages/index/cards/Interested'
 import Index_Timeline from '@/pages/index/Timeline'
 
 import Publish from '@/pages/Publish'

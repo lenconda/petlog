@@ -58,12 +58,6 @@ export default {
   color: #2c3e50;
   box-sizing: border-box;
   height: 100%;
-  // padding-top: 55px;
-  // padding-bottom: 57px;
-  // .content {
-  //   height: 100%;
-  //   width: 100%;
-  // }
   .popup {
     width: 248px;
     height: 128px;
