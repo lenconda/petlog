@@ -4,14 +4,68 @@
       <div class="avatar-wrapper">
         <div>
           <img :src="[`../../../static/images/${this.avatar}`]" width="100%" height="100%">
-          <i class="switch-btn" @click="toggleAvt"></i>
+          <i class="switch-btn" @click="select = !select" :class="[select ? 'actived' : '']"></i>
         </div>
       </div>
       <div class="info-wrapper">
         <span class="name-age">
           <span>毛毛</span>|<span>2岁</span>
         </span>
-        <span class="motto">毛毛，两岁，波斯猫，有兴趣认识毛毛...</span>
+        <span class="motto" v-show="!select">毛毛，两岁，波斯猫，有兴趣认识毛毛...毛毛，两岁，波斯猫，有兴趣认识毛毛...毛毛，两岁，波斯猫，有兴趣认识毛毛...</span>
+        <div class="select-pets" v-show="select">
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+          <div class="items">
+            <img src="../../../static/images/testonly.jpg" alt="">
+            <span>大毛</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="timeline-items-wrapper">
@@ -90,7 +144,8 @@ export default {
   data () {
     return {
       avatar: 'testonly.jpg',
-      test: 'aahahaha'
+      test: 'aahahaha',
+      select: false
     }
   },
   methods: {
@@ -132,7 +187,7 @@ export default {
       bottom: 0;
       left: 0;
       background: inherit;
-      filter: blur(18px);
+      filter: blur(10px);
       margin: -20%;
       z-index: 0;
     }
@@ -162,6 +217,11 @@ export default {
           bottom: 50%;
           transform: translateY(50%);
           right: -15px;
+          &.actived {
+            width: 13px;
+            height: 10.5px;
+            background: url('../../../static/images/switch_active@3x.png') 100% e('/') 100% no-repeat;
+          }
         }
       }
     }
@@ -176,6 +236,7 @@ export default {
         display: block;
         margin-bottom: 2px;
         font-size: 17px;
+        text-shadow: 0 1px 1px #000;
         span:first-child {
           padding-right: 24px;
         }
@@ -185,10 +246,47 @@ export default {
       }
       .motto {
         box-sizing: border-box;
+        display: inline-block;
+        text-shadow: 0 1px 1px #000;
+        text-align: left;
         width: 100%;
         padding: 0 26.5px 0 26.5px;
         margin-top: 2px;
         font-size: 14.5px;
+      }
+      .select-pets {
+        width: 100%;
+        height: 73px;
+        text-align: left;
+        overflow-y: hidden;
+        overflow-x: auto;
+        white-space: nowrap;
+        .items {
+          padding: 0;
+          margin: 0;
+          display: inline-block;
+          text-align: center;
+          text-shadow: 0 1px 1px #000;
+          box-sizing: border-box;
+          padding: 0 7.5px 0 7.5px;
+          &:first-child {
+            padding-left: 15px;
+          }
+          &:last-child {
+            padding-right: 15px;
+          }
+          img {
+            display: block;
+            box-sizing: border-box;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            box-shadow: 0 0 0 0.5px #949494;
+            background: red;
+            margin-bottom: 3.5px;
+          }
+        }
       }
     }
   }

@@ -29,7 +29,6 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      console.log(to)
       if (to.hash == '#login') {
         this.$store.commit('toggleLogin', true)
         this.$store.commit('setRef', from.fullPath)
