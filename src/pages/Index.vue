@@ -76,7 +76,7 @@ export default {
     background-color: #fff;
     user-select: none;
     div {
-      width: 33.33%;
+      flex-grow: 1;
       a {
         box-sizing: border-box;
         color: #949494;
