@@ -187,7 +187,7 @@ export default {
       bottom: 0;
       left: 0;
       background: inherit;
-      filter: blur(10px);
+      filter: blur(4px);
       margin: -20%;
       z-index: 0;
     }
@@ -236,6 +236,7 @@ export default {
         display: block;
         margin-bottom: 2px;
         font-size: 17px;
+        color: rgba(255, 255, 255, .8);
         text-shadow: 0 1px 1px #000;
         span:first-child {
           padding-right: 24px;
@@ -268,12 +269,12 @@ export default {
           text-align: center;
           text-shadow: 0 1px 1px #000;
           box-sizing: border-box;
-          padding: 0 7.5px 0 7.5px;
+          padding: 0 6px 0 6px;
           &:first-child {
-            padding-left: 15px;
+            padding-left: 12px;
           }
           &:last-child {
-            padding-right: 15px;
+            padding-right: 12px;
           }
           img {
             display: block;
@@ -410,7 +411,7 @@ export default {
         }
       }
       &:first-child > .content {
-        padding-top: 16.5px;
+        padding-top: 16px;
       }
     }
   }
