@@ -13,7 +13,8 @@ const state = {
   referer: '/index',
   title: '宠物秀',
   showLogin: false,
-  showRegister: false
+  showRegister: false,
+  showTitle: true
 }
 
 const mutations = {
@@ -44,6 +45,9 @@ const mutations = {
   },
   isTimeline (state, option) {
     state.isTimeline = option
+  },
+  toggleHeader (state, option) {
+    state.showTitle = option
   }
 }
 

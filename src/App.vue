@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="navbar">
+    <div class="navbar" v-show="$store.state.showTitle">
       <div class="navbar-left" @click="back" v-show="!$store.state.isHome && !$store.state.isTimeline"><i class="fa fa-angle-left left-arrow"></i></div>
       <div class="navbar-middle" v-show="!$store.state.isHome">{{ $store.state.title }}</div>
       <div class="icon_personal" v-show="$store.state.isHome || $store.state.isTimeline"></div>

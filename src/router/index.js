@@ -11,6 +11,8 @@ import Index_Timeline from '@/pages/index/Timeline'
 import Publish from '@/pages/Publish'
 import Details from '@/pages/Details'
 
+import Auth from '@/pages/Auth'
+
 
 import Test1 from '@/temp/Test1'
 import Test2 from '@/temp/Test2'
@@ -70,6 +72,11 @@ export default new Router({
       path: '/details',
       name: 'details',
       component: Details
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: Auth
     },
     {
       path: '/test1',
