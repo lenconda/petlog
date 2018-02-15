@@ -103,7 +103,8 @@ export default {
       width: 19px;
       height: 20px;
       position: absolute;
-      bottom: 16px;
+      bottom: 50%;
+      transform: translateY(50%);
       left: 16px;
       background: url('../static/images/personal@3x.png') 100% e('/') 100% no-repeat;
     }
