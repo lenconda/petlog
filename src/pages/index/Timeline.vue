@@ -262,6 +262,7 @@ export default {
         overflow-y: hidden;
         overflow-x: auto;
         white-space: nowrap;
+        background-color: rgba(255, 255, 255, .1);
         .items {
           padding: 0;
           margin: 0;
