@@ -10,7 +10,7 @@
         </div>
         <div class="input-group">
           <input v-model="verification" type="text" placeholder="输入验证码">
-          <button class="form-control-btn">发送</button>
+          <button class="form-control-btn" :disabled="codeSent" @click="test"><span v-if="!codeSent">发送</span><span v-else>{{ retry }}</span></button>
         </div>
       </div>
       <button class="login-btn" :disabled="username == '' || password == '' || verification == ''">下一步</button>
@@ -63,7 +63,9 @@ export default {
   },
   data () {
     return {
-      step: 2,
+      codeSent: false,
+      retry: 60,
+      step: 1,
       username: '',
       password: '',
       verification: '',
@@ -72,7 +74,16 @@ export default {
   },
   methods: {
     test () {
-      alert(1)
+      if (this.retry == 0) {
+        this.retry = 60
+        this.codeSent = false
+      } else {
+        this.codeSent = true
+        this.retry--
+        setTimeout(() => {
+          this.test()
+        }, 1000)
+      }
     }
   }
 }
@@ -152,6 +163,9 @@ export default {
           }
           .form-control-btn {
             margin: 0 18.5px;
+            &:disabled {
+              background-color: #d4d4d4;
+            }
           }
           &::before {
             content: '';
