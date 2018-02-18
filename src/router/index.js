@@ -11,7 +11,7 @@ import Index_Timeline from '@/pages/index/Timeline'
 import Publish from '@/pages/Publish'
 import Details from '@/pages/Details'
 
-import Auth from '@/pages/Auth'
+import Start from '@/pages/Start'
 
 
 import Test1 from '@/temp/Test1'
@@ -74,9 +74,9 @@ export default new Router({
       component: Details
     },
     {
-      path: '/auth',
-      name: 'auth',
-      component: Auth
+      path: '/start',
+      name: 'start',
+      component: Start
     },
     {
       path: '/test1',
