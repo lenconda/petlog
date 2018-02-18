@@ -2,7 +2,7 @@
   <div class="content">
     <div class="wrapper">
       <div class="login">
-        <router-link :to="{path: '/login'}">登录</router-link>
+        <router-link :to="{path: '/auth/login'}">登录</router-link>
         <router-link :to="{path: '/auth/register'}">注册</router-link>
       </div>
       <div class="visitor">
