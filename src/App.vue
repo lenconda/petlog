@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="navbar" v-show="$store.state.showTitle">
-      <div class="navbar-left" @click="back" v-show="!$store.state.isHome && !$store.state.isTimeline"><i class="fa fa-angle-left left-arrow"></i></div>
+      <div class="navbar-left" @click="back" v-show="!$store.state.isHome && !$store.state.isTimeline"></div>
       <div class="navbar-middle" v-show="!$store.state.isHome">{{ $store.state.title }}</div>
       <div class="icon_personal" v-show="$store.state.isHome || $store.state.isTimeline"></div>
       <div class="navbar-middle-tabs" v-show="$store.state.isHome">
@@ -64,6 +64,12 @@ export default {
     z-index: 9999999 !important;
   }
   .navbar {
+    .navbar-left {
+      background: url('../static/images/back@3x.png') 100% e('/') 100% no-repeat;
+      display: inline-block;
+      width: 9px;
+      height: 16.5px;
+    }
     .navbar-middle-tabs {
       display: flex;
       position: absolute;
