@@ -31,7 +31,7 @@ export default {
     this.$store.commit('modNavbar', true)
     this.$store.commit('setTitle', '宠爱时刻')
   },
-  mounted () {
+  created () {
     this.$store.commit('modClass', {inclass: 'slideInRight', leaveclass: 'slideOutLeft'})
   },
   data () {

@@ -2,8 +2,8 @@
   <div class="content">
     <div class="wrapper">
       <div class="login">
-        <router-link :to="{path: '/index/login'}">登录</router-link>
-        <router-link :to="{path: '/index/register'}">注册</router-link>
+        <router-link :to="{path: '/login'}">登录</router-link>
+        <router-link :to="{path: '/auth/register'}">注册</router-link>
       </div>
       <div class="visitor">
         <router-link :to="{path: '/index/cards/hot'}">随便看看</router-link>
@@ -15,7 +15,8 @@
 <script>
 export default {
   name: 'start',
-  mounted () {
+  created () {
+    this.$store.commit('modClass', {inclass: 'slideInRight', leaveclass: 'slideOutLeft'})
     this.$store.commit('toggleHeader', false)
   },
   destroyed () {

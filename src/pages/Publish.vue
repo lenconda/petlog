@@ -90,7 +90,7 @@ import Utils from '../utils'
 import EXIF from 'exif-js'
 export default {
   name: 'publish',
-  mounted () {
+  created () {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '发布动态')

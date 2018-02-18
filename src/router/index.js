@@ -8,6 +8,10 @@ import Index_Cards_Hot from '@/pages/index/cards/Hot'
 import Index_Cards_Interested from '@/pages/index/cards/Interested'
 import Index_Timeline from '@/pages/index/Timeline'
 
+import Auth from '@/pages/Auth'
+import Auth_Register from '@/pages/auth/Register'
+import Auth_Login from '@/pages/auth/Login'
+
 import Publish from '@/pages/Publish'
 import Details from '@/pages/Details'
 
@@ -29,7 +33,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/index'
+      redirect: '/start'
     },
     {
       path: '/index',
@@ -77,6 +81,23 @@ export default new Router({
       path: '/start',
       name: 'start',
       component: Start
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: Auth,
+      children: [
+        {
+          path: '/auth/register',
+          name: 'auth_register',
+          component: Auth_Register
+        },
+        {
+          path: '/auth/login',
+          name: 'auth_login',
+          component: Auth_Login
+        }
+      ]
     },
     {
       path: '/test1',
