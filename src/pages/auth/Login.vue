@@ -8,7 +8,7 @@
         <input v-model="password" type="password" placeholder="输入密码">
       </div>
     </div>
-    <button class="login-btn" :disabled="username == '' || password == ''">登录</button>
+    <button class="login-btn" :disabled="username == '' || password == ''" @click="login">登录</button>
   </div>  
 </template>
 
@@ -32,6 +32,16 @@ export default {
   methods: {
     test () {
       alert(1)
+    },
+    login () {
+      this.$http.post('/api/login', {email: this.username, password: this.password}).then(res => {
+        if (res.body.status == 1) {
+          this.$router.push('/index/cards/interested')
+          localStorage.token = res.body.token
+        } else {
+          this.$toast.fail('用户名或密码错误')
+        }
+      })
     }
   }
 }
