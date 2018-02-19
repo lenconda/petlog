@@ -182,7 +182,10 @@ export default {
     box-sizing: border-box;
     height: 100%;
     padding-top: 20px;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
     .form-wrapper {
       width: 100%;
       box-sizing: border-box;
@@ -277,8 +280,7 @@ export default {
       border: none;
       outline: none;
       background-color: rgba(255, 167, 33, 0.6);
-      position: fixed;
-      bottom: 0;
+      align-self: flex-end;
       &[disabled] {
         background-color: #d4d4d4;
       }
