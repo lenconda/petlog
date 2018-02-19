@@ -1,5 +1,11 @@
 <template>
   <div class="content">
+    <div class="banner">
+      <span>欢迎来到<b>宠物记</b></span>
+      <section class="banner">
+        <img src="../../static/images/banner@3x.png">
+      </section>
+    </div>
     <div class="wrapper">
       <div class="login">
         <router-link :to="{path: '/auth/login'}">登录</router-link>
@@ -30,6 +36,25 @@ export default {
   height: 100%;
   position: relative;
   background-image: linear-gradient(rgba(255, 171, 44, .95), rgba(252, 205, 94, .95));
+  .banner {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 52.5px;
+    font-size: 22.5px;
+    background: linear-gradient(to bottom, #fbfddf, #e2f3fb);
+    -webkit-background-clip: text;
+    color: transparent;
+    .banner {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 43px 0 0 0;
+      user-select: none;
+      img {
+        width: 306px;
+        height: 293px;
+      }
+    }
+  }
   .wrapper {
     width: 100%;
     height: 122.5px;
