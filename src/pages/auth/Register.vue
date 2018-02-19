@@ -337,6 +337,7 @@ export default {
           outline: none;
           text-align: right;
           width: 261px;
+          color: #686868;
           caret-color: #ffa721;
           &::placeholder {
             color: #9b9b9b;
@@ -349,7 +350,7 @@ export default {
           color: #000;
           font-size: 18.5px;
           &.position {
-            color: #9b9b9b;
+            color: #686868;
             .right {
               display: inline-block;
               width: 7.5px;
