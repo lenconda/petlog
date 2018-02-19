@@ -18,13 +18,14 @@
     <div class="step2" v-show="step == 2">
       <div class="avatar-wrapper">
         <div class="avatar">
-          <img src="../../../static/images/avatars/default.png" alt="头像">
+          <input id="setavatar" type="file" accept="image/*" @change="upAvatar($event)" style="display: none">
+          <img :src="avatar" alt="头像" @click="upAvatarTrigger">
         </div>
       </div>
       <div class="form-wrapper">
         <div class="input-group">
           <span>主人昵称</span>
-          <input type="text" placeholder="设置昵称" maxlength="16">
+          <input v-model="nickname" type="text" placeholder="设置昵称" maxlength="16">
         </div>
         <div class="input-group">
           <span>主人性别</span>
@@ -39,19 +40,24 @@
             </label>
           </div>
         </div>
-        <div class="input-group">
+        <div class="input-group" @click="selectLocation = true">
           <span>所在地</span>
-          <span class="position">选择&nbsp;<i class="right"></i></span>
+          <span class="position">{{ location == '' ? '选择' : location }}&nbsp;<i class="right"></i></span>
         </div>
       </div>
       <div class="finish-wrapper">
-        <button class="finish-btn">完成</button>
+        <button class="finish-btn" :disabled="nickname == '' || location == ''">完成</button>
       </div>
     </div>
+    <van-popup v-model="selectLocation" position="bottom" class="select-location">
+      <van-area :area-list="cities" :columns-num="2" @confirm="onChange($event)" @cancel="onCancel" title="选择所在地" />
+    </van-popup>
   </div>  
 </template>
 
 <script>
+import md5 from 'md5'
+import AreaList from '../../citylist.json'
 export default {
   name: 'register',
   beforeMount () {
@@ -64,12 +70,18 @@ export default {
   data () {
     return {
       codeSent: false,
+      selectLocation: false,
       retry: 60,
-      step: 1,
+      step: 2,
       username: '',
       password: '',
       verification: '',
-      gender: 'female'
+      gender: 'female',
+      cities: AreaList,
+      location: '',
+      nickname: '',
+      avatar: '../../../static/images/avatars/default.png',
+      tempAvatar: ''
     }
   },
   methods: {
@@ -84,6 +96,33 @@ export default {
           this.test()
         }, 1000)
       }
+    },
+    upAvatarTrigger () {
+      document.getElementById('setavatar').click()
+    },
+    upAvatar (event) {
+      function getObjectURL (object) {
+        return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object)
+      }
+      // this.tempAvatar = getObjectURL(event.target.files[0])
+      this.$http.post('/api/set')
+    },
+    onChange(value) {
+      if (value[0].code == -1 || value[1].code == -1) {
+        this.$toast.fail('请选择正确的地址！')
+      } else if (value[0].name == value[1].name) {
+        this.location = value[0].name
+        this.selectLocation = false
+      } else if (value[1].name == '县') {
+        this.location = value[0].name
+        this.selectLocation = false
+      } else {
+        this.location = `${value[0].name} ${value[1].name}`
+        this.selectLocation = false
+      }
+    },
+    onCancel () {
+      this.selectLocation = false
     }
   }
 }
@@ -355,6 +394,20 @@ export default {
           background-color: #d48000;
           transition: all .4s;
         }
+        &:disabled {
+          background: #d4d4d4;
+        }
+      }
+    }
+  }
+  .select-location {
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    .van-area {
+      & > .van-picker__toolbar.van-hairline--top-bottom {
+        display: none !important;
       }
     }
   }

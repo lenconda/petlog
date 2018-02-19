@@ -80,7 +80,15 @@ div.write-comment-field textarea.van-field__control {
 div.write-comment-field {
   padding: 0 !important;
 }
-
+div.select-location .van-picker__toolbar > .van-picker__cancel {
+  color: #ffa721;
+}
+div.select-location .van-picker__toolbar > .van-picker__confirm {
+  color: #ffa721;
+}
+div.select-location .van-picker__toolbar > .van-picker__title {
+  font-size: 16px;
+}
 .slide-enter-active,
 .slideIn,
 .slide-leave-active,
