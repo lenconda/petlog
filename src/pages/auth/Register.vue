@@ -9,11 +9,11 @@
           <input v-model="password" type="password" maxlength="16" placeholder="设置登录密码">
         </div>
         <div class="input-group">
-          <input v-model="verification" type="text" placeholder="输入验证码">
-          <button class="form-control-btn" :disabled="codeSent" @click="test"><span v-if="!codeSent">发送</span><span v-else>{{ retry }}</span></button>
+          <input v-model="code" type="text" placeholder="输入验证码">
+          <button class="form-control-btn" :disabled="codeSent" @click="sendMail"><span v-if="!codeSent">发送</span><span v-else>{{ retry }}</span></button>
         </div>
       </div>
-      <button class="login-btn" :disabled="username == '' || password == '' || verification == ''">下一步</button>
+      <button class="login-btn" :disabled="username == '' || password == '' || code == ''" @click="nextStep">下一步</button>
     </div>
     <div class="step2" v-show="step == 2">
       <div class="avatar-wrapper">
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="finish-wrapper">
-        <button class="finish-btn" :disabled="nickname == '' || location == ''">完成</button>
+        <button class="finish-btn" :disabled="nickname == '' || location == ''" @click="register">完成</button>
       </div>
     </div>
     <van-popup v-model="selectLocation" position="bottom" class="select-location">
@@ -72,20 +72,24 @@ export default {
       codeSent: false,
       selectLocation: false,
       retry: 60,
-      step: 2,
+      step: 1,
       username: '',
       password: '',
       verification: '',
+      code: '',
       gender: 'female',
       cities: AreaList,
       location: '',
       nickname: '',
       avatar: '../../../static/images/avatars/default.png',
-      tempAvatar: ''
+      tempAvatar: 'default.png'
     }
   },
   methods: {
-    test () {
+    testOnly () {
+      console.log(md5('QYABG'))
+    },
+    interval () {
       if (this.retry == 0) {
         this.retry = 60
         this.codeSent = false
@@ -93,19 +97,60 @@ export default {
         this.codeSent = true
         this.retry--
         setTimeout(() => {
-          this.test()
+          this.interval()
         }, 1000)
+      }
+    },
+    sendMail () {
+      var _this = this
+      this.$toast.success('验证邮件已发送!')
+      this.$http.post('/api/registered/verify_code', {email: this.username}).then(res => {
+        if (res.body.status == 1 && res.status == 200) {
+          this.verification = res.body.code
+          this.interval()
+        } else {
+          _this.$toast.fail('发送失败，请稍后再试...')
+        }
+      })
+    },
+    nextStep () {
+      if (this.verification == md5(this.code)) {
+        this.step = 2
+      } else {
+        this.$toast.fail('验证码错误！')
       }
     },
     upAvatarTrigger () {
       document.getElementById('setavatar').click()
     },
     upAvatar (event) {
+      var _this = this
       function getObjectURL (object) {
         return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object)
       }
-      // this.tempAvatar = getObjectURL(event.target.files[0])
-      this.$http.post('/api/set')
+      var imageData = new FormData()
+      imageData.append('image', event.target.files[0])
+      this.$http.post('/api/registered/new_avatar', imageData).then(res => {
+        if (res.body.status == 1) {
+          _this.$toast.success('上传头像成功')
+          _this.avatar = getObjectURL(event.target.files[0])
+          _this.tempAvatar = res.body.filename
+        } else {
+          _this.$toast.fail('上传头像失败')
+        }
+      })
+    },
+    register () {
+      //加上avatar字段
+      var _this = this
+      this.$http.post('/api/registered', {email: this.username, password: this.password, user_nickname: this.nickname, address: this.location, gender: this.gender, register_key: md5(`${this.username}fdsfd32${this.password}`)}).then(res => {
+        if (res.body.status == 1) {
+          _this.$toast.success('注册成功')
+          _this.$router.push('/start')
+        } else {
+          _this.$toast.fail('注册失败')
+        }
+      })
     },
     onChange(value) {
       if (value[0].code == -1 || value[1].code == -1) {
