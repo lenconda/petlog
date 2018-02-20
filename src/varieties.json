@@ -1,0 +1,26 @@
+[
+  {
+    "name": "狗狗",
+    "avatar": "dog"
+  },
+  {
+    "name": "猫猫",
+    "avatar": "cat"
+  },
+  {
+    "name": "兔兔",
+    "avatar": "rabbit"
+  },
+  {
+    "name": "宠物鼠",
+    "avatar": "mouse"
+  },
+  {
+    "name": "宠物猪",
+    "avatar": "pig"
+  },
+  {
+    "name": "其他",
+    "avatar": "other"
+  }
+]
