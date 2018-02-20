@@ -30,15 +30,15 @@
       </div>
       <div class="input-group" @click="birth = true">
         <span>出生日期</span>
-        <span class="position">{{ birthDay == '' ? '选择宠物生日' : birthDay }}&nbsp;<i class="right"></i></span>
+        <span class="position" :class="{'color-sharpen': birthDay != ''}">{{ birthDay == '' ? '选择宠物生日' : birthDay }}&nbsp;<i class="right"></i></span>
       </div>
       <div class="input-group" @click="meet = true">
         <span>相遇日期</span>
-        <span class="position">{{ meetDay == '' ? '选择相遇日期' : meetDay }}&nbsp;<i class="right"></i></span>
+        <span class="position" :class="{'color-sharpen': meetDay != ''}">{{ meetDay == '' ? '选择相遇日期' : meetDay }}&nbsp;<i class="right"></i></span>
       </div>
       <div class="input-group" @click="showVariety = true">
         <span>宠物品种</span>
-        <span class="position">{{ variety == '' ? '选择宠物品种' : variety }}&nbsp;<i class="right"></i></span>
+        <span class="position" :class="{'color-sharpen': variety != ''}">{{ variety == '' ? '选择宠物品种' : variety }}&nbsp;<i class="right"></i></span>
       </div>
     </div>
     <div class="finish-wrapper">
@@ -117,6 +117,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.color-sharpen {
+  color: #686868 !important;
+}
 .add {
   height: 100%;
   box-sizing: border-box;
