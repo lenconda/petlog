@@ -531,18 +531,6 @@
 		background: #f7f7f8;
 	}
 	
-	.calendar-week::after {
-		content: "";
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 1px;
-		background-color: #c4c4c4;
-		transform: translateY(-0.5px);
-		transform: scaleY(0.5);
-	}
-	
 	.calendar-week-day {
 		flex-grow: 1;
 		text-align: center;
@@ -597,20 +585,6 @@
 		-ms-flex-negative: 1;
 		flex-shrink: 1;
 		height: 40px;
-	}
-	
-	.calendar-month-row::after {
-		content: "";
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 1px;
-		background-color: #ccc;
-		transform: translateY(-0.5px);
-		-webkit-transform: translateY(-0.5px);
-		transform: scaleY(0.5);
-		-webkit-transform: scaleY(0.5);
 	}
 	
 	.calendar-day {
