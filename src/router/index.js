@@ -17,6 +17,14 @@ import Details from '@/pages/Details'
 
 import Start from '@/pages/Start'
 
+import Profile from '@/pages/Profile'
+import Profile_Following from '@/pages/profile/Following'
+import Profile_Followers from '@/pages/profile/Followers'
+
+import Pets from '@/pages/Pets'
+import Pets_Add from '@/pages/pets/Add'
+import Pets_Modify from '@/pages/pets/Modify'
+import Pets_List from '@/pages/pets/List'
 
 import Test1 from '@/temp/Test1'
 import Test2 from '@/temp/Test2'
@@ -96,6 +104,45 @@ export default new Router({
           path: '/auth/login',
           name: 'auth_login',
           component: Auth_Login
+        }
+      ]
+    },
+    {
+      path: '/profile',
+      redirect: '/profile/following',
+      component: Profile,
+      children: [
+        {
+          path: '/profile/following',
+          name: 'profile_following',
+          component: Profile_Following
+        },
+        {
+          path: '/profile/followers',
+          name: 'profile_followers',
+          component: Profile_Followers
+        }
+      ]
+    },
+    {
+      path: '/pets',
+      redirect: '/pets/list',
+      component: Pets,
+      children: [
+        {
+          path: '/pets/list',
+          name: 'pets_list',
+          component: Pets_List
+        },
+        {
+          path: '/pets/add',
+          name: 'pets_add',
+          component: Pets_Add
+        },
+        {
+          path: '/pets/modify',
+          name: 'pets/modify',
+          component: Pets_Modify
         }
       ]
     },
