@@ -10,6 +10,8 @@ import 'vue2-animate/dist/vue2-animate.css'
 import './common.css'
 import 'lib-flexible'
 import VueResource from 'vue-resource'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
 import './assets/font-awesome/css/font-awesome.min.css'
 import './assets/iconfont/petshow-icons.css'
@@ -17,6 +19,9 @@ import './assets/iconfont/petshow-icons.css'
 Vue.config.productionTip = false
 Vue.use(Vant)
 Vue.use(VueResource)
+Vue.use(VueAwesomeSwiper, {
+  zoom: true
+})
 
 /* eslint-disable no-new */
 new Vue({
