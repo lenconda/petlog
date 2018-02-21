@@ -41,7 +41,7 @@
     </div>
     <div class="field-wrapper">
       <ul>
-        <li>个人资料</li>
+        <li>修改个人资料</li>
         <li>宠物信息</li>
         <li>时间轴</li>
       </ul>
@@ -287,7 +287,7 @@ export default {
     }
   }
   .logout-btn {
-    margin: 40px 0 86px 0;
+    margin: 40px 0 60px 0;
     width: 100%;
     height: 50px;
     font-size: 18.5px;
