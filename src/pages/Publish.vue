@@ -77,8 +77,9 @@
             <span class="tag-content">{{ tag }}</span>
           </label>
         </div>
-        <div class="refresh-wrapper">
-          <i class="iconfont ptsh-refresh refresh-btn" @click="random"></i>
+        <div class="refresh-wrapper" @click="random">
+          <i class="refresh-btn"></i>
+          <span>换一批</span>
         </div>
       </div>
     </van-popup>
@@ -624,14 +625,21 @@ export default {
       .refresh-wrapper {
         width: 100%;
         height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .refresh-btn {
-          font-size: 26.5px;
-          line-height: 60px;
           display: inline-block;
-          color: #aaaaaa;
-          &:active {
-            color: #686868;
-          }
+          width: 21.5px;
+          height: 18.5px;
+          background: url('../../static/images/refresh@3x.png') 100% e('/') 100% no-repeat;
+          margin-right: 5.5px;
+        }
+        span {
+          display: inline-block;
+          font-size: 12.5px;
+          line-height: 1;
+          color: #aaa;
         }
       }
     }
