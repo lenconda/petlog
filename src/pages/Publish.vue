@@ -8,7 +8,7 @@
         <div class="status-panel">
           <div>您的宠物当前状态：{{ currentStatus }}</div>
           <div class="current-tags-wrapper">
-            <span class="current-tags" v-for="tag in selectedTags">{{ tag }}</span>
+            <span class="current-tags" v-for="(tag, index) in selectedTags">{{ tag }}</span>
           </div>
         </div>
       </div>
@@ -51,14 +51,18 @@
       </div>
       <div class="pets-wrapper">
         <ul>
-          <li><label><input type="radio" name="pet" value="pet1" v-model="selectedPet"><span>Pet1</span></label></li>
-          <li><label><input type="radio" name="pet" value="pet2" v-model="selectedPet"><span>Pet2</span></label></li>
-          <li><label><input type="radio" name="pet" value="pet3" v-model="selectedPet"><span>Pet3</span></label></li>
-          <li><label><input type="radio" name="pet" value="pet4" v-model="selectedPet"><span>Pet4</span></label></li>
-          <li><label><input type="radio" name="pet" value="pet5" v-model="selectedPet"><span>Pet5</span></label></li>
-          <li><label><input type="radio" name="pet" value="pet6" v-model="selectedPet"><span>Pet6</span></label></li>
-          <li><label><input type="radio" name="pet" value="pet7" v-model="selectedPet"><span>Pet7</span></label></li>
-          <li><label><input type="radio" name="pet" value="pet8" v-model="selectedPet"><span>Pet8</span></label></li>
+          <li>
+            <label>
+              <div class="avatar">
+                <img :src="[`../../static/images/dog@3x.png`]">
+              </div>
+              <div class="name">大猫</div>
+              <input type="radio" name="variety" v-model="tempVariety" value="大猫">
+              <div class="checked-wrapper">
+                <i class="checked"></i>
+              </div>
+            </label>
+          </li>
         </ul>
       </div>
     </van-popup>
@@ -528,30 +532,64 @@ export default {
     }
     .pets-wrapper {
       width: 100%;
-      height: 170px;
+      height: 300px;
+      overflow-y: auto;
+      overflow-x: hidden;
       background-color: #f5f5f5;
-      text-align: left;
-      display: flex;
-      box-sizing: border-box;
-      padding: 9px 0;
       ul {
-        margin: 0;
         padding: 0;
-        box-sizing: border-box;
+        margin: 0;
         width: 100%;
-        overflow-y: auto;
         li {
-          display: inline-block;
-          box-sizing: border-box;
-          width: 122px;
-          white-space: nowrap;
-          /* padding: 9px 0; */
-          padding-left: 32px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          text-align: left;
-          color: #949494;
-          font-size: 21px;
+          width: 100%;
+          border-bottom: 1px solid #e6e6e6;
+          label {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            box-sizing: border-box;
+            input[name=variety] {
+              display: none;
+              & + .checked-wrapper {
+                display: none;
+              }
+              &:checked + .checked-wrapper {
+                display: flex;
+              }
+            }
+            .avatar {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              box-sizing: border-box;
+              padding: 0 20px;
+              img {
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+              }
+            }
+            .name {
+              display: flex;
+              flex-grow: 1;
+              justify-content: flex-start;
+              align-items: center;
+              font-size: 18.5px;
+              color: #686868;
+            }
+            .checked-wrapper {
+              width: 56px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .checked {
+                display: inline-block;
+                width: 16px;
+                height: 11.5px;
+                background: url('../../static/images/checked@3x.png') 100% e('/') 100% no-repeat;
+              }
+            }
+          }
         }
       }
     }

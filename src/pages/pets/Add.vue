@@ -56,7 +56,7 @@
       </div>
       <div class="tag-wrapper">
         <ul>
-          <li v-for="item in varieties">
+          <li v-for="(item, index) in varieties">
             <label>
               <div class="avatar">
                 <img :src="[`../../../static/images/${item.avatar}@3x.png`]">

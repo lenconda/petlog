@@ -20,7 +20,7 @@
           <div class="avatar">
             <img :src="['../../../static/images/testonly.jpg']">
           </div>
-          <div class="name">大猫</div>
+          <div class="name">大猫asdasdasdasd</div>
           <i class="icon-right"></i>
         </div>
         <div class="list-item">
@@ -30,7 +30,7 @@
           <div class="name">二猫</div>
           <i class="icon-right"></i>
         </div>
-        <div class="list-item">
+        <div class="list-item" @click="$router.push('/pets/add')">
           <div class="avatar">
             <img :src="['../../../static/images/profile_add@3x.png']">
           </div>
@@ -248,7 +248,11 @@ export default {
           font-size: 11.5px;
           color: #949494;
           display: inline-block;
+          width: 46.5px;
           flex-grow: 1;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
         }
         .icon-right {
           display: inline-block;
