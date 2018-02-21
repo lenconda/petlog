@@ -21,7 +21,7 @@
       <div class="tags-wrapper">
         <div class="tag-list">
           <label class="tag-wrapper" v-for="(tag, index) in tags" v-show="randomShow.indexOf(index) > -1">
-            <input type="checkbox" v-model="selectedTags" :value="tag">
+            <input type="checkbox" :value="tag">
             <span class="tag-content">{{ tag }}</span>
           </label>
         </div>
@@ -60,6 +60,7 @@ export default {
       this.$router.go(-1)
     },
     random() {
+      // console.log(this.$route)
       this.randomShow = []
       for (var i = 0; i < 10; i++) {
         this.randomShow.push(parseInt(Math.random() * (this.tags.length + 1), 10))
@@ -182,7 +183,7 @@ export default {
         .tag-wrapper {
           display: inline-block;
           font-size: 16px;
-          margin: 0 10px 10px 10px;
+          margin: 0 12.35px;
           input {
             display: none;
           }
@@ -192,7 +193,7 @@ export default {
             width: 100%;
             height: 100%;
             padding: 6px;
-            margin: 0 2.5px;
+            margin: 5.75px;
             border-radius: 4px;
             background-color: #fff;
             border: 1px solid #949494;

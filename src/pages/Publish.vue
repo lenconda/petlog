@@ -603,7 +603,7 @@ export default {
         .tag-wrapper {
           display: inline-block;
           font-size: 16px;
-          margin: 0 10px 10px 10px;
+          margin: 0 12.35px;
           input {
             display: none;
           }
@@ -613,7 +613,7 @@ export default {
             width: 100%;
             height: 100%;
             padding: 6px;
-            margin: 0 2.5px;
+            margin: 5.75px;
             border-radius: 4px;
             background-color: #fff;
             border: 1px solid #949494;
