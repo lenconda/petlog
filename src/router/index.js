@@ -20,6 +20,7 @@ import Start from '@/pages/Start'
 import Profile from '@/pages/Profile'
 import Profile_Following from '@/pages/profile/Following'
 import Profile_Followers from '@/pages/profile/Followers'
+import Profile_Modify from '@/pages/profile/Modify'
 
 import Pets from '@/pages/Pets'
 import Pets_Add from '@/pages/pets/Add'
@@ -121,6 +122,11 @@ export default new Router({
           path: '/profile/followers',
           name: 'profile_followers',
           component: Profile_Followers
+        },
+        {
+          path: '/profile/modify',
+          name: 'profile_modify',
+          component: Profile_Modify
         }
       ]
     },

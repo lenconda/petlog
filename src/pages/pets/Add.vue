@@ -13,7 +13,7 @@
       </div>
       <div class="input-group">
         <span>宠物简介</span>
-        <input type="text" placeholder="填写" maxlength="16" v-model="motto">
+        <input type="text" placeholder="填写" maxlength="64" v-model="motto">
       </div>
       <div class="input-group">
         <span>宠物性别</span>
