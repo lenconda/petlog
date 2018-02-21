@@ -29,7 +29,7 @@ export default {
   name: 'index',
   beforeMount () {
     this.$store.commit('modNavbar', true)
-    this.$store.commit('setTitle', '宠爱时刻')
+    this.$store.commit('setTitle', '宠物记')
   },
   created () {
     this.$store.commit('modClass', {inclass: 'slideInRight', leaveclass: 'slideOutLeft'})
