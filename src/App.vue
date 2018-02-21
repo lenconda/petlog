@@ -60,7 +60,7 @@ export default {
       this.$router.go(-1)
     },
     random() {
-      // console.log(this.$route)
+      console.log(this.$route)
       this.randomShow = []
       for (var i = 0; i < 10; i++) {
         this.randomShow.push(parseInt(Math.random() * (this.tags.length + 1), 10))

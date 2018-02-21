@@ -1,5 +1,9 @@
 <template>
   <van-pull-refresh v-model="isLoading" class="content">
+    <div class="topic-wrapper" v-show="$route.query.tag">
+      <div class="topic-icon"></div>
+      <div>当前已选中的标签： #{{ $route.query.tag }}#</div>
+    </div>
     <div class="card-wrapper">
       <div class="card-head">
         <div class="card-head-avatar">
@@ -87,6 +91,26 @@ export default {
 <style lang="less" scoped>
 .content {
   background-color: #f4f4f4;
+  .topic-wrapper {
+    height: 45px;
+    background: #fff;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 18px;
+    color: #949494;
+    .topic-icon {
+      width: 18.5px;
+      height: 18.5px;
+      background: url('../../../../static/images/topic@3x.png') 100% e('/') 100% no-repeat;
+      margin: 0 9.5px 0 10.5px;
+    }
+    div:last-child {
+      flex-grow: 1;
+      text-align: left;
+    }
+  }
   & .card-wrapper {
     text-align: left;
     width: 100%;
@@ -216,9 +240,9 @@ export default {
         .tag {
           display: inline-block;
           font-size: 16.5px;
-          color: #2cbce7;
+          color: #9f9f9f;
           padding: 6px 9px;
-          border: 1px solid #2cbce7;
+          border: 1px solid #c1c1c1;
           border-radius: 4px;
           margin-right: 7px;
           margin-bottom: 6px;

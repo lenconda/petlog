@@ -1,6 +1,6 @@
 <template>
   <div class="test1">
-    <div class="images">
+    <div class="images" v-show="images.length != 0">
       <pet-image :images="images"></pet-image>
     </div>
   </div>
