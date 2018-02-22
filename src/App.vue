@@ -170,6 +170,7 @@ export default {
     width: 100%;
     background-color: #fff;
     top: 55px;
+    z-index: 2012 !important;
     .tags-wrapper {
       width: 100%;
       height: 220px;

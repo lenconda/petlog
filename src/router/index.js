@@ -25,7 +25,6 @@ import Profile_Mine from '@/pages/profile/Mine'
 
 import Pets from '@/pages/Pets'
 import Pets_Add from '@/pages/pets/Add'
-import Pets_Modify from '@/pages/pets/Modify'
 import Pets_List from '@/pages/pets/List'
 
 import Test1 from '@/temp/Test1'
@@ -150,11 +149,6 @@ export default new Router({
           path: '/pets/add',
           name: 'pets_add',
           component: Pets_Add
-        },
-        {
-          path: '/pets/modify',
-          name: 'pets/modify',
-          component: Pets_Modify
         }
       ]
     },

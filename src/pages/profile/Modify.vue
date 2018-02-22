@@ -131,6 +131,9 @@ export default {
         .avatar {
           width: 140px;
           position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           img {
             width: 69px;
             height: 69px;

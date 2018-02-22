@@ -86,7 +86,6 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '添加宠物')
-
   },
   methods: {
     handleBirth (date, formatDate) {

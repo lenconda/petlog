@@ -89,6 +89,10 @@ div.select-location .van-picker__toolbar > .van-picker__confirm {
 div.select-location .van-picker__toolbar > .van-picker__title {
   font-size: 16px;
 }
+.van-modal {
+  z-index: 1999 !important;
+}
+
 .slide-enter-active,
 .slideIn,
 .slide-leave-active,

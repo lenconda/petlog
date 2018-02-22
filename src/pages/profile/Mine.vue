@@ -40,18 +40,14 @@
       </div>
     </div>
     <div class="field-wrapper">
-      <ul>
-        <li>修改个人资料</li>
-        <li>宠物信息</li>
-        <li>时间轴</li>
-      </ul>
+      <button>修改个人资料</button>
+      <button>宠物信息</button>
+      <button>时间轴</button>
     </div>
     <div class="field-wrapper">
-      <ul>
-        <li>新的动态</li>
-        <li>我的关注</li>
-        <li>我的粉丝</li>
-      </ul>
+      <button>新的动态</button>
+      <button>我的关注</button>
+      <button>我的粉丝</button>
     </div>
     <button class="logout-btn">退出登录</button>
   </div> 
@@ -269,26 +265,29 @@ export default {
     background-color: #fff;
     margin-top: 10px;
     text-align: left;
-    ul {
-      padding: 0;
-      margin: 0;
-      li {
-        display: block;
-        box-sizing: border-box;
-        padding-left: 20px;
-        color: #000;
-        font-size: 18.5px;
-        height: 51px;
-        line-height: 51px;
-        border-bottom: 1px solid #e6e6e6;
-        &:last-child {
-          border: none;
-        }
-        &:hover {
-          background-color: #e6e6e6;
-        }
+    button {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding-left: 20px;
+      background-color: #fff;
+      text-align: left;
+      color: #000;
+      font-size: 18.5px;
+      height: 51px;
+      line-height: 51px;
+      border-bottom: 1px solid #e6e6e6;
+      transition: all .4s;
+      &:last-child {
+        border: none;
       }
-    }
+      &:active {
+        background-color: #e6e6e6;
+        transition: all .4s;
+      }
+    }  
   }
   .logout-btn {
     margin: 40px 0 60px 0;
@@ -299,8 +298,10 @@ export default {
     border: none;
     outline: none;
     background-color: #fff;
+    transition: all .4s;
     &:active {
       background-color: #e6e6e6;
+      transition: all .4s;
     }
   }
 }
