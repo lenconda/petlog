@@ -64,6 +64,9 @@
         </div>
       </div>
     </div>
+    <div class="loadmore">
+      加载更多
+    </div>
   </van-pull-refresh>
 </template>
 
@@ -293,6 +296,16 @@ export default {
         }
       }
     }
+  }
+  .loadmore {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #ffa721;
+    line-height: 1;
   }
 }
 </style>
