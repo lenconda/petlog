@@ -6,7 +6,11 @@
 
 <script>
 export default {
-  name: 'auth'
+  name: 'auth',
+  mounted () {
+    console.log('Auth.vue mounted')
+    //请求/api/auth，返回1就跳转到/index/interested
+  }
 }
 </script>
 

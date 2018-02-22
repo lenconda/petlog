@@ -41,9 +41,16 @@ export default {
     return {
       isHome: true,
       tag: false,
+      //Temp
       tags: ['狗年大吉', '喵星人', '铲屎官', '萌宠', 'lorem', 'ipsum', 'sim', 'dolor', 'asda', 'asdasdasd', 'uhdwiud', 'a78euqn', 'asjdh72y788', '123ad', 'weaas12', 'qweas', '123', 'asd', 'foo', 'bar'],
       randomShow: []
     }
+  },
+  mounted () {
+    this.random()
+    // console.log('App.vue mounted')
+    //获取Tag
+    //如果登录，获取宠物列表
   },
   watch: {
     '$route' (to, from) {
@@ -60,7 +67,6 @@ export default {
       this.$router.go(-1)
     },
     random() {
-      console.log(this.$route)
       this.randomShow = []
       for (var i = 0; i < 10; i++) {
         this.randomShow.push(parseInt(Math.random() * (this.tags.length + 1), 10))

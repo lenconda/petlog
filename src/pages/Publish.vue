@@ -57,7 +57,7 @@
                 <img :src="[`../../static/images/dog@3x.png`]">
               </div>
               <div class="name">大猫</div>
-              <input type="radio" name="variety" v-model="tempVariety" value="大猫">
+              <input type="radio" name="variety" value="大猫">
               <div class="checked-wrapper">
                 <i class="checked"></i>
               </div>
