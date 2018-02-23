@@ -130,7 +130,7 @@ export default {
       }
       var imageData = new FormData()
       imageData.append('image', event.target.files[0])
-      this.$http.post('api/user/avatar', imageData).then(res => {
+      this.$http.post('/api/user/avatar', imageData).then(res => {
         if (res.body.status == 1) {
           _this.$toast.success('上传头像成功')
           _this.avatar = getObjectURL(event.target.files[0])
