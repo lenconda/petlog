@@ -93,6 +93,10 @@ export default {
     },
     handleMeet (date, formatDate) {
       this.meetDay = formatDate
+    },
+    //加一个上传头像的
+    createPet () {
+      this.$http.post('/api/user/pet/create_pet', {})
     }
   },
   data () {
@@ -111,7 +115,7 @@ export default {
       variety: '',
       varieties: Varieties
     }
-  }
+  },
 }
 </script>
 

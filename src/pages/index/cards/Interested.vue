@@ -78,6 +78,9 @@ export default {
       isLoading: false
     }
   },
+  created () {
+    getFollowed()
+  },
   watch: {
     isLoading () {
       if (this.isLoading) {
@@ -86,6 +89,11 @@ export default {
           this.isLoading = false
         }, 3000);
       }
+    }
+  },
+  methods: {
+    getFollowed () {
+      this.$http.post('/api/user/get_circle_of_friends', {action})
     }
   }
 }

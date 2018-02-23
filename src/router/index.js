@@ -82,7 +82,7 @@ export default new Router({
     },
     {
       // 这个地方要改成命名路由
-      path: '/details',
+      path: '/c/:id',
       name: 'details',
       component: Details
     },

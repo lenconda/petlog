@@ -148,6 +148,11 @@ export default {
       select: false
     }
   },
+  created () {
+    this.$http.get('/api/user/get_timeline/?id=').then(res => {
+      
+    })
+  },
   methods: {
     toggleAvt () {
       if (this.avatar == 'testonly.jpg') {

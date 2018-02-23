@@ -14,7 +14,8 @@ const state = {
   title: '宠物秀',
   showLogin: false,
   showRegister: false,
-  showTitle: true
+  showTitle: true,
+  pets: []
 }
 
 const mutations = {
@@ -48,6 +49,9 @@ const mutations = {
   },
   toggleHeader (state, option) {
     state.showTitle = option
+  },
+  setPets (state, pets) {
+    state.pets = pets
   }
 }
 

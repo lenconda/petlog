@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
   name: 'App',
   data () {
@@ -48,9 +49,17 @@ export default {
   },
   mounted () {
     this.random()
-    // console.log('App.vue mounted')
-    //获取Tag
-    //如果登录，获取宠物列表
+    Vue.http.headers.common['Authorization'] = `${localStorage.token}`
+    this.$http.get('/api/auth').then(res => {
+      if (res.body.status == 1) {
+        this.$http.get('/api/user/all_pets').then(res => {
+          this.$store.commit('setPets', res.body.pets)
+        })
+        this.$router.push('/index/cards/interested')
+      } else {
+        this.$router.push('/start')
+      }
+    })
   },
   watch: {
     '$route' (to, from) {

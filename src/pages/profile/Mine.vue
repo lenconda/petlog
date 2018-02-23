@@ -60,6 +60,9 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '')
+    this.$http.get('/api/user/profile_summary').then(res => {
+      
+    })
   },
   data () {
     return {

@@ -92,13 +92,32 @@ export default {
       comment: ''
     }
   },
+  created () {
+    this.$http.get(`/api/card/?id=${ this.$route.params.id }`).then(res => {
+
+    })
+  },
   mounted () {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '')
   },
   methods: {
+    like () {
+      this.$http.post('/api/user/post_praise').then(res => {
 
+      })
+    },
+    follow () {
+      this.$http.get('/api/user/focus/?action=&id=').then(res => {
+
+      })
+    },
+    comment () {
+      this.$http.post('/api/user/post_comment', {}).then(res => {
+        
+      })
+    } 
   }
 }
 </script>

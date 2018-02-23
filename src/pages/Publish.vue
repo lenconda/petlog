@@ -180,7 +180,7 @@ export default {
           this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
             var ajaxFrom = new FormData()
             ajaxFrom.append('image', res.body)
-            this.$http.post('/api/Upload/card_imges', ajaxFrom).then(res => {
+            this.$http.post('/api/Upload/card_image', ajaxFrom).then(res => {
               if (res.body.status ==1) {
                 _this.payload.push(res.body.filename)
               } else {
@@ -218,6 +218,12 @@ export default {
     },
     delImg (index) {
       this.imgList.splice(index, 1)
+    },
+
+    publish () {
+      this.$http.post('/api/user/post_card', {}).then(res => {
+
+      })
     }
   }
 }

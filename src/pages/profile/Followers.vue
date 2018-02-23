@@ -36,6 +36,9 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '粉丝列表')
+    this.$http.get('/api/user/get_followers').then(res => {
+
+    })
   },
   watch: {
     isLoading () {
@@ -50,6 +53,12 @@ export default {
   data () {
     return {
       isLoading: false
+    }
+  },
+  methods: {
+    //关注/取关
+    follow () {
+      
     }
   }
 }

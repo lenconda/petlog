@@ -87,6 +87,16 @@ export default {
         }, 3000);
       }
     }
+  },
+  created () {
+    getHot()
+  },
+  methods: {
+    getHot () {
+      this.$http.get('/api/get_hot').then(res => {
+
+      })
+    }
   }
 }
 </script>

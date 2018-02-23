@@ -63,6 +63,9 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '修改个人信息')
+    this.$http.get('/api/user/profile').then(res => {
+      
+    })
   },
   data () {
     return {

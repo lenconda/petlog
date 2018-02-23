@@ -106,6 +106,11 @@ export default {
     },
     handleMeet (date, formatDate) {
       this.meetDay = formatDate
+    },
+    update () {
+      this.$http.post('/api/user/pet/update', {}).then(res => {
+        
+      })
     }
   },
   data () {
