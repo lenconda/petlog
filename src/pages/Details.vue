@@ -10,7 +10,7 @@
           <div class="poster-date">{{ post.time }}</div>
         </div>
         <div class="card-head-follow">
-          <button class="follow" :class="[ author.followed ? 'followed' : '' ]"><i class="checked" v-if="author.followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
+          <button class="follow" @click="follow" :class="[ author.followed ? 'followed' : '' ]"><i class="checked" v-if="author.followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
         </div>
       </div>
       <div class="card-content">
@@ -27,7 +27,7 @@
       <div class="comment-head">
         <div class="comment-count">评论 {{ comments.length }}</div>
         <div class="comment-likes">
-          <span class="like-icon">10</span>
+          <span class="like-icon" @click="like">10</span>
           <span class="like-count">{{ post.likes }}</span>
         </div>
       </div>
@@ -51,9 +51,9 @@
     </div>
     <div class="write-comment">
       <div class="write-comment-wrapper">
-        <van-field type="textarea" class="write-comment-field" v-model="comment" maxlength="100" :placeholder="[ replyToName == '作者' ? '评论作者...' : `回复${replyToName}...` ]" rows="1" autosize/>
+        <van-field type="textarea" class="write-comment-field" v-model="comment" @blur="replyToName = '作者'" maxlength="100" :placeholder="[ replyToName == '作者' ? '评论作者...' : `回复${replyToName}...` ]" rows="1" autosize/>
       </div>
-      <div class="write-comment-submit" :class="[comment.length > 0 ? 'active' : '']">
+      <div class="write-comment-submit" :class="[comment.length > 0 ? 'active' : '']" @click="postComment">
         <span>发送</span>
       </div>
     </div>
@@ -80,7 +80,18 @@ export default {
         likes: 0,
         images: []
       },
-      comments: [],
+      comments: [
+        // {            
+        //   id: '234',
+        //   author: {
+        //     name: 'Test',
+        //     id: '123',
+        //     avatar: 'test.jpg'
+        //   },
+        //   time: '1-1', 
+        //   content: 'a test message'
+        // }
+      ],
       comment: '',
       replyToName: '作者'
     }
@@ -102,18 +113,32 @@ export default {
   },
   methods: {
     like () {
-      this.$http.post('/api/user/post_praise').then(res => {
-
+      this.$http.post('/api/user/post_praise', {id: this.$route.params.id, action: this.liked ? 0 : 1}).then(res => {
+        if (res.body.status == 1) {
+          this.liked = !this.liked
+        } else {
+          this.$toast.fail(res.body.message)
+        }
       })
     },
     follow () {
-      this.$http.get('/api/user/focus/?action=&id=').then(res => {
-
+      this.$http.get(`/api/user/focus/?action=${this.author.followed ? 0 : 1}&id=`).then(res => {
+        if (res.body.status == 1) {
+          this.author.followed = !this.author.followed
+        } else {
+          this.$toast.fail(res.body.message)
+        }
       })
     },
     postComment () {
-      this.$http.post('/api/user/post_comment', {}).then(res => {
-        
+      this.$http.post('/api/user/post_comment', {card_id: this.$route.params.id, to_author: this.replyToName == '作者' ? true : false, reply_to: this.replyToName, content: this.comment}).then(res => {
+        if (res.body.status == 1) {
+          this.$toast.success('发送成功')
+          this.replyToName = '作者'
+          this.comment = ''
+        } else {
+          this.$toast.fail(res.body.message)
+        }
       })
     } 
   }
