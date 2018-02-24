@@ -43,7 +43,7 @@ export default {
       isHome: true,
       tag: false,
       //Temp
-      tags: ['狗年大吉', '喵星人', '铲屎官', '萌宠', 'lorem', 'ipsum', 'sim', 'dolor', 'asda', 'asdasdasd', 'uhdwiud', 'a78euqn', 'asjdh72y788', '123ad', 'weaas12', 'qweas', '123', 'asd', 'foo', 'bar'],
+      tags: [],
       randomShow: []
     }
   },
@@ -54,6 +54,13 @@ export default {
       if (res.body.status == 1) {
         this.$http.get('/api/user/all_pets').then(res => {
           this.$store.commit('setPets', res.body.pets)
+        })
+        this.$http.get('/api/tags').then(res => {
+          if (res.body.status == 0) {
+            this.$toast.fail('获取Tag失败')
+          } else {
+            this.tags = res.body.tags
+          }
         })
         this.$router.push('/index/cards/interested')
       } else {

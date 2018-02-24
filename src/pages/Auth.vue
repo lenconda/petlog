@@ -10,6 +10,11 @@ export default {
   mounted () {
     console.log('Auth.vue mounted')
     //请求/api/auth，返回1就跳转到/index/interested
+    this.$http.get('/api/auth').then(res => {
+      if (res.body.status == 1) {
+        this.$router.push('/index/cards/interested')
+      }
+    })
   }
 }
 </script>

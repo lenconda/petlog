@@ -143,7 +143,7 @@ export default {
     register () {
       //加上avatar字段
       var _this = this
-      this.$http.post('/api/registered', {email: this.username, password: this.password, user_nickname: this.nickname, address: this.location, gender: this.gender, register_key: md5(`${this.username}fdsfd32${this.password}`)}).then(res => {
+      this.$http.post('/api/registered', {email: this.username, password: this.password, avatar: this.tempAvatar, user_nickname: this.nickname, address: this.location, gender: this.gender, register_key: md5(`${this.username}fdsfd32${this.password}`)}).then(res => {
         if (res.body.status == 1) {
           _this.$toast.success('注册成功')
           _this.$router.push('/start')

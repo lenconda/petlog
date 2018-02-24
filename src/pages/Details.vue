@@ -3,68 +3,47 @@
     <div class="card-wrapper">
       <div class="card-head">
         <div class="card-head-avatar">
-          <img src="../../static/images/testonly.jpg" width="100%">
+          <img :src="[`../../static/images/${author.avatar}`]" width="100%">
         </div>
         <div class="card-head-poster">
-          <div class="poster-name">金屋藏猫</div>
-          <div class="poster-date">1970年1月1日 00:00</div>
+          <div class="poster-name">{{ author.name }}</div>
+          <div class="poster-date">{{ post.time }}</div>
         </div>
         <div class="card-head-follow">
-          <button class="follow"><i class="iconfont ptsh-tianjia plus"></i> 关注</button>
+          <button class="follow" :class="[ author.followed ? 'followed' : '' ]"><i class="checked" v-if="author.followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
         </div>
       </div>
       <div class="card-content">
-        见甘、凉、瓜、沙等州城邑如故，陷蕃之人见唐使者旌节，夹道迎呼涕泣曰：“皇帝犹念陷蕃生灵否？”其人皆天宝中陷吐蕃者子孙，其语言小讹，而衣服未改。
+        {{ post.content }}
       </div>
       <div class="card-misc">
-        <div class="misc-status">您的宠物当前状态：难过</div>
+        <div class="misc-status">宠物当前状态：{{ post.status }}</div>
         <div class="misc-tags">
-          <span class="tag">萌宠</span>
-          <span class="tag">喵星人</span>
+          <span class="tag" v-for="(item, index) in post.tags">{{ item }}</span>
         </div>
       </div>
     </div>
     <div class="comment-wrapper">
       <div class="comment-head">
-        <div class="comment-count">评论 2</div>
+        <div class="comment-count">评论 {{ comments.length }}</div>
         <div class="comment-likes">
           <span class="like-icon">10</span>
-          <span class="like-count">10</span>
+          <span class="like-count">{{ post.likes }}</span>
         </div>
       </div>
       <div class="comment-contents">
-        <div class="none-comment" v-if="card.comments.length == 0">
+        <div class="none-comment" v-if="comments.length == 0">
           <span>快来发表评论吧</span>
         </div>
         <ul v-else>
-          <li>
+          <li v-for="(item, index) in comments" @click="replyToName = item.author.name">
             <div class="comment-avatar">
-              <img src="../../static/images/testonly.jpg">
+              <img :src="[`../../static/images/${item.author.avatar}`]">
             </div>
             <div class="comment-texts">
-              <div class="comment-text-author">美丽喵喵</div>
-              <div class="comment-text-raw">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 汉字汉字汉字</div>
-              <div class="comment-text-date"><span>1-1</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="comment-avatar">
-              <img src="../../static/images/testonly.jpg">
-            </div>
-            <div class="comment-texts">
-              <div class="comment-text-author">美丽喵喵</div>
-              <div class="comment-text-raw">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 汉字汉字汉字</div>
-              <div class="comment-text-date"><span>1-1</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="comment-avatar">
-              <img src="../../static/images/testonly.jpg">
-            </div>
-            <div class="comment-texts">
-              <div class="comment-text-author">美丽喵喵</div>
-              <div class="comment-text-raw">Lorem ipsum dolor sit amet consectetur, adipisicing elit. 汉字汉字汉字</div>
-              <div class="comment-text-date"><span>1-1</span></div>
+              <div class="comment-text-author">{{ item.author.name }}</div>
+              <div class="comment-text-raw">{{ item.content }}</div>
+              <div class="comment-text-date"><span>{{ item.time }}</span></div>
             </div>
           </li>
         </ul>
@@ -72,7 +51,7 @@
     </div>
     <div class="write-comment">
       <div class="write-comment-wrapper">
-        <van-field type="textarea" class="write-comment-field" v-model="comment" maxlength="100" placeholder="说点什么吧..." rows="1" autosize/>
+        <van-field type="textarea" class="write-comment-field" v-model="comment" maxlength="100" :placeholder="[ replyToName == '作者' ? '评论作者...' : `回复${replyToName}...` ]" rows="1" autosize/>
       </div>
       <div class="write-comment-submit" :class="[comment.length > 0 ? 'active' : '']">
         <span>发送</span>
@@ -83,18 +62,37 @@
 
 <script>
 export default {
-  name: 'details',
+  name: 'card_details',
   data () {
     return {
-      card: {
-        comments: ['asdasd']
+      author: {
+        name: '',
+        id: '',
+        avatar: '',
+        followed: false
       },
-      comment: ''
+      liked: false,
+      post: {
+        time: '',
+        content: '',
+        status: '',
+        tags: [],
+        likes: 0,
+        images: []
+      },
+      comments: [],
+      comment: '',
+      replyToName: '作者'
     }
   },
   created () {
     this.$http.get(`/api/card/?id=${ this.$route.params.id }`).then(res => {
-
+      if (res.status == 200) {
+        this.author = res.body.author
+        this.liked = res.body.liked
+        this.post = res.body.post
+        this.comments = res.body.comments
+      }
     })
   },
   mounted () {
@@ -113,7 +111,7 @@ export default {
 
       })
     },
-    comment () {
+    postComment () {
       this.$http.post('/api/user/post_comment', {}).then(res => {
         
       })
@@ -172,19 +170,35 @@ export default {
         height: 47px;
         padding: 3px 0 10px 5px;
         button {
-          width: 63px;
-          height: 34px;
-          background-color: #fff;
-          border: 1px solid #ffa721;
-          border-radius: 4px;
-          color: #ffa721;
-          font-size: 13px;
-          box-sizing: border-box;
-          outline: none;
+          &.follow {
+            width: 63px;
+            height: 34px;
+            background-color: #fff;
+            border: 1px solid #ffa721;
+            border-radius: 4px;
+            color: #ffa721;
+            font-size: 13px;
+            box-sizing: border-box;
+            outline: none;
+          }
+          &.followed {
+            background-color: #f4f4f4;
+            color: #686868;
+            border: 1px solid #e7e7e7;
+          }
         }
-        .plus {
-          font-weight: bold;
-          font-size: 13px;
+        i {
+          &.plus {
+            font-weight: bold;
+            font-size: 13px;
+          }
+          &.checked {
+            width: 13px;
+            height: 9.9px;
+            display: inline-block;
+            background: url('../../static/images/checked@3x.png') 100% e('/') 100% no-repeat;
+            transform: translateY(.6px);
+          }
         }
       }
     }
@@ -280,9 +294,14 @@ export default {
     }
     .comment-contents > .none-comment {
       background: #f4f4f4;
-      height: 267px;
+      height: 100px;
       position: relative;
       margin-bottom: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #686868;
+      font-size: 14px;
     }
     .comment-contents > ul {
       padding: 0;

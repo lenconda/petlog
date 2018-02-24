@@ -89,7 +89,7 @@ export default {
     }
   },
   created () {
-    getHot()
+    this.getHot()
   },
   methods: {
     getHot () {
