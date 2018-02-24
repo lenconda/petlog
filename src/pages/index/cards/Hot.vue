@@ -4,67 +4,36 @@
       <div class="topic-icon"></div>
       <div>当前已选中的标签： #{{ $route.query.tag }}#</div>
     </div>
-    <div class="card-wrapper">
+    <div class="card-wrapper" v-for="(item, index) in cards" @click="$router.push(`/c/${item.id}`)">
       <div class="card-head">
         <div class="card-head-avatar">
-          <img src="../../../../static/images/testonly.jpg" width="100%">
+          <img :src="[`../../../../static/images/avatars/${item.author.avatar}`]" width="100%">
         </div>
         <div class="card-head-poster">
-          <div class="poster-name">金屋藏猫</div>
-          <div class="poster-date">1970年1月1日 00:00</div>
+          <div class="poster-name">{{ item.author.name }}</div>
+          <div class="poster-date">{{ item.post.time }}</div>
         </div>
         <div class="card-head-follow">
-          <button class="follow"><i class="iconfont ptsh-tianjia plus"></i> 关注</button>
+          <button class="follow" @click="follow($event, index, item.author.id, item.author.followed ? 0 : 1)" :class="[item.author.followed ? 'followed' : '']"><i class="checked" v-if="item.author.followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
         </div>
       </div>
       <div class="card-content">
-        见甘、凉、瓜、沙等州城邑如故，陷蕃之人见唐使者旌节，夹道迎呼涕泣曰：“皇帝犹念陷蕃生灵否？”其人皆天宝中陷吐蕃者子孙，其语言小讹，而衣服未改。
+        {{ item.post.content }}
       </div>
       <div class="card-misc">
-        <div class="misc-status">您的宠物当前状态：难过</div>
+        <div class="misc-status">宠物当前状态：{{ item.post.status }}</div>
         <div class="misc-tags">
-          <span class="tag">萌宠</span>
-          <span class="tag">喵星人</span>
+          <span class="tag" v-for="(tag, index) in item.post.tags">{{ tag }}</span>
         </div>
       </div>
       <div class="card-control-wrapper">
         <div class="card-control">
-          <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;23</span></button>
-          <button class="control-btn"><span class="icon_like">icon_like</span><span>&nbsp;233</span></button>
+          <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;{{ item.comments }}</span></button>
+          <button class="control-btn" @click="like($event, index, item.id, item.liked ? 0 : 1)"><span class="icon_like" :class="[item.liked ? 'liked' : '']">icon_like</span><span>&nbsp;{{ item.post.likes }}</span></button>
         </div>
       </div>
     </div>
-    <div class="card-wrapper">
-      <div class="card-head">
-        <div class="card-head-avatar">
-          <img src="../../../../static/images/testonly.jpg" width="100%">
-        </div>
-        <div class="card-head-poster">
-          <div class="poster-name">金屋藏猫</div>
-          <div class="poster-date">1970年1月1日 00:00</div>
-        </div>
-        <div class="card-head-follow">
-          <button class="follow followed"><i class="checked"></i> 关注</button>
-        </div>
-      </div>
-      <div class="card-content">
-        见甘、凉、瓜、沙等州城邑如故，陷蕃之人见唐使者旌节，夹道迎呼涕泣曰：“皇帝犹念陷蕃生灵否？”其人皆天宝中陷吐蕃者子孙，其语言小讹，而衣服未改。
-      </div>
-      <div class="card-misc">
-        <div class="misc-status">您的宠物当前状态：难过</div>
-        <div class="misc-tags">
-          <span class="tag">萌宠</span>
-          <span class="tag">喵星人</span>
-        </div>
-      </div>
-      <div class="card-control-wrapper">
-        <div class="card-control">
-          <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;23</span></button>
-          <button class="control-btn"><span class="icon_like">icon_like</span><span>&nbsp;233</span></button>
-        </div>
-      </div>
-    </div>
-    <div class="loadmore">
+    <div class="loadmore" v-show="!infinited">
       加载更多
     </div>
   </van-pull-refresh>
@@ -75,26 +44,59 @@ export default {
   name: 'index_cards_hot',
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      cards: [],
+      infinited: false
     }
   },
   watch: {
     isLoading () {
       if (this.isLoading) {
-        console.log('is loading...')
-        setTimeout(() => {
-          this.isLoading = false
-        }, 3000);
+        getHot(this.$route.query.tag, 1)
       }
     }
   },
   created () {
-    this.getHot()
+    this.getHot(this.$route.query.tag, 1)
   },
   methods: {
-    getHot () {
-      this.$http.get('/api/get_hot').then(res => {
-
+    getHot (tag, action) {
+      this.$http.get(`/api/get_hot?tag=${tag}&action=${action}`).then(res => {
+        if (res.body.status == 1) {
+          if (action == 1) {
+            this.infinited = res.body.infinited
+            this.cards = res.body.cards
+          } else {
+            for (var i = 0; i < res.body.cards.length; i++) {
+              this.cards.push(res.body.cards[i])
+            }
+            this.infinited = res.body.infinited
+          }
+          this.isLoading = false
+        } else {
+          this.isLoading = false
+          this.$toast.fail(res.body.message)
+        }
+      })
+    },
+    like (event, index, id, action) {
+      event.stopPropagation()
+      this.$http.post('/api/user/post_praise', {id: id, action: action}).then(res => {
+        if (res.body.status == 1) {
+          this.cards[index].liked = !this.cards[index].liked
+        } else {
+          this.$toast.fail(res.body.message)
+        }
+      })
+    },
+    follow (event, index, id, action) {
+      event.stopPropagation()
+      this.$http.get(`/api/user/focus/?action=${action}&id=${id}`).then(res => {
+        if (res.body.status == 1) {
+          this.cards[index].author.followed = !this.cards[index].author.followed
+        } else {
+          this.$toast.fail(res.body.message)
+        }
       })
     }
   }

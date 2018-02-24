@@ -3,7 +3,7 @@
     <div class="card-wrapper">
       <div class="card-head">
         <div class="card-head-avatar">
-          <img :src="[`../../static/images/${author.avatar}`]" width="100%">
+          <img :src="[`../../static/images/avatars/${author.avatar}`]" width="100%">
         </div>
         <div class="card-head-poster">
           <div class="poster-name">{{ author.name }}</div>
@@ -122,7 +122,7 @@ export default {
       })
     },
     follow () {
-      this.$http.get(`/api/user/focus/?action=${this.author.followed ? 0 : 1}&id=`).then(res => {
+      this.$http.get(`/api/user/focus/?action=${this.author.followed ? 0 : 1}&id=${this.avatar.id}`).then(res => {
         if (res.body.status == 1) {
           this.author.followed = !this.author.followed
         } else {
