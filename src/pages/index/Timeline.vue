@@ -132,7 +132,11 @@ export default {
       if (res.body.status == 1) {
         this.$http.get(`/api/user/get_timeline/?id=${this.$route.query.id}`).then(res => {
           if (res.body.status == 1) {
-
+            this.name = res.body.name
+            this.age = res.body.age
+            this.avatar = res.body.avatar
+            this.motto = res.body.motto
+            this.items = res.body.items
           } else {
             this.$toast.fail(res.body.message)
           }
