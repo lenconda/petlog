@@ -50,21 +50,22 @@ export default {
   mounted () {
     this.random()
     Vue.http.headers.common['Authorization'] = `${localStorage.token}`
+    var _this = this
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
-        this.$http.get('/api/user/all_pets').then(res => {
-          this.$store.commit('setPets', res.body.pets)
+        _this.$http.get('/api/user/all_pets').then(res => {
+          _this.$store.commit('setPets', res.body.pets)
         })
-        this.$http.get('/api/tags').then(res => {
+        _this.$http.get('/api/tags').then(res => {
           if (res.body.status == 0) {
-            this.$toast.fail('获取Tag失败')
+            _this.$toast.fail('获取Tag失败')
           } else {
-            this.tags = res.body.tags
+            _this.tags = res.body.tags
           }
         })
-        this.$router.push('/index/cards/interested')
+        _this.$router.push('/index/cards/interested')
       } else {
-        this.$router.push('/start')
+        _this.$router.push('/start')
       }
     })
   },

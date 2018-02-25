@@ -59,12 +59,12 @@ export default {
   watch: {
     isLoading () {
       if (this.isLoading) {
-        getHot(this.$route.query.tag, 1)
+        this.getHot(this.$route.query.tag == undefined ? '' : this.$route.query.tag, 1)
       }
     }
   },
   created () {
-    this.getHot(this.$route.query.tag, 1)
+    this.getHot(this.$route.query.tag == undefined ? '' : this.$route.query.tag, 1)
   },
   methods: {
     getHot (tag, action) {

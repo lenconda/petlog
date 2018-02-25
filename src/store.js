@@ -52,6 +52,9 @@ const mutations = {
   },
   setPets (state, pets) {
     state.pets = pets
+  },
+  addPet (state, pet) {
+    state.pets.push(pet)
   }
 }
 

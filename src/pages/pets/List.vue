@@ -3,21 +3,18 @@
     <div class="select-pets">
       <div class="title">宠物选择</div>
       <div class="list-wrapper">
-        <div class="list-item" :class="[$route.query.pet == 123 ? 'selected' : '']">
-          <img :src="['../../../static/images/testonly.jpg']">
-          毛毛
-        </div>
-        <div class="list-item">
-          <img :src="['../../../static/images/testonly.jpg']">
-          毛毛
+        <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.query.pet == pet.id ? 'selected' : '']">
+          <img :src="[`../../../static/images/avatars_pets/${pet.avatar}`]">
+          {{ pet.name }}
         </div>
       </div>
     </div>
     <div class="form-wrapper">
-      <div class="avatar-wrapper">
+      <div class="avatar-wrapper" @click="upAvatarTrigger">
         <span>头像</span>
         <div class="avatar">
-          <img :src="avatar">
+          <input id="setavatar" type="file" accept="image/*" @change="upAvatar($event)" style="display: none">
+          <img :src="[`../../../static/images/avatars_pets/${avatar}`]">
         </div>
       </div>
       <div class="input-group">
@@ -96,6 +93,15 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '宠物资料')
+    this.$http.get(`/api/user/pet/detail/?id=${this.$route.query.pet}`).then(res => {
+      this.nickname = res.body.name
+      this.motto = res.body.motto
+      this.avatar = res.body.avatar
+      this.gender = res.body.gender
+      this.birthDay = res.body.birth_day
+      this.meetDay = res.body.meet_day
+      this.variety = res.body.variety
+    })
   },
   components: {
     'calendar': Calendar
@@ -108,14 +114,42 @@ export default {
       this.meetDay = formatDate
     },
     update () {
-      this.$http.post('/api/user/pet/update', {}).then(res => {
-        
+      this.$http.post('/api/user/pet/update', {id: this.$route.query.pet, name: this.nickname, motto: this.motto, avatar: this.tempAvatar, gender: this.gender, birth_day: this.birthDay, meet_day: this.meetDay, variety: this.variety}).then(res => {
+        if (res.body.status == 1) {
+          this.$toast.success('更新成功')
+          this.$http.get('/api/user/all_pets').then(res => {
+            this.$store.commit('setPets', res.body.pets)
+          })
+          window.history.go(-1)
+        } else {
+          this.$toast.fail(res.body.message)
+        }
+      })
+    },
+    upAvatarTrigger () {
+      document.getElementById('setavatar').click()
+    },
+    upAvatar (event) {
+      var _this = this
+      function getObjectURL (object) {
+        return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object)
+      }
+      var imageData = new FormData()
+      imageData.append('image', event.target.files[0])
+      this.$http.post('/api/user/pet/avatar', imageData).then(res => {
+        if (res.body.status == 1) {
+          _this.$toast.success('上传头像成功')
+          _this.avatar = getObjectURL(event.target.files[0])
+          _this.tempAvatar = res.body.filename
+        } else {
+          _this.$toast.fail('上传头像失败')
+        }
       })
     }
   },
   data () {
     return {
-      avatar: '../../../static/images/testonly.jpg',
+      avatar: 'default.png',
       tempAvatar: 'default.png',
       meet: false,
       birth: false,

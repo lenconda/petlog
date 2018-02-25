@@ -2,8 +2,8 @@
   <div class="add">
     <div class="avatar-wrapper">
       <div class="avatar">
-        <input id="setavatar" type="file" accept="image/*" style="display: none">
-        <img :src="avatar" alt="头像">
+        <input id="setavatar" type="file" accept="image/*" style="display: none" @change="upAvatar($event)">
+        <img :src="avatar" alt="头像" @click="upAvatarTrigger">
       </div>
     </div>
     <div class="form-wrapper">
@@ -96,7 +96,36 @@ export default {
     },
     //加一个上传头像的
     createPet () {
-      this.$http.post('/api/user/pet/create_pet', {})
+      var _this = this
+      this.$http.post('/api/user/pet/create_pet', {name: this.nickname, motto: this.motto, avatar: this.tempAvatar, gender: this.gender, birth_day: this.birthDay, meet_day: this.meetDay, variety: this.variety}).then(res => {
+        if (res.body.status == 1) {
+          _this.$store.commit('addPet', {name: _this.nickname, id: res.body.id, avatar: _this.tempAvatar})
+          _this.$toast.success('添加成功')
+          window.history.go(-1)
+        } else {
+          _this.$toast.fail(res.body.message)
+        }
+      })
+    },
+    upAvatarTrigger () {
+      document.getElementById('setavatar').click()
+    },
+    upAvatar (event) {
+      var _this = this
+      function getObjectURL (object) {
+        return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object)
+      }
+      var imageData = new FormData()
+      imageData.append('image', event.target.files[0])
+      this.$http.post('/api/user/pet/avatar', imageData).then(res => {
+        if (res.body.status == 1) {
+          _this.$toast.success('上传头像成功')
+          _this.avatar = getObjectURL(event.target.files[0])
+          _this.tempAvatar = res.body.filename
+        } else {
+          _this.$toast.fail('上传头像失败')
+        }
+      })
     }
   },
   data () {

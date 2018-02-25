@@ -60,14 +60,14 @@ export default {
   watch: {
     isLoading () {
       if (this.isLoading) {
-        getInterested(this.$route.query.tag, 'none')
+        this.getInterested(this.$route.query.tag == undefined ? '' : this.$route.query.tag, 'none')
       }
     }
   },
   created () {
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
-        this.getInterested(this.$route.query.tag, 'none')
+        this.getInterested(this.$route.query.tag == undefined ? '' : this.$route.query.tag, 'none')
       } else {
         this.$toast.fail(res.body.message)
         window.history.go(-1)

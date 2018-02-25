@@ -3,7 +3,7 @@
     <div class="head-wrapper" :style="{background: `url(../../../static/images/avatars/${this.avatar})`}">
       <div class="avatar-wrapper">
         <div>
-          <img :src="[`../../../static/images/avatars/${this.avatar}`]" width="100%" height="100%">
+          <img :src="[`../../../static/images/avatars_pets/${this.avatar}`]" width="100%" height="100%">
           <i class="switch-btn" @click="select = !select" :class="[select ? 'actived' : '']"></i>
         </div>
       </div>
@@ -13,7 +13,7 @@
         </span>
         <span class="motto" v-show="!select">{{ motto }}</span>
         <div class="select-pets" v-show="select">
-          <div class="items" v-for="(item, index) in $store.pets" @click="$router.push(`/index/timeline?id=${item.id}`)">
+          <div class="items" v-for="(item, index) in $store.state.pets" @click="$router.push(`/index/timeline?id=${item.id}`)">
             <img :src="[`../../../static/images/avatars/${item.avatar}`]" alt="">
             <span>{{ item.name }}</span>
           </div>
@@ -128,21 +128,22 @@ export default {
     }
   },
   created () {
+    var _this = this
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
-        this.$http.get(`/api/user/get_timeline/?id=${this.$route.query.id}`).then(res => {
+        _this.$http.get(`/api/user/get_timeline/?id=${this.$route.query.id}`).then(res => {
           if (res.body.status == 1) {
-            this.name = res.body.name
-            this.age = res.body.age
-            this.avatar = res.body.avatar
-            this.motto = res.body.motto
-            this.items = res.body.items
+            _this.name = res.body.name
+            _this.age = res.body.age
+            _this.avatar = res.body.avatar
+            _this.motto = res.body.motto
+            _this.items = res.body.items
           } else {
-            this.$toast.fail(res.body.message)
+            _this.$toast.fail(res.body.message)
           }
         })
       } else {
-        this.$toast.fail(res.body.message)
+        _this.$toast.fail(res.body.message)
         window.history.go(-1)
       }
     })
