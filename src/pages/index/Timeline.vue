@@ -1,130 +1,44 @@
 <template>
   <div class="timeline">
-    <div class="head-wrapper" :style="{background: `url(../../../static/images/${this.avatar})`}">
+    <div class="head-wrapper" :style="{background: `url(../../../static/images/avatars/${this.avatar})`}">
       <div class="avatar-wrapper">
         <div>
-          <img :src="[`../../../static/images/${this.avatar}`]" width="100%" height="100%">
+          <img :src="[`../../../static/images/avatars/${this.avatar}`]" width="100%" height="100%">
           <i class="switch-btn" @click="select = !select" :class="[select ? 'actived' : '']"></i>
         </div>
       </div>
       <div class="info-wrapper">
         <span class="name-age">
-          <span>毛毛</span>|<span>2岁</span>
+          <span>{{ name }}</span>|<span>{{ age }}岁</span>
         </span>
-        <span class="motto" v-show="!select">毛毛，两岁，波斯猫，有兴趣认识毛毛...毛毛，两岁，波斯猫，有兴趣认识毛毛...毛毛，两岁，波斯猫，有兴趣认识毛毛...</span>
+        <span class="motto" v-show="!select">{{ motto }}</span>
         <div class="select-pets" v-show="select">
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
-          </div>
-          <div class="items">
-            <img src="../../../static/images/testonly.jpg" alt="">
-            <span>大毛</span>
+          <div class="items" v-for="(item, index) in $store.pets" @click="$router.push(`/index/timeline?id=${item.id}`)">
+            <img :src="[`../../../static/images/avatars/${item.avatar}`]" alt="">
+            <span>{{ item.name }}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="timeline-items-wrapper">
-      <div class="timeline-items">
-        <div class="date">
+      <div class="timeline-items" v-for="(item, index) in items">
+        <div class="date" :class="[item.is_year ? 'isyear' : '']">
           <div class="dates">
-            <span>22</span>
-            <span>1月</span>
+            <span>{{ item.date != '' ? item.date.split('-')[1] : '' }}</span>
+            <span>{{ item.date != '' ? `${item.date.split('-')[0]}月` : '' }}</span>
           </div>
+          <div class="year" v-show="item.is_year">{{ item.year }}</div>
         </div>
         <div class="content">
-          <div class="card">
-            <p>今天和毛毛出去玩了，稍后放图，哈哈哈哈哈哈</p>
-          </div>
-        </div>
-      </div>
-      <div class="timeline-items">
-        <div class="date">
-          <div class="dates">
-            <span>22</span>
-            <span>1月</span>
-          </div>
-        </div>
-        <div class="content">
-          <div class="card">
-            <p>今天和毛毛出去玩了，稍后放图，哈哈哈哈哈哈</p>
-          </div>
-        </div>
-      </div>
-      <div class="timeline-items">
-        <div class="date isyear">
-          <div class="dates">
-            <span></span>
-            <span></span>
-          </div>
-          <div class="year">2017</div>
-        </div>
-        <div class="content">
-          <div class="card" style="display: none">
-            <p></p>
-          </div>
-        </div>
-      </div>
-      <div class="timeline-items">
-        <div class="date">
-          <div class="dates">
-            <span>2</span>
-            <span>12月</span>
-          </div>
-        </div>
-        <div class="content">
-          <div class="card">
-            <p>今天和毛毛出去玩了</p>
-            <div class="image-wrapper">
-              <img src="../../../static/images/testonly2.png" alt="" width="100%" height="100%">
-              <span>9</span>
+          <div class="card" v-show="!item.is_year" v-for="(card, index) in item.items" @click="$router.push(`/c/${card.id}`)">
+            <p>{{ card.content }}</p>
+            <div class="image-wrapper" v-if="card.images.length > 0">
+              <img :src="[`../../../static/images/posts/${card.images[0]}`]" width="100%" height="100%">
+              <span>{{ card.images.length }}</span>
             </div>
+            <div v-else></div>
             <div class="status-panel">
-              <span class="icon_status">status</span><span>开心</span>
+              <span class="icon_status">status</span><span>{{ card.status }}</span>
             </div>
           </div>
         </div>
@@ -140,18 +54,95 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('setTitle', '时间轴')
     this.$store.commit('isTimeline', true)
+    // var test = {
+    //   name: 'test',
+    //   age: 2,
+    //   avatar: 'default.png',
+    //   motto: 'a test: fuck GFW',
+    //   items: [
+    //     {
+    //       date: "12-2",
+    //       items: [
+    //         {
+    //           content: "asdasdasd",
+    //           images: ["P_01.jpg", "asdqweasdqwe"],
+    //           status: "asda",
+    //           id: "123123123123"
+    //         },
+    //         {
+    //           content: "asdasdasd",
+    //           images: [],
+    //           status: "asda",
+    //           id: "123123123123"
+    //         }
+    //       ],
+    //       is_year: false
+    //     },
+    //     {
+    //       date: "",
+    //       items: [
+    //         {
+    //           content: "",
+    //           images: [],
+    //           status: "",
+    //           id: ""
+    //         }
+    //       ],
+    //       is_year: true,
+    //       year: 2017
+    //     },
+    //     {
+    //       date: "12-2",
+    //       items: [
+    //         {
+    //           content: "asdasdasd",
+    //           images: ["asdasd", "asdqweasdqwe"],
+    //           status: "asda",
+    //           id: "123123123123"
+    //         },
+    //         {
+    //           content: "asdasdasd",
+    //           images: ["asdasd", "asdqweasdqwe"],
+    //           status: "asda",
+    //           id: "123123123123"
+    //         }
+    //       ],
+    //       is_year: false
+    //     },
+    //   ]
+    // }
+    // this.name = test.name
+    // this.age = test.age
+    // this.avatar = test.avatar
+    // this.motto = test.motto
+    // this.items = test.items
   },
   data () {
     return {
-      avatar: 'testonly.jpg',
-      test: 'aahahaha',
-      select: false
+      name: '',
+      age: 0,
+      avatar: '',
+      motto: '',
+      items: [],
+      select: false,
     }
   },
   created () {
-    this.$http.get('/api/user/get_timeline/?id=').then(res => {
-      
+    this.$http.get('/api/auth').then(res => {
+      if (res.body.status == 1) {
+        this.$http.get(`/api/user/get_timeline/?id=${this.$route.query.id}`).then(res => {
+          if (res.body.status == 1) {
+
+          } else {
+            this.$toast.fail(res.body.message)
+          }
+        })
+      } else {
+        this.$toast.fail(res.body.message)
+        window.history.go(-1)
+      }
     })
+    
   },
   methods: {
     toggleAvt () {
@@ -370,6 +361,7 @@ export default {
           padding: 12px;
           padding-right: 2px;
           padding-bottom: 8px;
+          margin-bottom: 12px;
           text-align: left;
           font-size: 16.5px;
           color: #000;
@@ -395,7 +387,7 @@ export default {
               font-size: 18.5px;
               position: absolute;
               right: 7px;
-              bottom: 24px;
+              bottom: 16px;
             }
           }
           .status-panel > span {

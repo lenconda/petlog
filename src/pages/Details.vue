@@ -15,6 +15,9 @@
       </div>
       <div class="card-content">
         {{ post.content }}
+        <div class="images" v-show="post.images.length != 0">
+          <pet-image :images="post.images"></pet-image>
+        </div>
       </div>
       <div class="card-misc">
         <div class="misc-status">宠物当前状态：{{ post.status }}</div>
@@ -61,8 +64,12 @@
 </template>
 
 <script>
+import petImage from '@/components/ImageView'
 export default {
   name: 'card_details',
+  components: {
+    'pet-image': petImage,
+  },
   data () {
     return {
       author: {
@@ -235,6 +242,11 @@ export default {
       padding: 0 19px 10px 19px;
       color: #000;
       font-size: 18px;
+      .images {
+        width: 100%;
+        height: 220px;
+        margin: 0 auto;
+      }
     }
     .card-misc {
       box-sizing: border-box;

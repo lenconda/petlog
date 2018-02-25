@@ -19,6 +19,9 @@
       </div>
       <div class="card-content">
         {{ item.post.content }}
+        <div class="images" v-show="item.post.images.length != 0">
+          <pet-image :images="[`../../../../static/images/posts/${item.post.images}`]"></pet-image>
+        </div>
       </div>
       <div class="card-misc">
         <div class="misc-status">宠物当前状态：{{ item.post.status }}</div>
@@ -40,8 +43,12 @@
 </template>
 
 <script>
+import petImage from '@/components/ImageView'
 export default {
   name: 'index_cards_hot',
+  components: {
+    'pet-image': petImage,
+  },
   data () {
     return {
       isLoading: false,
