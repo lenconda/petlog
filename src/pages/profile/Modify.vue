@@ -6,7 +6,7 @@
           <span>头像</span>
           <div class="avatar">
             <input id="setavatar" type="file" accept="image/*" @change="upAvatar($event)" style="display: none">
-            <img src="../../../static/images/testonly2.png">
+            <img :src="avatar">
           </div>
         </div>
         <div class="input-group">
@@ -65,7 +65,13 @@ export default {
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '修改个人信息')
     this.$http.get('/api/user/profile').then(res => {
-      
+      this.nickname = res.body.name
+      this.avatar = `../../../static/images/avatars/${res.body.avatar}`,
+      this.tempAvatar = res.body.avatar
+      this.motto = res.body.motto
+      this.gender = res.body.gender
+      this.birthDay = res.body.birth_day
+      this.location = res.body.location
     })
   },
   data () {
@@ -117,6 +123,15 @@ export default {
           _this.tempAvatar = res.body.filename
         } else {
           _this.$toast.fail('上传头像失败')
+        }
+      })
+    },
+    modifyInfo () {
+      this.$http.post('/api/user/update', {name: this.nickname, avatar: this.tempAvatar, motto: this.motto, gender: this.gender, birth_day: this.birthDay, location: this.location}).then(res => {
+        if (res.body.status == 1) {
+          this.$toast.success(res.body.message)
+        } else {
+          this.$toast.fail(res.body.message)
         }
       })
     }
