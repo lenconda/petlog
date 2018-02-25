@@ -27,6 +27,8 @@ import Pets from '@/pages/Pets'
 import Pets_Add from '@/pages/pets/Add'
 import Pets_List from '@/pages/pets/List'
 
+import User from '@/pages/User'
+
 import Test1 from '@/temp/Test1'
 import Test2 from '@/temp/Test2'
 import Emotions from '@/temp/Emotions'
@@ -85,6 +87,11 @@ export default new Router({
       path: '/c/:id',
       name: 'details',
       component: Details
+    },
+    {
+      path: '/u/:id',
+      name: 'user',
+      component: User
     },
     {
       path: '/start',

@@ -2,7 +2,7 @@
   <div class="swipe-wrapper">
     <van-swipe class="image-view" :show-indicators="false" @change="index => { swipeIndex = index }">
       <van-swipe-item v-for="(item, index) in images">
-        <pinch-image :src="item" :min-zoom="1" :max-zoom="3"></pinch-image>
+        <pinch-image :src="[`../../static/images/posts/${item}`]" :min-zoom="1" :max-zoom="3"></pinch-image>
       </van-swipe-item>
     </van-swipe>
     <div class="indicator">{{ swipeIndex + 1 }}/{{ images.length }}</div>
@@ -43,7 +43,6 @@ export default {
   .indicator {
     display: inline-block;
     background-color: rgba(0, 0, 0, .5);
-    z-index: 999999999999!important;
     border-radius: 5px;
     color: #fff;
     font-size: 18.5px;

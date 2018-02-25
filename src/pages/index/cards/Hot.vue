@@ -20,7 +20,7 @@
       <div class="card-content">
         {{ item.post.content }}
         <div class="images" v-show="item.post.images.length != 0">
-          <pet-image :images="[`../../../../static/images/posts/${item.post.images}`]"></pet-image>
+          <pet-image :images="item.post.images"></pet-image>
         </div>
       </div>
       <div class="card-misc">
