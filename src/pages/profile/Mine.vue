@@ -1,33 +1,26 @@
 <template>
   <div class="mine">
-    <div class="head-wrapper" :style="{background: `url(../../../static/images/avatars/${this.avatar})`}">
+    <div class="head-wrapper" :style="{background: `url(../../../static/images/avatars/${user.avatar})`}">
       <div class="avatar-wrapper">
         <div>
-          <img :src="[`../../../static/images/avatars/${this.avatar}`]" width="100%" height="100%">
+          <img :src="[`../../../static/images/avatars/${user.avatar}`]" width="100%" height="100%">
         </div>
       </div>
       <div class="info-wrapper">
         <span class="name-age">
-          <span>关注 22</span>|<span>粉丝 22</span>
+          <span>关注 {{ user.followers }}</span>|<span>粉丝 {{ user.following }}</span>
         </span>
-        <span class="motto">个性签名： {%motto%}</span>
+        <span class="motto">个性签名： {{ user.motto }}</span>
       </div>
     </div>
     <div class="pets-list-wrapper">
       <div class="title">宠物</div>
       <div class="list">
-        <div class="list-item">
+        <div class="list-item" v-for="(item, index) in $store.state.pets" @click="$router.push(`/index/timeline?id=${item.id}`)">
           <div class="avatar">
-            <img :src="['../../../static/images/testonly.jpg']">
+            <img :src="[`../../../static/images/avatars_pets/${item.avatar}`]">
           </div>
-          <div class="name">大猫asdasdasdasd</div>
-          <i class="icon-right"></i>
-        </div>
-        <div class="list-item">
-          <div class="avatar">
-            <img :src="['../../../static/images/testonly.jpg']">
-          </div>
-          <div class="name">二猫</div>
+          <div class="name">{{ item.name }}</div>
           <i class="icon-right"></i>
         </div>
         <div class="list-item" @click="$router.push('/pets/add')">
@@ -40,16 +33,16 @@
       </div>
     </div>
     <div class="field-wrapper">
-      <button>修改个人资料</button>
-      <button>宠物信息</button>
-      <button>时间轴</button>
+      <button @click="$router.push('/profile/modify')">修改个人资料</button>
+      <button @click="toList">宠物信息</button>
+      <button @click="toTimeLine">时间轴</button>
     </div>
     <div class="field-wrapper">
-      <button>新的动态</button>
-      <button>我的关注</button>
-      <button>我的粉丝</button>
+      <button @click="$router.push('/index/cards/interested')">新的动态</button>
+      <button @click="$router.push('/profile/following')">我的关注</button>
+      <button @click="$router.push('/profile/followers')">我的粉丝</button>
     </div>
-    <button class="logout-btn">退出登录</button>
+    <button class="logout-btn" @click="logOut">退出登录</button>
   </div> 
 </template>
 
@@ -61,12 +54,37 @@ export default {
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '')
     this.$http.get('/api/user/profile_summary').then(res => {
-      
+      if (res.body.status == 1) {
+        this.user = res.body.user
+      } else {
+        this.$toast.fail(res.body.message)
+        window.history.go(-1)
+      }
     })
   },
   data () {
     return {
-      avatar: 'avatar.jpg'
+      user: {}
+    }
+  },
+  methods: {
+    logOut () {
+      localStorage.removeItem('token')
+      this.$router.push('/start')
+    },
+    toList () {
+      if (this.$store.state.pets.length < 1) {
+        this.$toast.fail('还没有宠物哦')
+      } else {
+        this.$router.push(`/pets/list?pet=${this.$store.state.pets[0].id}`)
+      }
+    },
+    toTimeLine () {
+      if (this.$store.state.pets.length < 1) {
+        this.$toast.fail('还没有宠物哦')
+      } else {
+        this.$router.push(`/index/timeline?id=${this.$store.state.pets[0].id}`)
+      }
     }
   }
 }

@@ -1,28 +1,17 @@
 <template>
   <van-pull-refresh v-model="isLoading" class="following">
     <ul>
-      <li>
+      <li v-for="(item, index) in following">
         <div class="avatar-wrapper">
-          <img src="../../../static/images/testonly.jpg" alt="">
+          <!-- **********************跳转个人页面 -->
+          <img :src="[`../../../static/images/avatars/${item.avatar}`]">
         </div>
         <div class="info-wrapper">
-          <p class="nickname">金屋藏猫</p>
-          <p class="motto">简介Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+          <p class="nickname">{{ item.name }}</p>
+          <p class="motto">{{ item.motto }}</p>
         </div>
         <div class="btn-wrapper">
-          <button class="follow followed"><i class="checked"></i> 关注</button>
-        </div>
-      </li>
-      <li>
-        <div class="avatar-wrapper">
-          <img src="../../../static/images/testonly.jpg" alt="">
-        </div>
-        <div class="info-wrapper">
-          <p class="nickname">金屋藏猫</p>
-          <p class="motto">简介Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-        </div>
-        <div class="btn-wrapper">
-          <button class="follow followed"><i class="checked"></i> 关注</button>
+          <button class="follow" :class="[item.followed ? 'followed' : '']" @click="follow(index, item.id, item.followed ? 0 : 1)"><i class="checked" v-if="item.followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
         </div>
       </li>
     </ul>
@@ -36,29 +25,48 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '关注列表')
-    this.$http.get('/api/user/get_following').then(res => {
-
-    })
+    this.getFollowing()
   },
   watch: {
     isLoading () {
       if (this.isLoading) {
-        console.log('is loading...')
-        setTimeout(() => {
-          this.isLoading = false
-        }, 3000);
+        this.getFollowing()
       }
     }
   },
   data () {
     return {
-      isLoading: false
+      isLoading: false,
+      following: []
     }
   },
   methods: {
     //关注/取关
-    follow () {
-      
+    getFollowing () {
+      this.$http.get('/api/user/get_following').then(res => {
+        if (res.body.status == 1) {
+          this.followers = res.body.following
+          this.isLoading = false
+        } else {
+          this.$toast.fail(res.body.message)
+          window.history.go(-1)
+          this.isLoading = false
+        }
+      })
+    },
+    follow (index, id, action) {
+      this.$http.get(`/api/user/focus/?id=${id}&action=${action}`).then(res => {
+        if (res.body.status == 1) {
+          if (aciton == 0) {
+            this.following[index].followed = false
+          } else {
+            this.following[index].followed = true
+          }
+          this.$toast.success('关注成功')
+        } else {
+          this.$toast.fail(res.body.message)
+        }
+      })
     }
   }
 }

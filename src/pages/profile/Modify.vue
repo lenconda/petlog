@@ -2,9 +2,10 @@
   <div class="modify">
     <div class="wrapper">
       <div class="form-wrapper">
-        <div class="avatar-wrapper">
+        <div class="avatar-wrapper" @click="upAvatarTrigger">
           <span>头像</span>
           <div class="avatar">
+            <input id="setavatar" type="file" accept="image/*" @change="upAvatar($event)" style="display: none">
             <img src="../../../static/images/testonly2.png">
           </div>
         </div>
@@ -72,6 +73,8 @@ export default {
       selectLocation: false,
       birth: false,
       cities: Cities,
+      avatar: '../../../static/images/avatars/default.png',
+      tempAvatar: 'default.png',
       nickname: '',
       motto: '',
       gender: 'female',
@@ -96,6 +99,26 @@ export default {
         this.location = `${value[0].name} ${value[1].name}`
         this.selectLocation = false
       }
+    },
+    upAvatarTrigger () {
+      document.getElementById('setavatar').click()
+    },
+    upAvatar (event) {
+      var _this = this
+      function getObjectURL (object) {
+        return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object)
+      }
+      var imageData = new FormData()
+      imageData.append('image', event.target.files[0])
+      this.$http.post('/api/user/avatar', imageData).then(res => {
+        if (res.body.status == 1) {
+          _this.$toast.success('上传头像成功')
+          _this.avatar = getObjectURL(event.target.files[0])
+          _this.tempAvatar = res.body.filename
+        } else {
+          _this.$toast.fail('上传头像失败')
+        }
+      })
     }
   }
 }

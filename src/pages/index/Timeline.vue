@@ -1,9 +1,9 @@
 <template>
   <div class="timeline">
-    <div class="head-wrapper" :style="{background: `url(../../../static/images/avatars/${this.avatar})`}">
+    <div class="head-wrapper" :style="{background: `url(../../../static/images/avatars_pets/${avatar})`}">
       <div class="avatar-wrapper">
         <div>
-          <img :src="[`../../../static/images/avatars_pets/${this.avatar}`]" width="100%" height="100%">
+          <img :src="[`../../../static/images/avatars_pets/${avatar}`]" width="100%" height="100%">
           <i class="switch-btn" @click="select = !select" :class="[select ? 'actived' : '']"></i>
         </div>
       </div>
@@ -131,17 +131,21 @@ export default {
     var _this = this
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
-        _this.$http.get(`/api/user/get_timeline/?id=${this.$route.query.id}`).then(res => {
-          if (res.body.status == 1) {
-            _this.name = res.body.name
-            _this.age = res.body.age
-            _this.avatar = res.body.avatar
-            _this.motto = res.body.motto
-            _this.items = res.body.items
-          } else {
-            _this.$toast.fail(res.body.message)
-          }
-        })
+        if (this.$store.state.pets.length < 1) {
+          _this.$toast.fail('还没有宠物哦')
+        } else {
+          _this.$http.get(`/api/user/get_timeline/?id=${this.$store.state.pets[0].id}`).then(res => {
+            if (res.body.status == 1) {
+              _this.name = res.body.name
+              _this.age = res.body.age
+              _this.avatar = res.body.avatar
+              _this.motto = res.body.motto
+              _this.items = res.body.items
+            } else {
+              _this.$toast.fail(res.body.message)
+            }
+          })
+        }
       } else {
         _this.$toast.fail(res.body.message)
         window.history.go(-1)

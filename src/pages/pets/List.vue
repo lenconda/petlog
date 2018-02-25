@@ -3,8 +3,8 @@
     <div class="select-pets">
       <div class="title">宠物选择</div>
       <div class="list-wrapper">
-        <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.query.pet == pet.id ? 'selected' : '']">
-          <img :src="[`../../../static/images/avatars_pets/${pet.avatar}`]">
+        <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.query.pet == pet.id ? 'selected' : '']" @click="$router.push(`/pets/list?pet=${pet.id}`)">
+          <img :src="pet.avatar">
           {{ pet.name }}
         </div>
       </div>
@@ -96,7 +96,8 @@ export default {
     this.$http.get(`/api/user/pet/detail/?id=${this.$route.query.pet}`).then(res => {
       this.nickname = res.body.name
       this.motto = res.body.motto
-      this.avatar = res.body.avatar
+      this.avatar = `../../../static/images/avatars_pets/${res.body.avatar}`
+      this.tempAvatar = res.body.avatar
       this.gender = res.body.gender
       this.birthDay = res.body.birth_day
       this.meetDay = res.body.meet_day
@@ -149,7 +150,7 @@ export default {
   },
   data () {
     return {
-      avatar: 'default.png',
+      avatar: '../../../static/images/avatars_pets/default.png',
       tempAvatar: 'default.png',
       meet: false,
       birth: false,
