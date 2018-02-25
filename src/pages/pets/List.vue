@@ -94,14 +94,18 @@ export default {
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '宠物资料')
     this.$http.get(`/api/user/pet/detail/?id=${this.$route.query.pet}`).then(res => {
-      this.nickname = res.body.name
-      this.motto = res.body.motto
-      this.avatar = `../../../static/images/avatars_pets/${res.body.avatar}`
-      this.tempAvatar = res.body.avatar
-      this.gender = res.body.gender
-      this.birthDay = res.body.birth_day
-      this.meetDay = res.body.meet_day
-      this.variety = res.body.variety
+      if (res.body.status == 1) {
+        this.nickname = res.body.name
+        this.motto = res.body.motto
+        this.avatar = `../../../static/images/avatars_pets/${res.body.avatar}`
+        this.tempAvatar = res.body.avatar
+        this.gender = res.body.gender
+        this.birthDay = res.body.birth_day
+        this.meetDay = res.body.meet_day
+        this.variety = res.body.variety
+      } else {
+        this.$toast.message(res.body.message)
+      }
     })
   },
   components: {

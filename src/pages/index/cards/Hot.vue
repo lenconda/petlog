@@ -6,7 +6,7 @@
     </div>
     <div class="card-wrapper" v-for="(item, index) in cards" @click="$router.push(`/c/${item.id}`)">
       <div class="card-head">
-        <div class="card-head-avatar">
+        <div class="card-head-avatar" @click="$router.push(`/u/${item.author.id}`)">
           <img :src="[`../../../../static/images/avatars/${item.author.avatar}`]" width="100%">
         </div>
         <div class="card-head-poster">
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="loadmore" v-show="!infinited">
+    <div class="loadmore" v-show="!infinited" @click="getHot(this.$route.query.tag == undefined ? '' : this.$route.query.tag, 0)">
       加载更多
     </div>
   </van-pull-refresh>

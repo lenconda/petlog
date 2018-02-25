@@ -131,10 +131,24 @@ export default {
     var _this = this
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
-        if (this.$store.state.pets.length < 1) {
-          _this.$toast.fail('还没有宠物哦')
+        if (this.$route.query.id == undefined) {
+          if (this.$store.state.pets.length < 1) {
+            _this.$toast.fail('还没有宠物哦')
+          } else {
+            _this.$http.get(`/api/user/get_timeline/?id=${this.$store.state.pets[0].id}`).then(res => {
+              if (res.body.status == 1) {
+                _this.name = res.body.name
+                _this.age = res.body.age
+                _this.avatar = res.body.avatar
+                _this.motto = res.body.motto
+                _this.items = res.body.items
+              } else {
+                _this.$toast.fail(res.body.message)
+              }
+            })
+          }
         } else {
-          _this.$http.get(`/api/user/get_timeline/?id=${this.$store.state.pets[0].id}`).then(res => {
+          _this.$http.get(`/api/user/get_timeline/?id=${this.$route.query.id}`).then(res => {
             if (res.body.status == 1) {
               _this.name = res.body.name
               _this.age = res.body.age
@@ -151,7 +165,6 @@ export default {
         window.history.go(-1)
       }
     })
-    
   },
   methods: {
     toggleAvt () {

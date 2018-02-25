@@ -1,65 +1,69 @@
 <template>
   <div class="user">
-    <div class="head-wrapper" :style="{background: `url(../../static/images/avatars/default.png)`}">
+    <div class="head-wrapper" :style="{background: `url(../../static/images/avatars/${user.avatar})`}">
       <div class="avatar-wrapper">
         <div>
-          <img :src="[`../../static/images/avatars/default.png`]" width="100%" height="100%">
+          <img :src="[`../../static/images/avatars/${user.avatar}`]" width="100%" height="100%">
         </div>
       </div>
       <div class="info-wrapper">
         <span class="name-age">
-          <span>关注 23</span>|<span>粉丝 20</span>
+          <span>关注 {{ user.following }}</span>|<span>粉丝 {{ user.followers }}</span>
         </span>
-        <span class="motto">个性签名： {% user.motto %}</span>
+        <span class="motto">个性签名： {{ user.motto }}</span>
       </div>
     </div>
     <div class="pets-list-wrapper">
       <div class="title">宠物</div>
-      <div class="list">
-        <div class="list-item">
+      <div class="list" v-if="pets.length != 0">
+        <div class="list-item" v-for="(item, index) in pets" @click="$router.push(`/index/timeline?id=${item.id}`)">
           <div class="avatar">
-            <img :src="[`../../static/images/avatars_pets/default.png`]">
+            <img :src="[`../../static/images/avatars_pets/${item.avatar}`]">
           </div>
-          <div class="name">{% item.name %}</div>
+          <div class="name">{{ item.name }}</div>
           <i class="icon-right"></i>
         </div>
       </div>
+      <div class="list" v-else>Ta还没有宠物</div>
     </div>
     <div class="posts-wrapper">
       <div class="title">Ta的动态</div>
-      <div class="card-wrapper" @click="$router.push(`/c/123`)">
+      <div class="card-wrapper" v-for="(item, index) in cards" @click="$router.push(`/c/${item.id}`)">
         <div class="card-head">
           <div class="card-head-avatar">
-            <img :src="[`../../static/images/avatars/avatar.jpg`]" width="100%">
+            <img :src="[`../../static/images/avatars/${user.avatar}`]" width="100%">
           </div>
           <div class="card-head-poster">
-            <div class="poster-name">{% item.author.name %}</div>
-            <div class="poster-date">{% item.post.time %}</div>
+            <div class="poster-name">{{ user.name }}</div>
+            <div class="poster-date">{{ item.post.time }}</div>
           </div>
         </div>
         <div class="card-content">
-          <!-- {{ item.post.content }} -->
+          {{ item.post.content }}
           <div class="images">
-            <pet-image :images="images"></pet-image>
+            <pet-image :images="item.post.images"></pet-image>
           </div>
         </div>
         <div class="card-misc">
-          <div class="misc-status">宠物当前状态：难过</div>
+          <div class="misc-status">宠物当前状态：{{ item.post.status }}</div>
           <div class="misc-tags">
-            <span class="tag" >{% tag %}</span>
+            <span class="tag" v-for="(tag, index) in item.post.tags">{{ tag }}</span>
           </div>
         </div>
         <div class="card-control-wrapper">
           <div class="card-control">
-            <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;{% item.comments %}</span></button>
-            <button class="control-btn" @click="like($event, 1, 1, 1)"><span class="icon_like">icon_like</span><span>&nbsp;{% item.post.likes %}</span></button>
+            <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;{{ item.comments }}</span></button>
+            <button class="control-btn" @click="like($event, index, item.id, item.liked ? 0 : 1)"><span class="icon_like">icon_like</span><span>&nbsp;{{ item.post.likes }}</span></button>
           </div>
         </div>
       </div>
     </div>
     <div class="control-wrapper">
-      <button class="control-btn">关注</button>
-      <button class="control-btn">时间轴</button>
+      <button class="control-btn" @click="follow(user.id, followed ? 0 : 1)" :class="[followed ? '' : 'actived']"><i class="checked" v-if="followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
+      <button class="control-btn" @click="toTimeline"><i class="timeline"></i>时间轴</button>
+    </div>
+    <div class="loadmore" @click="getCards(lastCursor)">
+      加载更多
     </div>
   </div>
 </template>
@@ -74,24 +78,74 @@ export default {
   created () {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
-    this.$store.commit('setTitle', '')
+    this.$store.commit('setTitle', ''),
+    this.$http.get(`/api/user/profile_othe?id=${this.$route.params.id}`).then(res => {
+      if (res.body.status == 1) {
+        this.getCards('none')
+      } else {
+        this.$toast.fail(res.body.message)
+      }
+    })
   },
   methods: {
     like (event, index, id, action) {
       event.stopPropagation()
-      console.log(event)
-      // this.$http.post('/api/user/post_praise', {id: id, action: action}).then(res => {
-      //   if (res.body.status == 1) {
-      //     this.cards[index].liked = !this.cards[index].liked
-      //   } else {
-      //     this.$toast.fail(res.body.message)
-      //   }
-      // })
-    }
+      this.$http.post('/api/user/post_praise', {id: id, action: action}).then(res => {
+        if (res.body.status == 1) {
+          this.cards[index].liked = !this.cards[index].liked
+        } else {
+          this.$toast.fail(res.body.message)
+        }
+      })
+    },
+    follow (id, action) {
+      this.$http.get(`/api/user/focus/?id=${id}&action=${action}`).then(res => {
+        if (res.body.status == 1) {
+          if (aciton == 0) {
+            this.followed = false
+          } else {
+            this.followed = true
+          }
+          this.$toast.success('关注成功')
+        } else {
+          this.$toast.fail(res.body.message)
+        }
+      })
+    },
+    toTimeline () {
+      if (this.pets.length == 0) {
+        this.$toast.fail('Ta还没有宠物')
+      } else {
+        this.$router.push(`/index/timeline?id=${pets[0].id}`)
+      }
+    },
+    getCards (lastCursor) {
+      this.$http.get(`/api/user/get_cards?id=${this.$route.params.id}&lastCursor=${lastCursor}`).then(res => {
+        if (res.body.status == 1) {
+          if (lastCursor == 'none') {
+            this.infinited = res.body.infinited
+            this.cards = res.body.cards
+            this.lastCursor = res.body.cards[res.body.cards.length - 1].id
+          } else {
+            for (var i = 0; i < res.body.cards.length; i++) {
+              this.cards.push(res.body.cards[i])
+            }
+            this.infinited = res.body.infinited
+          }
+        } else {
+          this.$toast.fail(res.body.message)
+        }
+      })
+    },
   },
   data () {
     return {
-      images: ['P_01.jpg', 'P_02.jpg']
+      user: {},
+      pets: [],
+      followed: false,
+      cards: [],
+      infinited: false,
+      lastCursor: 'none'
     }
   }
 }
@@ -252,6 +306,8 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-content: center;
+      color: #686868;
+      font-size: 16px;
       .list-item {
         width: 107px;
         height: 52.5px;
@@ -312,11 +368,35 @@ export default {
       outline: none;
       padding: 0;
       margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       &.actived {
         color: #ffa721;
       }
       &:active {
         background-color: #f4f4f4;
+      }
+      i {
+        &.plus {
+          font-weight: bold;
+          font-size: 13px
+        }
+        &.checked {
+          width: 13px;
+          height: 9.9px;
+          display: inline-block;
+          margin-right: 5px;
+          background: url('../../static/images/checked@3x.png') 100% e('/') 100% no-repeat;
+          transform: translateY(.6px);
+        }
+        &.timeline {
+          display: block;
+          width: 12.5px;
+          height: 15.5px;
+          background: url('../../static/images/timeline@3x.png') 100% e('/') 100% no-repeat;
+          margin-right: 5px;
+        }
       }
     }
     &::after {
@@ -531,6 +611,16 @@ export default {
         }
       }
     }
+  }
+  .loadmore {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #ffa721;
+    line-height: 1;
   }
 }
 </style>
