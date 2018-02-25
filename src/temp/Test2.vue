@@ -16,14 +16,14 @@ export default {
   },
   methods: {
     testOnly () {
-      this.$http.get('/static/test.json').then(res => {
-        console.log(this)
-        if (res.body.status == 1) {
-          this.$http.get('/static/test.json').then(res => {
-            console.log(this)
-          })
-        }
-      })
+      // this.$http.get('/static/test.json').then(res => {
+      //   console.log(this)
+      //   if (res.body.status == 1) {
+      //     this.$http.get('/static/test.json').then(res => {
+      //       console.log(this)
+      //     })
+      //   }
+      // })
     }
   },
   data () {

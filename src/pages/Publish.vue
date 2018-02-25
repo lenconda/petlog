@@ -46,18 +46,18 @@
         <ul>
           <li class="cancel-btn" @click="actions(3)">取消</li>
           <li class="confirm-title">为哪只宠物发布</li>
-          <li class="confirm-btn" @click="actions(3)">确定</li>
+          <li class="confirm-btn" @click="actions(4)">确定</li>
         </ul>
       </div>
       <div class="pets-wrapper">
         <ul>
-          <li>
+          <li v-for="(pet, index) in $store.state.pets">
             <label>
               <div class="avatar">
-                <img :src="[`../../static/images/dog@3x.png`]">
+                <img :src="[`../../static/images/avatars_pets/${pet.avatar}`]">
               </div>
-              <div class="name">大猫</div>
-              <input type="radio" name="variety" value="大猫">
+              <div class="name">{{ pet.name }}</div>
+              <input type="radio" name="variety" :value="pet.id">
               <div class="checked-wrapper">
                 <i class="checked"></i>
               </div>
@@ -93,19 +93,27 @@
 <script>
 import Utils from '../utils'
 import EXIF from 'exif-js'
+import Status from '@/status.json'
 export default {
   name: 'publish',
   created () {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '发布动态')
-    this.random()
+    this.$http.get('/api/auth').then(res => {
+      if (res.body.status == 1) {
+        this.getTags()
+      } else {
+        this.$toast.fail(res.body.message)
+        window.history.go(-1)
+      }
+    })
   },
   watch: {
     'payload.length': {
       handler () {
         if (this.payload.length == this.imgList.length) {
-          this.postCard()
+          this.showSelect = true
         }
       }
     }
@@ -113,17 +121,16 @@ export default {
   data () {
     return {
       imgList: [],
-      uploadList: [],
       payload: [],
       content: '',
-      tags: ['狗年大吉', '喵星人', '铲屎官', '萌宠', 'lorem', 'ipsum', 'sim', 'dolor', 'asda', 'asdasdasd', 'uhdwiud', 'a78euqn', 'asjdh72y788', '123ad', 'weaas12', 'qweas', '123', 'asd', 'foo', 'bar'],
+      tags: [],
       randomShow: [],
       selectedTags: [],
       selectedPet: '',
       showTags: false,
       showStatus: false,
       showSelect: false,
-      status: ['开心', '难过', '怀孕', '生病'],
+      status: Status,
       currentStatus: '开心'
     }
   },
@@ -133,6 +140,16 @@ export default {
       for (var i = 0; i < 10; i++) {
         this.randomShow.push(parseInt(Math.random() * (this.tags.length + 1), 10))
       }
+    },
+    getTags () {
+      this.$http.get('/api/tags').then(res => {
+        if (res.body.status == 0) {
+          _this.$toast.fail('获取Tag失败')
+        } else {
+          _this.tags = res.body.tags
+          this.random()
+        }
+      })
     },
     actions(option) {
       switch (option) {
@@ -150,6 +167,8 @@ export default {
           this.selectedTags = []
         case 3:
           this.showSelect = !this.showSelect
+        case 4:
+          this.postCard()
         default:
           break
       }
@@ -161,10 +180,10 @@ export default {
       document.getElementById('upfile').click()
     },
     postCard () {
-      this.$http.post('/api/user/post_card', {content: thi.content, images: this.payload, tags: this.selectedTags, time: Utils.getDate(4, true), status: this.currentStatus}).then(res => {
-        
+      this.showSelect = false
+      this.$http.post('/api/user/post_card', {content: this.content, images: this.payload, tags: this.selectedTags, status: this.currentStatus, for: this.selectedPet}).then(res => {     
         if (res.body.status == 1) {
-          this.payload.splice(0, this.payload.length)
+          window.history.go(-1)
           this.$toast.success('发布成功！')
         } else {
           this.$toast.fail('发布失败！')
