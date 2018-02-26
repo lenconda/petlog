@@ -3,7 +3,7 @@
     <div class="select-pets">
       <div class="title">宠物选择</div>
       <div class="list-wrapper">
-        <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.query.pet == pet.id ? 'selected' : '']" @click="$router.push(`/pets/list?pet=${pet.id}`)">
+        <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.params.id == pet.id ? 'selected' : '']" @click="$router.push(`/pets/list?pet=${pet.id}`)">
           <img :src="pet.avatar">
           {{ pet.name }}
         </div>
@@ -14,7 +14,7 @@
         <span>头像</span>
         <div class="avatar">
           <input id="setavatar" type="file" accept="image/*" @change="upAvatar($event)" style="display: none">
-          <img :src="[`../../../static/images/avatars_pets/${avatar}`]">
+          <img :src="avatar">
         </div>
       </div>
       <div class="input-group">
@@ -93,7 +93,7 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '宠物资料')
-    this.$http.get(`/api/user/pet/detail/?id=${this.$route.query.pet}`).then(res => {
+    this.$http.get(`/api/user/pet/detail/?id=${this.$route.params.id}`).then(res => {
       if (res.body.status == 1) {
         this.nickname = res.body.name
         this.motto = res.body.motto
@@ -103,8 +103,9 @@ export default {
         this.birthDay = res.body.birth_day
         this.meetDay = res.body.meet_day
         this.variety = res.body.variety
+        this.tempVariety = res.body.variety
       } else {
-        this.$toast.message(res.body.message)
+        this.$toast.fail(res.body.message)
       }
     })
   },
@@ -119,7 +120,7 @@ export default {
       this.meetDay = formatDate
     },
     update () {
-      this.$http.post('/api/user/pet/update', {id: this.$route.query.pet, name: this.nickname, motto: this.motto, avatar: this.tempAvatar, gender: this.gender, birth_day: this.birthDay, meet_day: this.meetDay, variety: this.variety}).then(res => {
+      this.$http.post('/api/user/pet/update', {id: this.$route.params.id, name: this.nickname, motto: this.motto, avatar: this.tempAvatar, gender: this.gender, birth_day: this.birthDay, meet_day: this.meetDay, variety: this.variety}).then(res => {
         if (res.body.status == 1) {
           this.$toast.success('更新成功')
           this.$http.get('/api/user/all_pets').then(res => {

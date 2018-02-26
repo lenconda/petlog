@@ -22,7 +22,7 @@ Vue.use(VueResource)
 Vue.use(VueAwesomeSwiper, {
   zoom: true
 })
-
+Vue.http.headers.common['Authorization'] = `${localStorage.token}`
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

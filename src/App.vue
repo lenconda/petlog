@@ -20,7 +20,7 @@
     <van-popup v-model="tag" position="top" class="tags">
       <div class="tags-wrapper">
         <div class="tag-list">
-          <label class="tag-wrapper" v-for="(tag, index) in tags" v-show="randomShow.indexOf(index) > -1">
+          <label class="tag-wrapper" v-for="(tag, index) in tags" v-show="randomShow.indexOf(index) > -1" @click="toTag(tag)">
             <input type="checkbox" :value="tag">
             <span class="tag-content">{{ tag }}</span>
           </label>
@@ -49,21 +49,20 @@ export default {
   },
   mounted () {
     this.random()
-    Vue.http.headers.common['Authorization'] = `${localStorage.token}`
+    // Vue.http.headers.common['Authorization'] = `${localStorage.token}`
     var _this = this
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
-        _this.$http.get('/api/user/all_pets').then(res => {
+        _this.$http.get('/api/user/pet/all_pets').then(res => {
           _this.$store.commit('setPets', res.body.pets)
         })
-        _this.$http.get('/api/tags').then(res => {
+        _this.$http.get('/api/tags/get_tags').then(res => {
           if (res.body.status == 0) {
             _this.$toast.fail('获取Tag失败')
           } else {
             _this.tags = res.body.tags
           }
         })
-        _this.$router.push('/index/cards/interested')
       } else {
         _this.$router.push('/start')
       }
@@ -91,6 +90,13 @@ export default {
     },
     closeLogin () {
       this.$store.commit('toggleLogin', false)
+    },
+    toTag (tag) {
+      if (this.$route.path == '/index/cards/hot') {
+        this.$router.push(`${this.$route.path}?tag=${tag}&action=1`)
+      } else if (this.$route.path == '/index/cards/interested') {
+        this.$router.push(`${this.$route.path}?tag=${tag}&;astCursor=none`)
+      }
     }
   }
 }

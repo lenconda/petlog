@@ -24,6 +24,11 @@ export default {
   created () {
     this.$store.commit('modClass', {inclass: 'slideInRight', leaveclass: 'slideOutLeft'})
     this.$store.commit('toggleHeader', false)
+    this.$http.get('/api/auth').then(res => {
+      if (res.body.status == 1) {
+        this.$router.push('/index/cards/interested')
+      }
+    })
   },
   destroyed () {
     this.$store.commit('toggleHeader', true)

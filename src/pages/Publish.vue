@@ -57,7 +57,7 @@
                 <img :src="[`../../static/images/avatars_pets/${pet.avatar}`]">
               </div>
               <div class="name">{{ pet.name }}</div>
-              <input type="radio" name="variety" :value="pet.id">
+              <input type="radio" name="variety" :value="pet.id" v-model="selectedPet">
               <div class="checked-wrapper">
                 <i class="checked"></i>
               </div>
@@ -106,7 +106,6 @@ export default {
           this.getTags()
         } else {
           this.$toast.fail('还没有宠物')
-          window.history.go(-1)
         }
       } else {
         this.$toast.fail(res.body.message)
@@ -147,7 +146,8 @@ export default {
       }
     },
     getTags () {
-      this.$http.get('/api/tags').then(res => {
+      var _this = this
+      this.$http.get('/api/tags/get_tags').then(res => {
         if (res.body.status == 0) {
           _this.$toast.fail('获取Tag失败')
         } else {

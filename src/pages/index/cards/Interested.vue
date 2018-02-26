@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import petImage from '@/components/ImageView'
 export default {
   name: 'index_cards_interested',
@@ -68,6 +69,7 @@ export default {
     }
   },
   created () {
+    Vue.http.headers.common['Authorization'] = `${localStorage.token}`
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
         this.getInterested(this.$route.query.tag == undefined ? '' : this.$route.query.tag, 'none')

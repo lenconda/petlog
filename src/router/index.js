@@ -143,11 +143,11 @@ export default new Router({
     },
     {
       path: '/pets',
-      redirect: '/pets/list',
+      redirect: '/pets/list/',
       component: Pets,
       children: [
         {
-          path: '/pets/list',
+          path: '/pets/list/:id',
           name: 'pets_list',
           component: Pets_List
         },

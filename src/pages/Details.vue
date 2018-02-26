@@ -129,7 +129,7 @@ export default {
       })
     },
     follow () {
-      this.$http.get(`/api/user/focus/?action=${this.author.followed ? 0 : 1}&id=${this.avatar.id}`).then(res => {
+      this.$http.get(`/api/user/focus/?action=${this.author.followed ? 0 : 1}&id=${this.author.id}`).then(res => {
         if (res.body.status == 1) {
           this.author.followed = !this.author.followed
         } else {
