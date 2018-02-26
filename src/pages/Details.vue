@@ -45,7 +45,7 @@
             </div>
             <div class="comment-texts">
               <div class="comment-text-author">{{ item.author.name }}</div>
-              <div class="comment-text-raw">{{ item.content }}</div>
+              <div class="comment-text-raw">{{ item.to_author ? '评论作者' : `回复 ${item.reply_to} 的评论` }}： {{ item.content }}</div>
               <div class="comment-text-date"><span>{{ item.time }}</span></div>
             </div>
           </li>
