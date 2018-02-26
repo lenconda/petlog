@@ -3,7 +3,7 @@
     <div class="select-pets">
       <div class="title">宠物选择</div>
       <div class="list-wrapper">
-        <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.params.id == pet.id ? 'selected' : '']" @click="$router.push(`/pets/list?pet=${pet.id}`)">
+        <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.params.id == pet.id ? 'selected' : '']" @click="$router.push(`/pets/list/${pet.id}`)">
           <img :src="pet.avatar">
           {{ pet.name }}
         </div>
@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="finish-wrapper">
-      <button class="finish-btn" :disabled="nickname == '' || motto == '' || birthDay == '' || location == ''">完成修改</button>
+      <button class="finish-btn" :disabled="nickname == '' || motto == '' || birthDay == '' || meetDay == '' || tempVariety == ''">完成修改</button>
     </div>
     <calendar v-model="birth" @change="handleBirth"></calendar>
     <calendar v-model="meet" @change="handleMeet"></calendar>
@@ -93,26 +93,34 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '宠物资料')
-    this.$http.get(`/api/user/pet/detail/?id=${this.$route.params.id}`).then(res => {
-      if (res.body.status == 1) {
-        this.nickname = res.body.name
-        this.motto = res.body.motto
-        this.avatar = `../../../static/images/avatars_pets/${res.body.avatar}`
-        this.tempAvatar = res.body.avatar
-        this.gender = res.body.gender
-        this.birthDay = res.body.birth_day
-        this.meetDay = res.body.meet_day
-        this.variety = res.body.variety
-        this.tempVariety = res.body.variety
-      } else {
-        this.$toast.fail(res.body.message)
-      }
-    })
+    this.fetch(this.$route.params.id)
   },
   components: {
     'calendar': Calendar
   },
+  beforeRouteUpdate (to, from, next) {
+    console.log(to)
+    this.fetch(to.params.id)
+    next()
+  },
   methods: {
+    fetch (id) {
+      this.$http.get(`/api/user/pet/detail/?id=${id}`).then(res => {
+        if (res.body.status == 1) {
+          this.nickname = res.body.name
+          this.motto = res.body.motto
+          this.avatar = `../../../static/images/avatars_pets/${res.body.avatar}`
+          this.tempAvatar = res.body.avatar
+          this.gender = res.body.gender
+          this.birthDay = res.body.birth_day
+          this.meetDay = res.body.meet_day
+          this.variety = res.body.variety
+          this.tempVariety = res.body.variety
+        } else {
+          this.$toast.fail(res.body.message)
+        }
+      })
+    },
     handleBirth (date, formatDate) {
       this.birthDay = formatDate
     },
