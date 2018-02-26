@@ -102,7 +102,12 @@ export default {
     this.$store.commit('setTitle', '发布动态')
     this.$http.get('/api/auth').then(res => {
       if (res.body.status == 1) {
-        this.getTags()
+        if (this,$store.pets.length != 0) {
+          this.getTags()
+        } else {
+          this.$toast.fail('还没有宠物')
+          window.history.go(-1)
+        }
       } else {
         this.$toast.fail(res.body.message)
         window.history.go(-1)

@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="loadmore" v-show="!infinited" @click="getHot(this.$route.query.tag == undefined ? '' : this.$route.query.tag, 0)">
+    <div class="loadmore" v-show="!infinited" @click="getHot($route.query.tag == undefined ? '' : this.$route.query.tag, 0)">
       加载更多
     </div>
   </van-pull-refresh>

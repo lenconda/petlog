@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div class="loadmore" v-show="!infinited" @click="getInterested(this.$route.query.tag == undefined ? '' : this.$route.query.tag, lastCursor)">
+    <div class="loadmore" v-show="!infinited" @click="getInterested($route.query.tag == undefined ? '' : this.$route.query.tag, lastCursor)">
       加载更多
     </div>
   </van-pull-refresh>
@@ -94,6 +94,7 @@ export default {
           this.$toast.fail(res.body.message)
         }
       })
+      
     },
     like (event, index, id, action) {
       event.stopPropagation()
