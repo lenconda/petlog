@@ -31,7 +31,6 @@ import User from '@/pages/User'
 
 import Test1 from '@/temp/Test1'
 import Test2 from '@/temp/Test2'
-import Emotions from '@/temp/Emotions'
 
 Vue.use(Router)
 
@@ -168,11 +167,6 @@ export default new Router({
       path: '/test2',
       name: 'test2',
       component: Test2
-    },
-    {
-      path: '/emotions',
-      name: 'text',
-      component: Emotions
     }
   ]
 })
