@@ -1,5 +1,5 @@
 <template>
-  <van-pull-refresh v-model="isLoading" class="content">
+  <van-pull-refresh v-model="isLoading" class="content" v-if="cards.length != 0">
     <div class="topic-wrapper" v-show="$route.query.tag">
       <div class="topic-icon"></div>
       <div>当前已选中的标签： #{{ $route.query.tag }}#</div>
@@ -39,6 +39,9 @@
     <div class="loadmore" v-show="!infinited" @click="getHot($route.query.tag == undefined ? '' : this.$route.query.tag, 0)">
       加载更多
     </div>
+  </van-pull-refresh>
+  <van-pull-refresh class="nocards" v-else>
+    暂无动态
   </van-pull-refresh>
 </template>
 
@@ -111,6 +114,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.nocards {
+  height: 100%;
+  background-color: #f4f4f4;
+  font-size: 18.5px;
+  color: #686868;
+}
 .content {
   background-color: #f4f4f4;
   .topic-wrapper {

@@ -66,6 +66,9 @@ export default {
   padding-top: 55px;
   padding-bottom: 57px;
   overflow-y: auto;
+  div {
+    height: 100%;
+  }
   .tabbar {
     width: 100%;
     border-top: 1px solid #e6e6e6;
