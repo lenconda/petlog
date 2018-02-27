@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
+  userID: '',
   inClass: 'slideInLeft',
   leaveClass: 'slideOutRight',
   isHome: true,
@@ -19,6 +20,9 @@ const state = {
 }
 
 const mutations = {
+  setUserId (state, id) {
+    state.id = id
+  },
   modClass (state, classes) {
     state.inClass = classes.inclass
     state.leaveClass = classes.leaveclass
