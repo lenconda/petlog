@@ -118,7 +118,7 @@ export default {
       if (this.pets.length == 0) {
         this.$toast.fail('Ta还没有宠物')
       } else {
-        this.$router.push(`/index/timeline?id=${pets[0].id}`)
+        this.$router.push(`/index/timeline?id=${this.pets[0].id}`)
       }
     },
     getCards (lastCursor) {
