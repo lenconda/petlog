@@ -122,6 +122,8 @@ export default {
 }
 .content {
   background-color: #f4f4f4;
+  box-sizing: border-box;
+  padding-bottom: 50px;
   .topic-wrapper {
     height: 45px;
     background: #fff;
