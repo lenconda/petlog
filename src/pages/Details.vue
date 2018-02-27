@@ -2,7 +2,7 @@
   <div class="gray">
     <div class="card-wrapper">
       <div class="card-head">
-        <div class="card-head-avatar">
+        <div class="card-head-avatar" @click="$router.push(`/u/${author.id}`)">
           <img :src="[`../../static/images/avatars/${author.avatar}`]" width="100%">
         </div>
         <div class="card-head-poster">

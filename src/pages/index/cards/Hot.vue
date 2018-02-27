@@ -6,7 +6,7 @@
     </div>
     <div class="card-wrapper" v-for="(item, index) in cards" @click="$router.push(`/c/${item.id}`)">
       <div class="card-head">
-        <div class="card-head-avatar" @click="$router.push(`/u/${item.author.id}`)">
+        <div class="card-head-avatar" @click="toUserPage($event, item.author.id)">
           <img :src="[`../../../../static/images/avatars/${item.author.avatar}`]" width="100%">
         </div>
         <div class="card-head-poster">
@@ -88,6 +88,10 @@ export default {
           this.$toast.fail(res.body.message)
         }
       })
+    },
+    toUserPage (event, id) {
+      event.stopPropagation()
+      this.$router.push(`/u/${id}`)
     },
     like (event, index, id, action) {
       event.stopPropagation()
