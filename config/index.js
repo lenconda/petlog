@@ -12,7 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'http://120.78.94.18:5000',
+        // target: 'http://120.78.94.18:5000',
+        target: 'http://petlog.lenconda.top',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/api'

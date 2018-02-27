@@ -238,6 +238,9 @@ export default {
       padding: 0 19px 10px 19px;
       color: #000;
       font-size: 18px;
+      .images {
+        height: 220px;
+      }
     }
     .card-misc {
       box-sizing: border-box;
