@@ -14,7 +14,7 @@
         <span class="motto" v-show="!select">{{ motto }}</span>
         <div class="select-pets" v-show="select">
           <div class="items" v-for="(item, index) in $store.state.pets" @click="$router.push(`/index/timeline?id=${item.id}`)">
-            <img :src="[`../../../static/images/avatars/${item.avatar}`]" alt="">
+            <img :src="[`../../../static/images/avatars_pets/${item.avatar}`]" alt="">
             <span>{{ item.name }}</span>
           </div>
         </div>
@@ -310,7 +310,6 @@ export default {
             border-radius: 50%;
             border: 1px solid #fff;
             box-shadow: 0 0 0 0.5px #949494;
-            background: red;
             margin-bottom: 3.5px;
           }
         }

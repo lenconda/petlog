@@ -196,22 +196,26 @@ export default {
       })
     },
     uploadImg () {
-      if (this.imgList.length == 0 && this.content == 0) {
+      if (this.content == 0) {
         this.$toast.fail('写一些东西吧')
       } else {
-        var _this = this      
-        for (var i = 0; i < this.imgList.length; i++) {
-          this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
-            var ajaxFrom = new FormData()
-            ajaxFrom.append('image', res.body)
-            this.$http.post('/api/upload/card_image', ajaxFrom).then(res => {
-              if (res.body.status ==1) {
-                _this.payload.push(res.body.filename)
-              } else {
-                this.$toast.fail('图片上传失败！')
-              }
+        if (this.imgList.length != 0) {
+          var _this = this      
+          for (var i = 0; i < this.imgList.length; i++) {
+            this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
+              var ajaxFrom = new FormData()
+              ajaxFrom.append('image', res.body)
+              this.$http.post('/api/upload/card_image', ajaxFrom).then(res => {
+                if (res.body.status ==1) {
+                  _this.payload.push(res.body.filename)
+                } else {
+                  this.$toast.fail('图片上传失败！')
+                }
+              })
             })
-          })
+          }
+        } else {
+          this.showSelect = true
         }
       }
     },
