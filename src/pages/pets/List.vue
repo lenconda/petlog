@@ -4,7 +4,7 @@
       <div class="title">宠物选择</div>
       <div class="list-wrapper">
         <div class="list-item" v-for="(pet, index) in $store.state.pets" :class="[$route.params.id == pet.id ? 'selected' : '']" @click="$router.push(`/pets/list/${pet.id}`)">
-          <img :src="pet.avatar">
+          <img :src=`../../../static/images/avatars_pets/${pet.avatar}`>
           {{ pet.name }}
         </div>
       </div>

@@ -13,7 +13,6 @@ import VueResource from 'vue-resource'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
-import './assets/font-awesome/css/font-awesome.min.css'
 import './assets/iconfont/petshow-icons.css'
 
 Vue.config.productionTip = false
