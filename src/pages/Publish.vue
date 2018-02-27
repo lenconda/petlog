@@ -200,16 +200,21 @@ export default {
         this.$toast.fail('写一些东西吧')
       } else {
         if (this.imgList.length != 0) {
-          var _this = this      
+          this.$toast.loading({duration: 0, message: '图片上传中'})
+          var _this = this
           for (var i = 0; i < this.imgList.length; i++) {
             this.$http.get(this.imgList[i], {responseType: 'blob'}).then(res => {
               var ajaxFrom = new FormData()
               ajaxFrom.append('image', res.body)
               this.$http.post('/api/upload/card_image', ajaxFrom).then(res => {
-                if (res.body.status ==1) {
+                if (res.body.status == 1) {
                   _this.payload.push(res.body.filename)
+                  _this.$toast.clear()
                 } else {
                   this.$toast.fail('图片上传失败！')
+                  setTimeout(() => {
+                    this.$toast.clear()
+                  }, 3000)
                 }
               })
             })
