@@ -43,7 +43,7 @@ export default {
   methods: {
     //关注/取关
     getFollowing () {
-      this.$http.get('/api/user/get_following').then(res => {
+      this.$http.get('/api/user/get_followings').then(res => {
         if (res.body.status == 1) {
           this.followers = res.body.following
           this.isLoading = false

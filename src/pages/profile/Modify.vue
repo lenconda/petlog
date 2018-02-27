@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="finish-wrapper">
-        <button class="finish-btn" :disabled="nickname == '' || motto == '' || birthDay == '' || location == ''">完成修改</button>
+        <button class="finish-btn" @click="modifyInfo" :disabled="nickname == '' || motto == '' || birthDay == '' || location == ''">完成修改</button>
       </div>
     </div>
     <van-popup v-model="selectLocation" position="bottom" class="select-location">
@@ -65,13 +65,17 @@ export default {
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', '修改个人信息')
     this.$http.get('/api/user/profile').then(res => {
-      this.nickname = res.body.name
-      this.avatar = `../../../static/images/avatars/${res.body.avatar}`,
-      this.tempAvatar = res.body.avatar
-      this.motto = res.body.motto
-      this.gender = res.body.gender
-      this.birthDay = res.body.birth_day
-      this.location = res.body.location
+      if (res.body.status == 1) {
+        this.nickname = res.body.user.name
+        this.avatar = `../../../static/images/avatars/${res.body.user.avatar}`,
+        this.tempAvatar = res.body.user.avatar
+        this.motto = res.body.user.motto
+        this.gender = res.body.user.gender
+        this.birthDay = res.body.user.birth_day
+        this.location = res.body.user.location
+      } else {
+        this.$toast.fail(res.body.message)
+      }
     })
   },
   data () {

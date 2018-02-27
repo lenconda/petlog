@@ -8,7 +8,7 @@
       </div>
       <div class="info-wrapper">
         <span class="name-age">
-          <span>关注 {{ user.followers }}</span>|<span>粉丝 {{ user.following }}</span>
+          <span>关注 {{ user.followers }}</span>|<span>粉丝 {{ user.followings }}</span>
         </span>
         <span class="motto">个性签名： {{ user.motto }}</span>
       </div>
@@ -76,7 +76,7 @@ export default {
       if (this.$store.state.pets.length < 1) {
         this.$toast.fail('还没有宠物哦')
       } else {
-        this.$router.push(`/pets/list?pet=${this.$store.state.pets[0].id}`)
+        this.$router.push(`/pets/list/${this.$store.state.pets[0].id}`)
       }
     },
     toTimeLine () {

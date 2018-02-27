@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="finish-wrapper">
-      <button class="finish-btn" :disabled="nickname == '' || motto == '' || birthDay == '' || meetDay == '' || tempVariety == ''">完成修改</button>
+      <button @click="update" class="finish-btn" :disabled="nickname == '' || motto == '' || birthDay == '' || meetDay == '' || tempVariety == ''">完成修改</button>
     </div>
     <calendar v-model="birth" @change="handleBirth"></calendar>
     <calendar v-model="meet" @change="handleMeet"></calendar>

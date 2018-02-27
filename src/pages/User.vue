@@ -62,7 +62,7 @@
       <button class="control-btn" @click="follow(user.id, followed ? 0 : 1)" :class="[followed ? '' : 'actived']"><i class="checked" v-if="followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
       <button class="control-btn" @click="toTimeline"><i class="timeline"></i>时间轴</button>
     </div>
-    <div class="loadmore" @click="getCards(lastCursor)">
+    <div class="loadmore" @click="getCards(lastCursor)" v-show="!infinited">
       加载更多
     </div>
   </div>
@@ -79,8 +79,10 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('modClass', {inclass: 'slideInLeft', leaveclass: 'slideOutRight'})
     this.$store.commit('setTitle', ''),
-    this.$http.get(`/api/user/profile_othe?id=${this.$route.params.id}`).then(res => {
+    this.$http.get(`/api/user/profile_other?id=${this.$route.params.id}`).then(res => {
       if (res.body.status == 1) {
+        this.user = res.body.user
+        this.pets = res.body.pets
         this.getCards('none')
       } else {
         this.$toast.fail(res.body.message)
@@ -120,7 +122,7 @@ export default {
       }
     },
     getCards (lastCursor) {
-      this.$http.get(`/api/user/get_cards?id=${this.$route.params.id}&lastCursor=${lastCursor}`).then(res => {
+      this.$http.get(`/api/get_cards?id=${this.$route.params.id}&lastCursor=${lastCursor}`).then(res => {
         if (res.body.status == 1) {
           if (lastCursor == 'none') {
             this.infinited = res.body.infinited
