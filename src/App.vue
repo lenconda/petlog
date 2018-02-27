@@ -47,7 +47,7 @@ export default {
       randomShow: []
     }
   },
-  mounted () {
+  created () {
     this.random()
     // Vue.http.headers.common['Authorization'] = `${localStorage.token}`
     var _this = this
