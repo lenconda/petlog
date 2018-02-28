@@ -29,9 +29,6 @@ import Pets_List from '@/pages/pets/List'
 
 import User from '@/pages/User'
 
-import Test1 from '@/temp/Test1'
-import Test2 from '@/temp/Test2'
-
 Vue.use(Router)
 
 Router.prototype.goBack = function () {
@@ -157,16 +154,6 @@ export default new Router({
           component: Pets_Add
         }
       ]
-    },
-    {
-      path: '/test1',
-      name: 'test1',
-      component: Test1
-    },
-    {
-      path: '/test2',
-      name: 'test2',
-      component: Test2
     }
   ]
 })
