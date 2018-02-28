@@ -59,6 +59,7 @@ export default {
       } else {
         this.$toast.fail(res.body.message)
         this.$store.commit('setRef', this.$route.fullPath)
+        this.$router.push('/auth/login')
       }
     })
   },
