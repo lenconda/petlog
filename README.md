@@ -4,11 +4,17 @@
 
 > 宠物记
 
+![](http://petlog.lenconda.top/static/banner.png)
+
 ## PREAMBLE
 
 本项目使用Vue.js编写，采用Webpack作为持续集成系统。
 
 请注意，本文档和仓库中的所有内容，包括但不限于源代码文件、图片文件、字体文件(除非某些文件本身不开放源代码，那么这时应该遵循或分别遵循该一个或多个文件所遵循的许可证)，遵循[Apache License v2.0](http://www.apache.org/licenses/LICENSE-2.0.html "Apache License v2.0")发布。
+
+项目主页：[http://petlog.lenconda.top]
+前端仓库：[https://github.com/lenconda](https://github.com/lenconda)
+后端仓库：[https://github.com/LinLorry/PetLog](https://github.com/LinLorry/PetLog)
 
 ##  BUILD SETUP
 
@@ -16,7 +22,7 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at 0.0.0.0:8080
 npm run dev
 
 # build for production with minification
@@ -27,3 +33,4 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
