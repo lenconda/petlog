@@ -39,7 +39,7 @@
           <span>快来发表评论吧</span>
         </div>
         <ul v-else>
-          <li v-for="(item, index) in comments" @click="replyToName = item.author.name">
+          <li v-for="(item, index) in comments" @click="if (replyToName != item.author.name) {replyToName = item.author.name} else {replyToName = '作者'}">
             <div class="comment-avatar">
               <img :src="[`../../static/images/avatars/${item.author.avatar}`]">
             </div>
@@ -54,7 +54,7 @@
     </div>
     <div class="write-comment">
       <div class="write-comment-wrapper">
-        <van-field type="textarea" class="write-comment-field" v-model="comment" @blur="replyToName = '作者'" maxlength="100" :placeholder="[ replyToName == '作者' ? '评论作者...' : `回复${replyToName}...` ]" rows="1" autosize/>
+        <van-field type="textarea" class="write-comment-field" v-model="comment" maxlength="100" :placeholder="[ replyToName == '作者' ? '评论作者...' : `回复${replyToName}...` ]" rows="1" autosize/>
       </div>
       <div class="write-comment-submit" :class="[comment.length > 0 ? 'active' : '']" @click="postComment">
         <span>发送</span>
@@ -127,7 +127,7 @@ export default {
       })
     },
     postComment () {
-      this.$http.post('/api/user/post_comment', {card_id: this.$route.params.id, to_author: this.replyToName == '作者' ? true : false, reply_to: this.replyToName, content: this.comment}).then(res => {
+      this.$http.post('/api/user/post_comment', {card_id: this.$route.params.id, to_author: this.replyToName == '作者', reply_to: this.replyToName, content: this.comment}).then(res => {
         if (res.body.status == 1) {
           this.$toast.success('发送成功')
           this.replyToName = '作者'
