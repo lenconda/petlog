@@ -104,7 +104,7 @@ export default {
     follow (id, action) {
       this.$http.get(`/api/user/focus/?id=${id}&action=${action}`).then(res => {
         if (res.body.status == 1) {
-          if (aciton == 0) {
+          if (action == 0) {
             this.followed = false
           } else {
             this.followed = true

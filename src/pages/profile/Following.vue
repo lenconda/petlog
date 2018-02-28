@@ -44,7 +44,7 @@ export default {
     getFollowing () {
       this.$http.get('/api/user/get_followings').then(res => {
         if (res.body.status == 1) {
-          this.followers = res.body.followings
+          this.following = res.body.followings
           this.isLoading = false
         } else {
           this.$toast.fail(res.body.message)
@@ -58,10 +58,11 @@ export default {
         if (res.body.status == 1) {
           if (aciton == 0) {
             this.following[index].followed = false
+            this.$toast.success('取消关注成功')
           } else {
             this.following[index].followed = true
+            this.$toast.success('关注成功')
           }
-          this.$toast.success('关注成功')
         } else {
           this.$toast.fail(res.body.message)
         }

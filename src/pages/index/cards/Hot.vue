@@ -97,7 +97,13 @@ export default {
       event.stopPropagation()
       this.$http.post('/api/user/post_praise', {id: id, action: action}).then(res => {
         if (res.body.status == 1) {
-          this.cards[index].liked = !this.cards[index].liked
+          if (action == 1) {
+            this.cards[index].liked = true
+            this.cards[index].post.likes++
+          } else {
+            this.cards[index].liked = false
+            this.cards[index].post.likes--
+          }
         } else {
           this.$toast.fail(res.body.message)
         }

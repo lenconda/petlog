@@ -56,12 +56,13 @@ export default {
     follow (index, id, action) {
       this.$http.get(`/api/user/focus/?id=${id}&action=${action}`).then(res => {
         if (res.body.status == 1) {
-          if (aciton == 0) {
+          if (action == 0) {
             this.followers[index].followed = false
+            this.$toast.success('取消关注成功')
           } else {
             this.followers[index].followed = true
+            this.$toast.success('关注成功')
           }
-          this.$toast.success('关注成功')
         } else {
           this.$toast.fail(res.body.message)
         }
