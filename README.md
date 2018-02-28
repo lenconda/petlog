@@ -14,7 +14,7 @@
 
 项目主页：[http://petlog.lenconda.top]
 
-前端仓库：[https://github.com/lenconda](https://github.com/lenconda)
+前端仓库：[https://github.com/lenconda/petlog](https://github.com/lenconda/petlog)
 
 后端仓库：[https://github.com/LinLorry/PetLog](https://github.com/LinLorry/PetLog)
 
