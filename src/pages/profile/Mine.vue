@@ -8,7 +8,7 @@
       </div>
       <div class="info-wrapper">
         <span class="name-age">
-          <span>关注 {{ user.followers }}</span>|<span>粉丝 {{ user.followings }}</span>
+          <span>关注 {{ user.followings }}</span>|<span>粉丝 {{ user.followers }}</span>
         </span>
         <span class="motto">个性签名： {{ user.motto }}</span>
       </div>
