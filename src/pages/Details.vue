@@ -87,18 +87,7 @@ export default {
         likes: 0,
         images: []
       },
-      comments: [
-        // {            
-        //   id: '234',
-        //   author: {
-        //     name: 'Test',
-        //     id: '123',
-        //     avatar: 'test.jpg'
-        //   },
-        //   time: '1-1', 
-        //   content: 'a test message'
-        // }
-      ],
+      comments: [],
       comment: '',
       replyToName: '作者'
     }

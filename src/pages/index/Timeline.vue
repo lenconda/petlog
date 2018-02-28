@@ -54,68 +54,6 @@ export default {
     this.$store.commit('modNavbar', false)
     this.$store.commit('setTitle', '时间轴')
     this.$store.commit('isTimeline', true)
-    // var test = {
-    //   name: 'test',
-    //   age: 2,
-    //   avatar: 'default.png',
-    //   motto: 'a test: fuck GFW',
-    //   items: [
-    //     {
-    //       date: "12-2",
-    //       items: [
-    //         {
-    //           content: "asdasdasd",
-    //           images: ["P_01.jpg", "asdqweasdqwe"],
-    //           status: "asda",
-    //           id: "123123123123"
-    //         },
-    //         {
-    //           content: "asdasdasd",
-    //           images: [],
-    //           status: "asda",
-    //           id: "123123123123"
-    //         }
-    //       ],
-    //       is_year: false
-    //     },
-    //     {
-    //       date: "",
-    //       items: [
-    //         {
-    //           content: "",
-    //           images: [],
-    //           status: "",
-    //           id: ""
-    //         }
-    //       ],
-    //       is_year: true,
-    //       year: 2017
-    //     },
-    //     {
-    //       date: "12-2",
-    //       items: [
-    //         {
-    //           content: "asdasdasd",
-    //           images: ["asdasd", "asdqweasdqwe"],
-    //           status: "asda",
-    //           id: "123123123123"
-    //         },
-    //         {
-    //           content: "asdasdasd",
-    //           images: ["asdasd", "asdqweasdqwe"],
-    //           status: "asda",
-    //           id: "123123123123"
-    //         }
-    //       ],
-    //       is_year: false
-    //     },
-    //   ]
-    // }
-    // this.name = test.name
-    // this.age = test.age
-    // this.avatar = test.avatar
-    // this.motto = test.motto
-    // this.items = test.items
   },
   data () {
     return {
