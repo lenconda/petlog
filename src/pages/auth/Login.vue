@@ -36,8 +36,13 @@ export default {
     login () {
       this.$http.post('/api/login', {email: this.username, password: this.password}).then(res => {
         if (res.body.status == 1) {
-          this.$router.push('/index/cards/interested')
+          if (this.$store.state.referer == '') {
+            this.$router.push('/index/cards/interested')
+          } else {
+            this.$router.push(this.$store.state.referer)
+          }
           localStorage.token = res.body.token
+          this.$store.commit('setRef', '')
         } else {
           this.$toast.fail('用户名或密码错误')
         }

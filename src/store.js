@@ -11,7 +11,7 @@ const state = {
   isTimeline: false,
   processed: '',
   images: [],
-  referer: '/index',
+  referer: '',
   title: '宠物秀',
   showLogin: false,
   showRegister: false,

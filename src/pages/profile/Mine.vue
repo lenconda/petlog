@@ -58,7 +58,7 @@ export default {
         this.user = res.body.user
       } else {
         this.$toast.fail(res.body.message)
-        window.history.go(-1)
+        this.$store.commit('setRef', this.$route.fullPath)
       }
     })
   },
