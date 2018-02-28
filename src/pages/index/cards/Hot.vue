@@ -32,7 +32,7 @@
       <div class="card-control-wrapper">
         <div class="card-control">
           <button class="control-btn"><span class="icon_comment">icon_comment</span><span>&nbsp;{{ item.comments }}</span></button>
-          <button class="control-btn" @click="like($event, index, item.id, item.liked ? 0 : 1)"><span class="icon_like" :class="[item.liked ? 'liked' : '']">icon_like</span><span>&nbsp;{{ item.post.likes }}</span></button>
+          <button class="control-btn" @click="like($event, index, item.id, item.liked ? 0 : 1)"><span class="icon_like" :class="[item.liked ? 'actived' : '']">icon_like</span><span>&nbsp;{{ item.post.likes }}</span></button>
         </div>
       </div>
     </div>

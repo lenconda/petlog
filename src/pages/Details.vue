@@ -30,7 +30,7 @@
       <div class="comment-head">
         <div class="comment-count">评论 {{ comments.length }}</div>
         <div class="comment-likes">
-          <span class="like-icon" @click="like">10</span>
+          <span class="like-icon" :class="[liked ? 'active' : '']" @click="like">10</span>
           <span class="like-count">{{ post.likes }}</span>
         </div>
       </div>
