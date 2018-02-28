@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="control-wrapper">
-      <button class="control-btn" @click="follow(user.id, followed ? 0 : 1)" :class="[followed ? '' : 'actived']"><i class="checked" v-if="followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
+      <button class="control-btn" @click="follow($route.params.id, followed ? 0 : 1)" :class="[followed ? '' : 'actived']"><i class="checked" v-if="followed"></i><i class="iconfont ptsh-tianjia plus" v-else></i> 关注</button>
       <button class="control-btn" @click="toTimeline"><i class="timeline"></i>时间轴</button>
     </div>
     <div class="loadmore" @click="getCards(lastCursor)" v-show="!infinited">
