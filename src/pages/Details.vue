@@ -41,7 +41,7 @@
         <ul v-else>
           <li v-for="(item, index) in comments" @click="replyToName = item.author.name">
             <div class="comment-avatar">
-              <img :src="[`../../static/images/${item.author.avatar}`]">
+              <img :src="[`../../static/images/avatars/${item.author.avatar}`]">
             </div>
             <div class="comment-texts">
               <div class="comment-text-author">{{ item.author.name }}</div>
