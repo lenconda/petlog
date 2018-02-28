@@ -2,8 +2,7 @@
   <van-pull-refresh v-model="isLoading" class="following">
     <ul>
       <li v-for="(item, index) in followers">
-        <div class="avatar-wrapper">
-          <!-- **********************跳转个人页面 -->
+        <div class="avatar-wrapper" @click="$router.push(`/u/${item.id}`)">
           <img :src="[`../../../static/images/avatars/${item.avatar}`]">
         </div>
         <div class="info-wrapper">

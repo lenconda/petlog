@@ -2,8 +2,7 @@
   <van-pull-refresh v-model="isLoading" class="following">
     <ul>
       <li v-for="(item, index) in following">
-        <div class="avatar-wrapper">
-          <!-- **********************跳转个人页面 -->
+        <div class="avatar-wrapper" @click="$router.push(`/u/${item.id}`)">
           <img :src="[`../../../static/images/avatars/${item.avatar}`]">
         </div>
         <div class="info-wrapper">
@@ -45,7 +44,7 @@ export default {
     getFollowing () {
       this.$http.get('/api/user/get_followings').then(res => {
         if (res.body.status == 1) {
-          this.followers = res.body.following
+          this.followers = res.body.followings
           this.isLoading = false
         } else {
           this.$toast.fail(res.body.message)
