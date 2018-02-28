@@ -49,22 +49,19 @@ export default {
   },
   created () {
     this.random()
-    // Vue.http.headers.common['Authorization'] = `${localStorage.token}`
-    var _this = this
-    this.$http.get('/api/auth').then(res => {
-      if (res.body.status == 1) {
-        _this.$http.get('/api/user/pet/all_pets').then(res => {
-          _this.$store.commit('setPets', res.body.pets)
-        })
-        _this.$http.get('/api/tags/get_tags').then(res => {
-          if (res.body.status == 0) {
-            _this.$toast.fail('获取Tag失败')
-          } else {
-            _this.tags = res.body.tags
-          }
-        })
+    this.$http.get('/api/user/pet/all_pets').then(res => {
+      this.$store.commit('setPets', res.body.pets)
+    })
+    this.$http.get('/api/tags/get_tags').then(res => {
+      if (res.body.status == 0) {
+        this.$toast.fail('获取Tag失败')
       } else {
-        _this.$router.push('/start')
+        this.tags = res.body.tags
+      }
+    })
+    this.$http.get('/api/auth').then(res => {
+      if (res.body.status == 1) {} else {
+        this.$router.push('/start')
       }
     })
   },

@@ -675,9 +675,6 @@ export default {
           display: inline-block;
           font-size: 16px;
           margin: 0 12.35px;
-          input {
-            display: none;
-          }
           .tag-content {
             text-align: center;
             display: inline-block;
@@ -690,6 +687,26 @@ export default {
             border: 1px solid #949494;
             color: #555555;
             transition: all .4s;
+          }
+          input {
+            display: none;
+            & + .tag-content {
+              text-align: center;
+              display: inline-block;
+              width: 100%;
+              height: 100%;
+              padding: 6px;
+              margin: 5.75px;
+              border-radius: 4px;
+              background-color: #fff;
+              border: 1px solid #949494;
+              color: #555555;
+              transition: all .4s;
+            }
+            &:checked + .tag-content {
+              color: #2cbce7;
+              border-color: #2cbce7;
+            }
           }
         }
       }
