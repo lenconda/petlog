@@ -83,6 +83,7 @@ export default {
       if (res.body.status == 1) {
         this.user = res.body.user
         this.pets = res.body.pets
+        this.followed = res.body.followed
         this.getCards('none')
       } else {
         this.$toast.fail(res.body.message)
